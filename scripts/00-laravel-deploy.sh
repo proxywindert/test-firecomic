@@ -9,5 +9,5 @@ echo "Running migrations..."
 #php artisan db:seed
 
 #echo "Running vite..."
-npm install
-npm run build
+#npm install
+#npm run build

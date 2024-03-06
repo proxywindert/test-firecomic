@@ -1,0 +1,102 @@
+.container .cards{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.container .cards .card{
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    background-color: rgba(var(--any-black),var(--tw-bg-opacity));
+    margin-bottom: 6px;
+    overflow: hidden;
+    padding-top: 48%;
+    width: 100%;
+}
+
+.container .cards .card  .bg-img{
+    position: absolute;
+    display: block;
+    /* max-width: 1000px; */
+    /* max-height: 480px; */
+    width: 100%;
+    /* height: 100%; */
+    opacity: 0.5;
+    object-fit: cover;
+    top: -50px;
+    /* left: 50%; */
+    transform: var(--tw-transform);
+    /* max-width: calc(100% - 20px); */
+    /* max-height: calc(100% - 20px); */
+}
+
+.container .cards .card  .char-img{
+    position:absolute;
+    bottom:0;
+    right: 0;
+    /* width: 608px; */
+    /* height: 480px; */
+    /* display: block; */
+    /* max-width: 1000px; */
+    /* max-width: calc(100% - 600px); */
+    max-height: calc(100% - 20px);
+    /* object-fit: fill; */
+}
+
+.container .cards .card .content{
+    position:absolute;
+    width: 40%;
+    top:50%;
+    left: 18px;
+    transform: translateY(-50%);
+}
+
+.container .cards .card .content .comic-name > img{
+    max-width: calc(100% - 20px);
+}
+
+.container .cards .card .content .time{
+    display: flex;
+    align-items: center;
+}
+
+.container .cards .card .content .time > span{
+    padding: 4px;
+    color: rgb(var(--any-white));
+    font-size: 10px;
+    font-weight: 700;
+    background-color: black;
+}
+
+.container .cards .card .chapter{
+    position:absolute;
+    bottom:10px;
+    font-size: 10px;
+    font-weight: 800;
+    background-color: black;
+    left: 17px;
+}
+
+.container .cards .card .chapter > span{
+    color: rgb(var(--any-white));
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+@media screen  and ((min-width: 580px)) {
+    .container .cards {
+        width: 490px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .container .cards {
+        max-width: 1000px;
+        width: 100%;
+    }
+}
