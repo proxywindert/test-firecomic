@@ -37,10 +37,21 @@
     <link rel="stylesheet" href="./assets/css/header.css">
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/loader.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
+    <div id="preloader">
+        <div class="preloader flex justify-center"style="align-items: center">
+            <div style="position: relative!important;">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img width="100px" height="auto" src="https://firecomic.hioncoding.com/libs/client/images/common/logo.png?v=20240118" alt="Fire Comic">
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="wrapper">
         <header class="header">
             <div class="container">
@@ -229,6 +240,40 @@
         </div>
     </div>
     <script src="./assets/js/menu.js"></script>
+    <script>
+        document.onkeydown = function (event) {
+            if (event.keyCode == 123) {
+                return false;
+            }
+        }
+    
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        });
+    
+        window.addEventListener('load', (event) => {
+            console.log('Trang web đã tải hoàn tất');
+            document.getElementById('preloader').setAttribute("style", "display:none");
+        });
+
+        if ('') {
+            $(".mask-sl").addClass("active-sl");
+        }
+    
+        if ('') {
+            console.log('')
+            document.getElementById("short_link_1").removeAttribute("href");
+            document.getElementById("short_link_1").onclick = function() { return false; };
+            document.getElementById("short_link_1").style.color = "gray";
+        }
+    
+        if ('') {
+            console.log('')
+            document.getElementById("short_link_2").removeAttribute("href");
+            document.getElementById("short_link_2").onclick = function() { return false; };
+            document.getElementById("short_link_2").style.color = "gray";
+        }
+    </script>
 </body>
 
 </html>
