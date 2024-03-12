@@ -17,36 +17,24 @@
     width: 100%;
 }
 
-.container .cards .card  .bg-img{
+.cards .card  .bg-img{
     position: absolute;
     display: block;
-    /* max-width: 1000px; */
-    /* max-height: 480px; */
     width: 100%;
-    /* height: 100%; */
     opacity: 0.5;
     object-fit: cover;
     top: -50px;
-    /* left: 50%; */
     transform: var(--tw-transform);
-    /* max-width: calc(100% - 20px); */
-    /* max-height: calc(100% - 20px); */
 }
 
-.container .cards .card  .char-img{
+.cards .card  .char-img{
     position:absolute;
     bottom:0;
     right: 0;
-    /* width: 608px; */
-    /* height: 480px; */
-    /* display: block; */
-    /* max-width: 1000px; */
-    /* max-width: calc(100% - 600px); */
     max-height: calc(100% - 20px);
-    /* object-fit: fill; */
 }
 
-.container .cards .card .content{
+.cards .card .label-time-content{
     position:absolute;
     width: 40%;
     top:50%;
@@ -54,21 +42,8 @@
     transform: translateY(-50%);
 }
 
-.container .cards .card .content .comic-name > img{
+.label-time-content .comic-name > img{
     max-width: calc(100% - 20px);
-}
-
-.container .cards .card .content .time{
-    display: flex;
-    align-items: center;
-}
-
-.container .cards .card .content .time > span{
-    padding: 4px;
-    color: rgb(var(--any-white));
-    font-size: 10px;
-    font-weight: 700;
-    background-color: black;
 }
 
 .container .cards .card .chapter{
