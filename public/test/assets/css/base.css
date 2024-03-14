@@ -82,6 +82,7 @@
     --black-white: var(--any-black);
     --white-black: var(--any-white);
     --tw-bg-opacity: 1;
+    --tw-border-opacity: 1;
     --tw-rotate: 180deg;
     --tw-translate-x: 0;
     --tw-translate-y: 0;
@@ -158,6 +159,11 @@
     border-color: rgba(var(--any-black), .25);
 }
 
+.bg-color-red {
+    background-color: rgba(var(--any-kakaopage-yellow), var(--tw-bg-opacity));
+    border-color: rgba(var(--any-black), .25);
+}
+
 .label-time-img>img {
     display: block;
     /* width: 100%; */
@@ -228,4 +234,22 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.small-arrow {
+    width: 24px;
+    height: 24px;
+}
+
+.small-arrow > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.content-overflow{
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
