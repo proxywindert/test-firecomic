@@ -589,6 +589,25 @@
     font-weight: 500;
 }
 
+.comic-content{
+    width: 100%;
+    --tw-bg-opacity: 1;
+    background-color: rgba(var(--any-white), var(--tw-bg-opacity));
+}
+
+.list-img{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 630px;
+}
+
+.img-item > img{
+    display: block;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
 @media only screen and (max-width: 768px) {
     .content {
         left: 0;
@@ -686,5 +705,11 @@
     .chapter{
         width: calc(50% - 2px);
         margin: 0 1px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .comic-content .list-img {
+        max-width: 490px;
     }
 }
