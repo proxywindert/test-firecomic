@@ -61,30 +61,12 @@
 
 .banner-char .img-char>img {
     max-height: calc(100% - 20px);
-    /* max-width: calc(100% - 20px); */
     width: 100%;
 }
 
 .tranfer-anchor {
     position: relative;
 }
-
-
-
-/* .tranfer-anchor > div{
-    margin-left:-51px;
-    width: 100vw;
-} */
-.tranfer-bg {
-    /* display: none; */
-    margin-left: calc((100vw - 630px) / -2);
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-    height: 150px;
-    background: linear-gradient(to bottom, rgba(48, 42, 41, 0) 2%, rgb(48, 42, 41, 0.7) 50%, rgb(48, 42, 41));
-}
-
 
 .comic-info {
     position: relative;
@@ -187,16 +169,7 @@
     display: inline-block;
 }
 
-.bg-content {
-    height: 100%;
-    background: rgb(48, 42, 41);
-    width: 100vw;
-    margin-left: calc((100vw - 630px) / -2);
-    /* margin-left: -50vw; */
-    /* left: 50%; */
-    top: 0;
-    position: absolute;
-}
+
 
 .nav-bar-anchor {
     position: relative;
@@ -226,7 +199,7 @@
     font-size: 15px;
 }
 
-.list-chapter{
+.list-chapter {
     width: 100%;
     /* max-width: 608px; */
     display: flex;
@@ -238,22 +211,32 @@
     margin: 0 -1px;
 }
 
-.chapter{
+.list-chapter .chapter {
+    display: flex;
+    flex-direction: column;
     width: calc(20% - 2px);
     margin: 0 1px;
     position: relative;
 }
 
-.chapter .des{
+.list-chapter .chapter .icon-img {
+    flex: 1;
+}
+
+.list-chapter .chapter .des {
     padding: 3px 5px;
 }
 
-.chapter .icon-img > img{
+.list-chapter .chapter .icon-img>img {
     border-radius: 4px;
     display: block;
+    /* min-height: 77px; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.chapter .title {
+.list-chapter .chapter .title {
     color: rgb(var(--any-white));
     font-size: 12px;
     font-weight: 400;
@@ -261,7 +244,7 @@
     overflow-wrap: break-word;
 }
 
-.chapter .date{
+.list-chapter .chapter .date {
     color: rgb(var(--any-white));
     font-size: 11px;
     font-weight: 400;
@@ -275,7 +258,9 @@
     left: 3px;
 }
 
-.content-anchor .cards .card{
+/* product-info ----------------------- */
+
+.content-anchor .cards .card {
     width: 100%;
     padding: 10px;
     background-color: rgba(var(--any-white), .1);
@@ -287,40 +272,38 @@
     row-gap: 10px;
 }
 
-.content-header h3{
+.content-header h3 {
     overflow-wrap: break-word;
     color: rgb(var(--any-white));
     font-size: 16px;
     font-weight: 600;
 }
 
-.content-body .list-content{
+.content-body .list-content {
     display: flex;
     column-gap: 7px;
     flex-direction: column;
 }
 
-.content-body .list-tag{
+.content-body .list-tag {
     display: flex;
     column-gap: 8px;
     row-gap: 8px;
     flex-wrap: wrap;
 }
 
-
-
-.content-body p{
+.content-body p {
     color: rgb(var(--any-white));
     font-size: 13px;
     font-weight: 400;
     line-height: 20px;
 }
 
-.row-content{
+.row-content {
     display: flex;
 }
 
-.row-content .col-tittle{
+.row-content .col-tittle {
     width: 54px;
     min-width: 54px;
     margin-right: 8px;
@@ -333,7 +316,7 @@
     flex-shrink: 1;
 }
 
-.row-content .col-des{
+.row-content .col-des {
     overflow-wrap: break-word;
     color: rgb(var(--any-white));
     font-size: 13px;
@@ -341,7 +324,7 @@
     line-height: 16px;
 }
 
-.list-comic{
+.list-comic {
     display: flex;
     flex-wrap: wrap;
     row-gap: 8px;
@@ -349,44 +332,49 @@
     justify-content: flex-start;
 }
 
-.comic{
+.comic {
     width: 100px;
     height: 160px;
     position: relative;
     overflow: hidden;
 }
 
- .comic .bg-content-comic{
+.comic .bg-content-comic {
     overflow: hidden;
     position: absolute;
     top: 0;
     left: 0;
 }
 
- .comic .bg-content-comic > img{
+.comic .bg-content-comic>img {
     border-radius: 5px;
     display: block;
     width: 100%;
     height: 100%;
 }
 
- .comic .comic-name{
+.comic .comic-name {
     position: absolute;
     bottom: 10px;
     left: 0;
 }
- .comic .comic-name > img{
+
+.comic .comic-name>img {
     display: block;
     width: 100%;
     height: 100%;
 }
 
+/* product-info end--------------------------- */
+
+/* product detail ------------------------- */
+
 .push-top-anchor {
     position: relative;
 }
 
-.push-top-bg{
-    background-color:rgb(var(--any-white));
+.push-top-bg {
+    background-color: rgb(var(--any-white));
     margin-left: calc((100vw - 630px) / -2);
     position: absolute;
     bottom: 0;
@@ -396,32 +384,39 @@
     border-top-width: 1px;
     border-bottom-width: 1px;
     border-style: solid;
+    border-color: rgba(var(--any-black), .08);
     cursor: pointer;
 }
 
-.ads{
+.push-top-bg>span {
+    color: rgb(var(--any-black));
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.ads {
     width: 100%;
     background-color: rgb(var(--any-black));
     margin-bottom: 6px;
     border-radius: 5px;
 }
 
-.ads-img{
+.ads-img {
     padding: 15px 85px 0px 85px;
 }
 
-.ads-img > img {
+.ads-img>img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.ads .content .content-body{
+.ads .content .content-body {
     position: relative;
 }
 
-.ads-content{
+.ads-content {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -432,13 +427,13 @@
     bottom: 10px;
 }
 
-.ads-tittle{
+.ads-tittle {
     color: rgb(var(--any-white));
     font-size: 14px;
     white-space: nowrap;
 }
 
-.ads-link{
+.ads-link {
     padding: 8px 12px;
     border: 1px solid rgb(var(--any-white));
     color: rgb(var(--any-white));
@@ -446,13 +441,13 @@
     white-space: nowrap;
 }
 
-.like-card{
+.like-card {
     margin-bottom: 6px;
     width: 100%;
     padding: 20px 0;
 }
 
-.like-card .content-body{
+.like-card .content-body {
     display: flex;
     flex-direction: column;
     column-gap: 5px;
@@ -460,24 +455,25 @@
     align-items: center;
 }
 
-.content-body .like-tittle{
+.content-body .like-tittle {
     color: rgb(var(--any-white));
     font-size: 21px;
     font-weight: 700;
 }
 
-.content-body .like-img{
+.content-body .like-img {
     width: 80px;
     height: 80px;
 }
-.content-body .like-img > svg{
+
+.content-body .like-img>svg {
     width: 100%;
     height: 100%;
     display: block;
     object-fit: cover;
 }
 
-.row-header{
+.row-header {
     padding-bottom: 10px;
     display: flex;
     justify-content: space-between;
@@ -488,22 +484,22 @@
     border-color: rgba(var(--grey-03), var(--tw-border-opacity));
 }
 
-.comment{
+.comment {
     margin-bottom: 30px;
 }
 
 .tittle-comment,
-.header-comment{
+.header-comment {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.header-comment{
+.header-comment {
     margin-bottom: 7px;
 }
 
-.tittle-comment{
+.tittle-comment {
     column-gap: 8px;
 }
 
@@ -519,14 +515,14 @@
     line-height: 21px;
 }
 
-.header-comment .tittle-comment .tittle-comment-user{
+.header-comment .tittle-comment .tittle-comment-user {
     color: rgb(var(--grey-13));
     font-size: 13px;
     font-weight: 700;
     word-break: break-word;
 }
 
-.header-comment .date-comment{
+.header-comment .date-comment {
     word-break: break-word;
     color: #6e6a60;
     font-size: 12px;
@@ -536,7 +532,7 @@
     height: 18px;
 }
 
-.next-chapter{
+.next-chapter {
     display: flex;
     align-items: center;
 }
@@ -547,7 +543,7 @@
     position: relative;
 }
 
-.next-chapter-img::after{
+.next-chapter-img::after {
     content: '';
     position: absolute;
     content: var(--tw-content);
@@ -556,15 +552,15 @@
     border-radius: 6px;
 }
 
-.next-chapter .next-chapter-img > img{
+.next-chapter .next-chapter-img>img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: cover;
     border-radius: 6px;
 }
 
-.next-chapter .small-arrow{
+.next-chapter .small-arrow {
     margin-left: auto;
 }
 
@@ -576,140 +572,36 @@
     margin: 0 14px;
 }
 
-.next-chapter .next-chapter-info .chapter-number{
+.next-chapter .next-chapter-info .chapter-number {
     color: rgb(var(--grey-15));
     font-size: 13px;
     font-weight: 500;
     word-break: break-word;
 }
 
-.next-chapter .next-chapter-info .type{
+.next-chapter .next-chapter-info .type {
     color: rgb(var(--grey-07));
     font-size: 12px;
     font-weight: 500;
 }
 
-.comic-content{
+.comic-content {
     width: 100%;
     --tw-bg-opacity: 1;
     background-color: rgba(var(--any-white), var(--tw-bg-opacity));
 }
 
-.list-img{
+.list-img {
     margin-left: auto;
     margin-right: auto;
     max-width: 630px;
 }
 
-.img-item > img{
+.img-item>img {
     display: block;
     height: 100%;
     width: 100%;
     object-fit: cover;
 }
 
-@media only screen and (max-width: 768px) {
-    .content {
-        left: 0;
-    }
-
-    /* .chapter{
-        width: calc(33.33% - 2px);
-        margin: 0 1px;
-    } */
-
-    .main .container {
-        width: 100%;
-        padding: 0;
-    }
-
-    .tranfer-bg {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .push-top-bg {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .bg-content {
-        width: 100%;
-        margin-left: 0;
-    }
-}
-
-@media only screen and (max-width: 618px) {
-    .content {
-        left: 0;
-    }
-
-    .chapter{
-        width: calc(25% - 2px);
-        margin: 0 1px;
-    }
-
-    .main .container {
-        width: 100%;
-        padding: 0;
-    }
-
-    .tranfer-bg {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .push-top-bg {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .bg-content {
-        width: 100%;
-        margin-left: 0;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .content {
-        left: 0;
-    }
-
-    .chapter{
-        width: calc(33.33% - 2px);
-        margin: 0 1px;
-    }
-
-    .main .container {
-        width: 100%;
-        padding: 0;
-    }
-
-    .tranfer-bg {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .push-top-bg {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .bg-content {
-        width: 100%;
-        margin-left: 0;
-    }
-}
-
-@media only screen and (max-width: 280px) {
-    .chapter{
-        width: calc(50% - 2px);
-        margin: 0 1px;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .comic-content .list-img {
-        max-width: 490px;
-    }
-}
+/* product detail end ------------------- */
