@@ -27,7 +27,7 @@
     height: auto;
 }
 
-.rotate-180{
+.rotate-180 {
     --tw-rotate: 180deg;
 }
 
@@ -145,7 +145,7 @@
     height: 30px;
 }
 
-.tag > span {
+.tag>span {
     color: rgb(var(--any-white));
     font-size: 14px;
     font-weight: 500;
@@ -159,15 +159,19 @@
     height: 24px;
 }
 
-.small-arrow > img {
+.small-arrow>img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: fill;
 }
 
-.content-overflow{
-    overflow-wrap: break-word;
+.content-overflow {
+    /* overflow-wrap: break-word;
     text-overflow: ellipsis;
+    overflow: hidden; */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
 }

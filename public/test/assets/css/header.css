@@ -1,5 +1,10 @@
 .header {
     position: relative;
+    display: block;
+}
+
+.header-hidden {
+    display:none !important/* Ẩn header menu bằng cách làm mờ */
 }
 
 .container .banner img {
@@ -54,7 +59,9 @@
 }
 
 .header .block-search {
-    position: absolute;
+    opacity: 0.4;
+    background: rgb(48, 42, 41);
+    position: fixed;
     top: 0;
     left: 0;
     display: flex;
@@ -62,7 +69,7 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    z-index: 2;
+    z-index: 1;
 }
 
 .header .block-search .col-left{
@@ -89,7 +96,7 @@
     overflow: hidden;
     transition: width 0.5s ease;
     background-color: rgba(var(--grey-02), var(--tw-bg-opacity));
-    z-index: 1;
+    z-index: 2;
 }
 
 .tab-nav-header>ul {

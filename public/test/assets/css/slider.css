@@ -28,7 +28,7 @@ body {
     border: none;
     height: 50px;
     width: 50px;
-    z-index: 5;
+    z-index: 1;
     color: #fff;
     display: flex;
     cursor: pointer;
