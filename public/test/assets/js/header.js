@@ -1,50 +1,27 @@
 
-var lastScrollTop = 0;
-var isClick = false;
 window.addEventListener('scroll', function () {
-    var headerMenu = document.getElementById('block-search');
-    var navigationBar = document.getElementById('navigationBar-content');
+    let elementPosition = navBarAnchor.getBoundingClientRect().top - headerMenu.offsetHeight;
+    if (elementPosition <= headerMenu.offsetHeight) {
+        fakeHeaderMenu.style.opacity = 1;
+        return;
+    }
+    navBarAnchor.style.top = headerMenu.offsetHeight + 'px';
 
-    var contentHeight = document.body.scrollHeight; // Chiều cao của nội dung trang web
-    var windowHeight = window.innerHeight; // Chiều cao của cửa sổ trình duyệt
-    var scrollPosition = window.scrollY || window.pageYOffset || document.documentElement.scrollTop; // Vị trí cuộn hiện tại
+    let scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop; // Vị trí cuộn hiện tại
 
-    if ((contentHeight - (windowHeight) <= scrollPosition) || scrollPosition == 0) {
-        // Trang đã cuộn xuống cuối cùng
-        headerMenu.classList.remove('header-hidden');
-        if (navigationBar)
-            navigationBar.classList.remove('header-hidden');
-        // Thực hiện các hành động tương ứng ở đây
+    let opacity = (scrollTop / (viewportHeight * 1));
+    opacity = opacity > 1 ? 1 : opacity;
+    if (scrollTop > lastScrollTop) {
+        // Cuộn chuột xuống
+        opacity = Math.max(opacity, 0); // Sử dụng biến opacity thay vì scrollDiv.style.opacity
     } else {
-        if (navigationBar)
-            navigationBar.classList.add('header-hidden');
-        headerMenu.classList.add('header-hidden');
+        // Cuộn chuột lên
+        opacity = Math.min(opacity, 1); // Sử dụng biến opacity thay vì scrollDiv.style.opacity
     }
+
+    fakeHeaderMenu.style.opacity = opacity.toString(); // Thiết lập opacity cho scrollDiv
+
+    lastScrollTop = scrollTop;
 });
 
-window.addEventListener('click', function (event) {
-    targetElement = event.target;
-    var computedStyle = window.getComputedStyle(targetElement);
 
-    // Kiểm tra nếu cursor của phần tử là 'pointer'
-    if (computedStyle.getPropertyValue('cursor') === 'pointer') {
-        return
-    }
-
-    if (event.button === 0) {
-        var headerMenu = document.getElementById('block-search');
-        var navigationBar = document.getElementById('navigationBar-content');
-
-        if (headerMenu.classList.contains("header-hidden")) {
-            headerMenu.classList.remove('header-hidden');
-            if (navigationBar)
-                navigationBar.classList.remove('header-hidden');
-        }
-        else {
-            if (navigationBar)
-                navigationBar.classList.add('header-hidden');
-            headerMenu.classList.add('header-hidden');
-        }
-
-    }
-});
