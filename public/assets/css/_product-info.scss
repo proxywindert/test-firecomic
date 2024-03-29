@@ -1,0 +1,71 @@
+
+
+/* product-info ----------------------- */
+
+.content-anchor .cards .card {
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(var(--any-white), .1);
+    border-radius: 4px;
+    margin-bottom: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 10px;
+}
+
+.content-header h3 {
+    overflow-wrap: break-word;
+    color: rgb(var(--any-white));
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.content-body .list-content {
+    display: flex;
+    column-gap: 7px;
+    flex-direction: column;
+}
+
+.content-body .list-tag {
+    display: flex;
+    column-gap: 8px;
+    row-gap: 8px;
+    flex-wrap: wrap;
+}
+
+.content-body p {
+    color: rgb(var(--any-white));
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.row-content {
+    display: flex;
+}
+
+.row-content .col-tittle {
+    white-space: nowrap;
+    width: 90px;
+    min-width: 54px;
+    margin-right: 8px;
+    color: rgb(var(--any-white));
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    overflow-wrap: break-word;
+    opacity: .5;
+    flex-shrink: 0;
+}
+
+.row-content .col-des {
+    overflow-wrap: break-word;
+    color: rgb(var(--any-white));
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    flex: 1;
+}
+
+/* product-info end--------------------------- */

@@ -1,0 +1,79 @@
+
+
+/* product-info ----------------------- */
+
+.list-comic {
+    scrollbar-width: none;
+    overflow-y: scroll;
+    max-height: 70vh;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    column-gap: calc(5%/4);
+    justify-content: flex-start;
+}
+
+.list-comic .comic {
+    width: calc(95%/5);
+    height: 236px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+.image-list .comic {
+    width: 118px;
+    height: 236px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+.list-comic .comic .tranfer-comic,
+.image-list .comic .tranfer-comic{
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    // border-radius: 5px;
+}
+
+.list-comic .comic .comic-avatar,
+.image-list .comic .comic-avatar,
+.image-list .comic .bg-content-comic,
+.list-comic .comic .bg-content-comic {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.list-comic .comic .comic-avatar>img,
+.image-list .comic .comic-avatar>img,
+.image-list .comic .bg-content-comic>img,
+.list-comic .comic .bg-content-comic>img {
+    // border-radius: 5px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.image-list .comic .comic-name,
+.list-comic .comic .comic-name {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+}
+
+.image-list .comic .comic-name>img,
+.list-comic .comic .comic-name>img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* product-info end--------------------------- */

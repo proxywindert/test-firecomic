@@ -1,0 +1,77 @@
+.container .cards{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.container .cards .card{
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    background-color: rgba(var(--any-black),var(--tw-bg-opacity));
+    margin-bottom: 6px;
+    overflow: hidden;
+    padding-top: 48%;
+    width: 100%;
+}
+
+.cards .card  .bg-img{
+    position: absolute;
+    display: block;
+    width: 100%;
+    opacity: 0.5;
+    object-fit: cover;
+    top: -50px;
+    transform: var(--tw-transform);
+}
+
+.cards .card  .char-img{
+    position:absolute;
+    bottom:0;
+    right: 0;
+    max-height: calc(100% - 20px);
+}
+
+.cards .card .label-time-content{
+    position:absolute;
+    width: 40%;
+    top:50%;
+    left: 18px;
+    transform: translateY(-50%);
+}
+
+.label-time-content .comic-name > img{
+    max-width: calc(100% - 20px);
+}
+
+.container .cards .card .chapter{
+    position:absolute;
+    bottom:10px;
+    font-size: 10px;
+    font-weight: 800;
+    background-color: black;
+    left: 17px;
+}
+
+.container .cards .card .chapter > span{
+    color: rgb(var(--any-white));
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+@media screen  and ((min-width: 580px)) {
+    .container .cards {
+        width: 490px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .container .cards {
+        max-width: 1000px;
+        width: 100%;
+    }
+}
