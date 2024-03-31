@@ -16,11 +16,6 @@ class ComicController extends BaseController
         parent::__construct();
     }
 
-    public function index(Request $request)
-    {
-        return view('Frontend.comics.index');
-    }
-
     public function show($comic_code)
     {
         $comic = $this->comicService->show($comic_code);

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebControllers\V1\Backend\ComicController;
 use App\Http\Controllers\WebControllers\V1\Backend\ChapterController;
+use App\Http\Controllers\WebControllers\V1\Backend\LandingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,9 @@ Route::get('/users', function () {
     return view('users', compact('users'));
 });
 
-Route::get('/', [ComicController::class, 'index']);
+Route::get('/', [LandingController::class, 'index']);
 
 Route::group(array('prefix' => 'comics'), function () {
     Route::get('/content/{comic_code}', [ComicController::class, 'show'])->name('comic-info');
-    Route::get('/viewer/{chapter_number}', [ChapterController::class, 'show'])->name('view-comic');
+    Route::get('/viewer/{comic_code}/chapter/{chapter_number}', [ChapterController::class, 'show'])->name('view-comic');
 });

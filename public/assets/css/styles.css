@@ -395,7 +395,6 @@
   opacity: 0.5;
   object-fit: cover;
   top: -50px;
-  transform: var(--tw-transform);
 }
 
 .cards .card .char-img {
@@ -562,7 +561,7 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  border-bottom: 1px solid rgba(48, 42, 41, 0.7);
+  border-bottom: 1px solid rgba(171, 42, 53, 0.7);
 }
 
 .banner-char .img-char > img {

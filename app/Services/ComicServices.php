@@ -20,8 +20,7 @@ class ComicServices extends BaseServices
 
     public function show($comicCode)
     {
-        $data = $this->model->where('comic_code', $comicCode)->first();
-
+        $data = $this->model->with('chapters')->where('comic_code', $comicCode)->first();
         return $data;
     }
 }

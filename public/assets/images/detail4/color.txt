@@ -1,0 +1,3 @@
+background:linear-gradient(to bottom, rgba(93, 122, 192, 0) 2%, rgb(93, 122, 192, 0.7) 50%,  rgb(93, 122, 192))
+
+rgb(93, 122, 192)

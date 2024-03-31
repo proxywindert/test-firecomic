@@ -13,21 +13,11 @@
                      style="top: 44px;background-color: rgba(var(--background), var(--tw-bg-opacity));">
                     <div class="nav-bar">
                         <ul class="list-item">
-                            <li class="item">
-                                <a class="active" href="">Mới Cập Nhật</a>
-                            </li>
-                            <li class="item">
-                                <a href="">Võ Thuật</a>
-                            </li>
-                            <li class="item">
-                                <a href="">Mạt Thế</a>
-                            </li>
-                            <li class="item">
-                                <a href="">Fantasy</a>
-                            </li>
-                            <li class="item">
-                                <a href="">Hành Động</a>
-                            </li>
+                            @foreach($genres as $genre)
+                                <li class="item">
+                                    <a class="{{ $loop->index == 0?"active":"" }}" href="">{{$genre->name}}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -80,101 +70,128 @@
     <div class="main">
         <div class="container">
             <div class="cards">
+                @foreach($comics as $comic)
+                    <div class="card">
+                        <a href="{{ route('comic-info', ['comic_code' => $comic->comic_code]) }}">
+                            <picture>
+                                <img class="bg-img" src="{!! asset($comic->link_bg) !!}"
+                                     alt="">
+                            </picture>
+                            <picture>
+                                <img class="char-img"
+                                     src="{!! asset($comic->link_avatar) !!}" alt="">
+                            </picture>
+                            <div class="label-time-content">
+                                <div class="time">
+                                    <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">
+                                    <span>3 tuần trước</span>
+                                </div>
+                                <div class="comic-name">
+                                    <img src="{!! asset($comic->link_comic_name) !!}" alt="">
+                                </div>
+                            </div>
+                            <div class="chapter">
+                                <span>5 Chap</span>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
 
-                <div class="card">
-                    <a href="{{ route('comic-info', ['comic_code' => 'cm-1']) }}">
-                        <picture>
-                            <img class="bg-img" src="{!! asset("assets/images/dynamic-image-1") !!}" alt="">
-                        </picture>
-                        <picture>
-                            <img class="char-img" src="{!! asset("assets/images/dynamic-image") !!}" alt="">
-                        </picture>
-                        <div class="label-time-content">
-                            <div class="time">
-                                <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">
-                                <span>3 tuần trước</span>
-                            </div>
-                            <div class="comic-name">
-                                <img src="{!! asset("assets/images/comic-name") !!}" alt="">
-                            </div>
-                        </div>
-                        <div class="chapter">
-                            <span>5 Chap</span>
-                        </div>
-                    </a>
-                </div>
 
-                <div class="card">
-                    <a href="{{ route('comic-info', ['comic_code' => 'cm-2']) }}">
+{{--                <div class="card">--}}
+{{--                    <a href="{{ route('comic-info', ['comic_code' => 'cm-1']) }}">--}}
+{{--                        <picture>--}}
+{{--                            <img class="bg-img" src="{!! asset("assets/images/dynamic-image-1") !!}" alt="">--}}
+{{--                        </picture>--}}
+{{--                        <picture>--}}
+{{--                            <img class="char-img" src="{!! asset("assets/images/dynamic-image") !!}" alt="">--}}
+{{--                        </picture>--}}
+{{--                        <div class="label-time-content">--}}
+{{--                            <div class="time">--}}
+{{--                                <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">--}}
+{{--                                <span>3 tuần trước</span>--}}
+{{--                            </div>--}}
+{{--                            <div class="comic-name">--}}
+{{--                                <img src="{!! asset("assets/images/comic-name") !!}" alt="">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="chapter">--}}
+{{--                            <span>5 Chap</span>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
 
-                        <picture>
-                            <img class="bg-img" src="{!! asset("assets/images/thánh-avatar-comic-bg") !!}" alt="">
-                        </picture>
-                        <picture>
-                            <img class="char-img" src="{!! asset("assets/images/thánh-avatar-comic-char") !!}" alt="">
-                        </picture>
-                        <div class="label-time-content">
-                            <div class="time">
-                                <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">
-                                <span>3 tuần trước</span>
-                            </div>
-                            <div class="comic-name">
-                                <img src="{!! asset("assets/images/thánh-avatar-comic.png") !!}" alt="">
-                            </div>
-                        </div>
-                        <div class="chapter">
-                            <span>5 Chap</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="{{ route('comic-info', ['comic_code' => 'cm-2']) }}">
+{{--                <div class="card">--}}
+{{--                    <a href="{{ route('comic-info', ['comic_code' => 'cm-2']) }}">--}}
 
-                        <picture>
-                            <img class="bg-img" src="{!! asset("assets/images/sống-avatar-comic-bg") !!}" alt="">
-                        </picture>
+{{--                        <picture>--}}
+{{--                            <img class="bg-img" src="{!! asset("assets/images/thánh-avatar-comic-bg") !!}" alt="">--}}
+{{--                        </picture>--}}
+{{--                        <picture>--}}
+{{--                            <img class="char-img" src="{!! asset("assets/images/thánh-avatar-comic-char") !!}" alt="">--}}
+{{--                        </picture>--}}
+{{--                        <div class="label-time-content">--}}
+{{--                            <div class="time">--}}
+{{--                                <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">--}}
+{{--                                <span>3 tuần trước</span>--}}
+{{--                            </div>--}}
+{{--                            <div class="comic-name">--}}
+{{--                                <img src="{!! asset("assets/images/thánh-avatar-comic.png") !!}" alt="">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="chapter">--}}
+{{--                            <span>5 Chap</span>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--                <div class="card">--}}
+{{--                    <a href="{{ route('comic-info', ['comic_code' => 'cm-2']) }}">--}}
 
-                        <picture>
-                            <img class="char-img" src="{!! asset("assets/images/sống-avatar-comic-char") !!}" alt="">
-                        </picture>
-                        <div class="label-time-content">
-                            <div class="time">
-                                <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">
-                                <span>3 tuần trước</span>
-                            </div>
-                            <div class="comic-name">
-                                <img src="{!! asset("assets/images/sống-avatar-comic") !!}" alt="">
-                            </div>
-                        </div>
-                        <div class="chapter">
-                            <span>5 Chap</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="{{ route('comic-info', ['comic_code' => 'cm-1']) }}">
+{{--                        <picture>--}}
+{{--                            <img class="bg-img" src="{!! asset("assets/images/sống-avatar-comic-bg") !!}" alt="">--}}
+{{--                        </picture>--}}
 
-                        <picture>
-                            <img class="bg-img" src="{!! asset("assets/images/dam-avatar-comic-bg") !!}" alt="">
-                        </picture>
+{{--                        <picture>--}}
+{{--                            <img class="char-img" src="{!! asset("assets/images/sống-avatar-comic-char") !!}" alt="">--}}
+{{--                        </picture>--}}
+{{--                        <div class="label-time-content">--}}
+{{--                            <div class="time">--}}
+{{--                                <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">--}}
+{{--                                <span>3 tuần trước</span>--}}
+{{--                            </div>--}}
+{{--                            <div class="comic-name">--}}
+{{--                                <img src="{!! asset("assets/images/sống-avatar-comic") !!}" alt="">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="chapter">--}}
+{{--                            <span>5 Chap</span>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--                <div class="card">--}}
+{{--                    <a href="{{ route('comic-info', ['comic_code' => 'cm-1']) }}">--}}
 
-                        <picture>
-                            <img class="char-img" src="{!! asset("assets/images/dam-avatar-comic-char" ) !!}" alt="">
-                        </picture>
-                        <div class="label-time-content">
-                            <div class="time">
-                                <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">
-                                <span>3 tuần trước</span>
-                            </div>
-                            <div class="comic-name">
-                                <img src="{!! asset("assets/images/dam-avatar-comic") !!}" alt="">
-                            </div>
-                        </div>
-                        <div class="chapter">
-                            <span>5 Chap</span>
-                        </div>
-                    </a>
-                </div>
+{{--                        <picture>--}}
+{{--                            <img class="bg-img" src="{!! asset("assets/images/dam-avatar-comic-bg") !!}" alt="">--}}
+{{--                        </picture>--}}
+
+{{--                        <picture>--}}
+{{--                            <img class="char-img" src="{!! asset("assets/images/dam-avatar-comic-char" ) !!}" alt="">--}}
+{{--                        </picture>--}}
+{{--                        <div class="label-time-content">--}}
+{{--                            <div class="time">--}}
+{{--                                <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">--}}
+{{--                                <span>3 tuần trước</span>--}}
+{{--                            </div>--}}
+{{--                            <div class="comic-name">--}}
+{{--                                <img src="{!! asset("assets/images/dam-avatar-comic") !!}" alt="">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="chapter">--}}
+{{--                            <span>5 Chap</span>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
             </div>
 
         </div>
