@@ -27,13 +27,13 @@ class ChapterServices extends BaseServices
         return $data;
     }
 
-    public function getChapterByComicCodeAndChapterNumber($comic_code,$chapterNumber)
+    public function getChapterByComicCodeAndChapterNumber($comic_code, $chapterNumber)
     {
-//        $data = $this->model->with('comic')->where('comic_code', $comic_code)->where('chapter_number', $chapterNumber)->with('contentImages')->first();
         $query = $this->model;
-        $data = $query->whereHas('comic',function ($query) use($comic_code){
+        $data = $query->whereHas('comic', function ($query) use ($comic_code) {
             $query->where('comic_code', $comic_code);
-        })->where('chapter_number', $chapterNumber)->with('contentImages')->with('comic')->first();
+        })
+            ->where('chapter_number', $chapterNumber)->with('contentImages')->with('comic')->first();
 
         return $data;
     }

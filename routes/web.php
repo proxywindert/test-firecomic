@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WebControllers\V1\Backend\ComicController;
-use App\Http\Controllers\WebControllers\V1\Backend\ChapterController;
-use App\Http\Controllers\WebControllers\V1\Backend\LandingController;
+use App\Http\Controllers\WebControllers\V1\Frontend\ComicController;
+use App\Http\Controllers\WebControllers\V1\Frontend\ChapterController;
+use App\Http\Controllers\WebControllers\V1\Frontend\LandingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,7 @@ Route::get('/users', function () {
 Route::get('/', [LandingController::class, 'index']);
 
 Route::group(array('prefix' => 'comics'), function () {
+    Route::get('/content/keywork/{hashtag}', [ComicController::class, 'search'])->name('search');
     Route::get('/content/{comic_code}', [ComicController::class, 'show'])->name('comic-info');
     Route::get('/viewer/{comic_code}/chapter/{chapter_number}', [ChapterController::class, 'show'])->name('view-comic');
 });

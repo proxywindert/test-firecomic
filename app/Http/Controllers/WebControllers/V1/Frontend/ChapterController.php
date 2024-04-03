@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\WebControllers\V1\Backend;
+namespace App\Http\Controllers\WebControllers\V1\Frontend;
 
 use App\Http\Controllers\BaseController;
 use App\Services\ChapterServices;

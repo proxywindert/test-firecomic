@@ -15,12 +15,18 @@ class ComicServices extends BaseServices
     {
         $limit = $request->get('limit', ComicModel::LIMIT_PAGE);
         $query = $this->model;
+        $hashtag = $request->get('hashtag');
+        if ($hashtag && $hashtag != 'null') {
+            $query = $query->whereHas('hashtags',function ($query) use($hashtag){
+                $query->where('hashtags.id',$hashtag);
+            });
+        }
         return $query->paginate($limit);
     }
 
     public function show($comicCode)
     {
-        $data = $this->model->with('chapters')->where('comic_code', $comicCode)->first();
+        $data = $this->model->with('chapters')->with('hashtags')->where('comic_code', $comicCode)->first();
         return $data;
     }
 }

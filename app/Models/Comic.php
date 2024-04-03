@@ -27,6 +27,14 @@ class Comic extends BaseModel
         return $this->hasMany(Chapter::class,'comic_id');
     }
 
+    public function hashtags(){
+        return $this->belongsToMany(Hashtag::class,'taggeds','comic_id','hashtag_id');
+    }
+
+    public function summaryContents(){
+        return $this->hasMany(SummaryContent::class,'comic_id');
+    }
+
     public function artist(){
         return $this->belongsTo(Artist::class,'artist_id');
     }
