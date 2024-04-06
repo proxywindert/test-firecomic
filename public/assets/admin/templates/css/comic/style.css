@@ -1,0 +1,28 @@
+
+
+.form-group .small-comic-img,
+#comic-list .small-comic-img{
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+}
+#comic-list .comic-name{
+    text-align: start;
+    vertical-align: middle;
+}
+
+table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+table.table-fit {
+    width: auto !important;
+    table-layout: auto !important;
+}
+table.table-fit thead th,
+table.table-fit tbody td,
+table.table-fit tfoot th,
+table.table-fit tfoot td {
+    width: auto !important;
+}

@@ -1,0 +1,91 @@
+@extends("Frontend.layouts.master")
+@section("header")
+    <header class="header" style="margin-bottom: 56px">
+        <div class="fake-block-search">
+        </div>
+        <div id="block-search" class="block-search">
+            <div class="col-right">
+                <a class="back-button" href="#">
+                    <img
+                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAzMiAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00LjQxNzUzIDEwLjU4NThMNy45NDU2NiA3LjA1NzY4TDcuOTUzMDUgNy4wNTAyMkM4LjM0MzU3IDYuNjU5NjkgOC45NzY3NCA2LjY1OTY5IDkuMzY3MjYgNy4wNTAyMkM5Ljc1Nzc3IDcuNDQwNzMgOS43NTc3OSA4LjA3Mzg3IDkuMzY3MyA4LjQ2NDM5TDkuMzY3MzQgOC40NjQ0M0w2LjgzMTggMTFIMjguMDAwMkMyOC41NTI1IDExIDI5LjAwMDIgMTEuNDQ3NyAyOS4wMDAyIDEyQzI5LjAwMDIgMTIuNTUyMyAyOC41NTI1IDEzIDI4LjAwMDIgMTNINi44MzE2OUw5LjM2MTQ5IDE1LjUyOThMOS4zNjcyNiAxNS41MzU1QzkuNzU3NzkgMTUuOTI2IDkuNzU3NzkgMTYuNTU5MiA5LjM2NzI2IDE2Ljk0OTdDOC45NzY3NCAxNy4zNDAyIDguMzQzNTcgMTcuMzQwMiA3Ljk1MzA1IDE2Ljk0OTdMNy45NTMwNCAxNi45NDk3TDcuOTUzMDEgMTYuOTQ5N0w0LjAwMzI2IDEzSDQuMDAwMlYxMi45OTY5TDMuNzEwMzcgMTIuNzA3MUMzLjMxOTg1IDEyLjMxNjYgMy4zMTk4NSAxMS42ODM0IDMuNzEwMzcgMTEuMjkyOUw0LjAwMDIgMTEuMDAzVjExSDQuMDAzMjdMNC40MTc0OCAxMC41ODU4TDQuNDE3NTMgMTAuNTg1OFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo="
+                        alt="back" width="32px" height="24px">
+                </a>
+            </div>
+            <div class="col-left">
+                <a href="" class="search-btn">
+                    <img src="{!! asset("assets/images/search.svg") !!}" alt="">
+                </a>
+                <div id="open-tab-nav-header" class="menu-btn">
+                    <img src="{!! asset("assets/images/menu.svg") !!}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="tab-nav-header" id="tab-nav-header">
+            <button id="close-tab-nav-header" class="close-tab-nav-header">
+                <img src="{!! asset("assets/images/close.svg") !!}" alt="close">
+            </button>
+            <ul>
+                <li class="nav-item">
+                    <a href="" class="s13-bold-white">Liên hệ</a>
+                    <ul class="sub-contact">
+                        <li>
+                            <a target="_blank" href="https://m.me/AlexVrt1">
+                                <img src="{!! asset("assets/images/messenger.webp") !!}" alt="">
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="mailto:firecomic247@gmail.com">
+                                <img src="{!! asset("assets/images/email.webp") !!}" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+@endsection
+@section("main-content")
+   <div class="main">
+       <div class="container">
+           <div class="cards">
+               @foreach($comics as $comic)
+                   <div class="card">
+                       <a href="{{ route('comic-info', ['comic_code' => $comic->comic_code]) }}">
+                            <picture>
+                                <img class="bg-img" src="{!! asset($comic->link_bg) !!}"
+                                     alt="">
+                            </picture>
+                            <picture>
+                                <img class="char-img"
+                                     src="{!! asset($comic->link_avatar) !!}" alt="">
+                            </picture>
+                            <div class="label-time-content">
+                                <div class="time">
+                                    <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">
+                                    <span>3 tuần trước</span>
+                                </div>
+                                <div class="comic-name">
+                                    <img src="{!! asset($comic->link_comic_name) !!}" alt="">
+                                </div>
+                            </div>
+                            <div class="chapter">
+                                <span>5 Chap</span>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+
+        </div>
+    </div>
+@endsection
+@section("addtional_scripts")
+    <script>
+        window.addEventListener('load',()=>{
+            document.querySelector('.back-button').addEventListener('click',()=>{
+                window.location = '/'
+            })
+        })
+    </script>
+@endsection

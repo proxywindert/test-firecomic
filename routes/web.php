@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebControllers\V1\Frontend\ComicController;
 use App\Http\Controllers\WebControllers\V1\Frontend\ChapterController;
 use App\Http\Controllers\WebControllers\V1\Frontend\LandingController;
+use App\Http\Controllers\WebControllers\V1\Backend\LandingController as AdmLandingController;
+use App\Http\Controllers\WebControllers\V1\Backend\ComicController as AdmComicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,21 @@ Route::get('/users', function () {
 Route::get('/', [LandingController::class, 'index']);
 
 Route::group(array('prefix' => 'comics'), function () {
-    Route::get('/content/keywork/{hashtag}', [ComicController::class, 'search'])->name('search');
+    Route::get('/content/search', [ComicController::class, 'searchByhashTag'])->name('searchByhashTag');
+    Route::get('/content/keywork/{hashtag}', [ComicController::class, 'searchByhashTag'])->name('searchByhashTag');
     Route::get('/content/{comic_code}', [ComicController::class, 'show'])->name('comic-info');
     Route::get('/viewer/{comic_code}/chapter/{chapter_number}', [ChapterController::class, 'show'])->name('view-comic');
+});
+
+Route::group(array('prefix' => 'admin'), function () {
+    Route::get('/dashboard', [AdmLandingController::class, 'index'])->name('dashboard');
+    Route::group(array('prefix' => 'comics','as' => 'comics.'), function () {
+        Route::get('/', [AdmComicController::class, 'index'])->name('list');
+        Route::get('/create', [AdmComicController::class, 'create'])->name('create');
+        Route::get('/edit/{code}', [AdmComicController::class, 'edit'])->name('edit');
+        Route::get('/{code}', [AdmComicController::class, 'show']);
+        Route::patch('/{code}', [AdmComicController::class, 'update'])->name('patch');
+        Route::post('/', [AdmComicController::class, 'store'])->name('store');
+        Route::delete('/{code}', [AdmComicController::class, 'destroy'])->name('delete');
+    });
 });

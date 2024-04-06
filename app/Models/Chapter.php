@@ -33,4 +33,12 @@ class Chapter extends BaseModel
     public function contentImages(){
         return $this->hasMany(ContentImage::class,"chapter_id",'id');
     }
+
+    public function nextChapter(){
+        return $this->belongsTo(Chapter::class,"next_chapter_id");
+    }
+
+    public function prvChapter(){
+        return $this->belongsTo(Chapter::class,"prv_chapter_id");
+    }
 }

@@ -18,12 +18,13 @@ class ChapterController extends BaseController
 
     public function index(Request $request)
     {
-        return view('Frontend.comics.index');
+        return view('Frontend.pages.comics.dashboard');
     }
 
     public function show($comic_code,$chapterNumber)
     {
         $comic = $this->chapterServices->getChapterByComicCodeAndChapterNumber($comic_code,$chapterNumber);
-        return view('Frontend.chapters.index',compact('comic'));
+        $comic->with('nextChapter','prvChapter');
+        return view('Frontend.pages.chapters.dashboard',compact('comic'));
     }
 }

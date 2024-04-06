@@ -11,9 +11,12 @@ class Comic extends BaseModel
     protected $fillable =[
         'comic_code',
         'comic_name',
-        'link_bg_color',
+        'bg_color',
+        'link_banner',
+        'link_bg',
         'link_avatar',
         'link_comic_name',
+        'link_comic_small_name',
         'tranfer_color',
         'total_view',
         'total_like',

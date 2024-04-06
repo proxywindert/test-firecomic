@@ -16,16 +16,16 @@ class ComicController extends BaseController
         parent::__construct();
     }
 
-    public function search(Request $request,$hashtag)
+    public function searchByhashTag(Request $request,$hashtag)
     {
         $request['hashtag'] = $hashtag;
         $comics = $this->comicService->index($request);
-        return view('Frontend.comics.search',compact('comics'));
+        return view('Frontend.pages.comics.search',compact('comics'));
     }
 
     public function show($comic_code)
     {
         $comic = $this->comicService->show($comic_code);
-        return view('Frontend.comics.detail',compact('comic'));
+        return view('Frontend.pages.comics.detail',compact('comic'));
     }
 }
