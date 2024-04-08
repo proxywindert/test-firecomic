@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\ContentImageServices;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,12 +21,35 @@ class Chapter extends BaseModel
         'chapter_number',
         'publish_at',
         'free_at',
+        'link_small_icon',
 
         'created_by',
         'updated_by',
         'created_at',
         'updated_at',
     ];
+
+    const TIME = [
+        'free_at',
+        'publish_at',
+    ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            $model->load('contentImages');
+            if (!$model->contentImages->isEmpty()) {
+                $contentImageServices = app()->make(ContentImageServices::class);
+                foreach ($model->contentImages as $contentImage){
+                    $contentImageServices->delete($contentImage->id);
+                }
+            }
+            return true;
+        });
+    }
+
     public function comic(){
         return $this->belongsTo(Comic::class,'comic_id');
     }

@@ -12,7 +12,7 @@ class ContentImage extends BaseModel
 
         'link_img',
         'chapter_id',
-
+        'ggdrive_id',
         'created_by',
         'updated_by',
         'created_at',

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\ChapterServices;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +14,7 @@ class Comic extends BaseModel
         'comic_name',
         'bg_color',
         'link_banner',
+        'ggdrive_id',
         'link_bg',
         'link_avatar',
         'link_comic_name',
@@ -26,6 +28,30 @@ class Comic extends BaseModel
         'updated_at',
     ];
 
+    const TIME = [
+        'application_date',
+        'attendance_start_at',
+        'attendance_end_at',
+        'approved_at'
+    ];
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            $model->load('chapters');
+            $chapterServices = app()->make(ChapterServices::class);
+            if (!$model->chapters->isEmpty()) {
+                foreach ($model->chapters as $chapter){
+                    $chapterServices->delete($chapter->id);
+//                    $chapter->delete($chapter->id);
+                }
+            }
+            $model->summaryContents()->delete();
+            return true;
+        });
+    }
+
     public function chapters(){
         return $this->hasMany(Chapter::class,'comic_id');
     }
@@ -35,7 +61,7 @@ class Comic extends BaseModel
     }
 
     public function summaryContents(){
-        return $this->hasMany(SummaryContent::class,'comic_id');
+        return $this->hasOne(SummaryContent::class,'comic_id');
     }
 
     public function artist(){

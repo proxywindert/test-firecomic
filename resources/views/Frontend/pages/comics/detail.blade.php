@@ -66,7 +66,7 @@
             <div class="label-time-content">
                 <div class="time">
                     <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">
-                    <span>3 tuần trước</span>
+                    <span>{{ $comic?->diff_time }}</span>
                 </div>
             </div>
             <div class="comic-info">
@@ -139,7 +139,7 @@
                 </div>
                 <div id="content-tab" class="content-anchor">
                     <input type="hidden" name="comic_code" value="{{$comic->comic_code}}"/>
-                    <a href="{{ route('view-comic', ['comic_code' => $comic->comic_code,'chapter_number' => '1']) }}"
+                    <a href="{{ route('view-comic', ['comic_code' => $comic->comic_code,'id' => $comic?->chapters?$comic?->chapters[0]->id:'1']) }}"
                        class="chapter">
                         <div class="watch-first-chap">
                                 <span>
@@ -149,8 +149,8 @@
                     </a>
                     <div class="list-chapter">
                         @foreach($comic->chapters as $key => $chapter)
-                            @if($key>0)
-                                <a href="{{ route('view-comic', ['comic_code' => $comic->comic_code,'chapter_number' => $chapter->chapter_number]) }}"
+{{--                            @if($key>0)--}}
+                                <a href="{{ route('view-comic', ['comic_code' => $comic->comic_code,'id' => $chapter->id]) }}"
                                    class="chapter">
                                     <div class="icon-img">
                                         <img src="{!! asset($chapter->link_small_icon) !!}" alt="">
@@ -160,7 +160,7 @@
                                             tập {{ $chapter->chapter_number }}
                                         </p>
                                         <p class="date">
-                                            01/07/09
+                                            {{ $chapter->publish_at }}
                                         </p>
                                     </div>
                                     <div class="extend-info">
@@ -168,7 +168,7 @@
                                     </div>
 
                                 </a>
-                            @endif
+{{--                            @endif--}}
                         @endforeach
                     </div>
                 </div>
@@ -224,7 +224,7 @@
                             <div class="content">
                                 <div class="content-body">
                                     <p id="content-desc" class="desc content-overflow">
-                                        {{ $comic?->summaryContents?->first()?->content }}
+                                        {{ $comic?->summaryContents?->content }}
                                        </p>
                                     <button id="btn-more" class="btn-more"><img
                                             src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxNCAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTMgNEw3IDhMMTEgNCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg=="

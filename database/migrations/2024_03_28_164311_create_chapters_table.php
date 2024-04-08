@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
 
-            $table->time('publish_at')->nullable();
-            $table->time('free_at')->nullable();
+            $table->dateTime('publish_at')->nullable();
+            $table->dateTime('free_at')->nullable();
             // trang thai free/waiting
             $table->string('status')->default('waiting');
             $table->integer('chapter_number');

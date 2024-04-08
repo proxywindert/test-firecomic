@@ -16,9 +16,11 @@
 @import "../plugins/timepicker/bootstrap-timepicker.min.css";
 @import "../bower_components/select2/dist/css/select2.min.css";
 @import "../drop/css/style.css";
-@import "../employee/list-employee.css";
+/*@import "../employee/list-employee.css";*/
 @import "../teams/multi-select.css";
 @import "../go_to_top/go_to_top.css";
+@import "../toast/toast.css";
+@import "../preloader/preloader.css";
 @import "../back_button/back_button.css";
-@import "../projects/project_list.css";
+/*@import "../projects/project_list.css";*/
 @import "../label/fix_label.css";

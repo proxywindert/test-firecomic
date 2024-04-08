@@ -3,15 +3,19 @@
 
 namespace App\Services;
 
+use App\Models\Chapter;
 use App\Models\Comic as ComicModel;
+use Carbon\Carbon;
 use Google_Service_Drive_DriveFile;
 use Google_Service_Drive_Permission;
 use Illuminate\Support\Facades\Storage;
 
 class ComicServices extends BaseServices
 {
-    public function __construct(ComicModel $model)
+    private $summaryContentServices;
+    public function __construct(ComicModel $model,SummaryContentServices $summaryContentServices)
     {
+        $this->summaryContentServices = $summaryContentServices;
         parent::__construct($model);
     }
 
@@ -25,7 +29,18 @@ class ComicServices extends BaseServices
                 $query->where('hashtags.slug', $hashtag);
             });
         }
-        return $query->paginate($limit);
+        $query->with('chapters');
+        $data = $query->paginate($limit);
+
+        if (!$data->isEmpty()) {
+            $now = Carbon::now();
+            $data->each(function ($item) use($now){
+                $item['diff_time'] = $now->diffInDays($item->chapters->last()->publish_at);
+                $item['diff_time'] = $item['diff_time']<=0?'Mới cập nhật':'Cách đây '.$item['diff_time'].' ngày';
+            });
+        }
+
+        return $data;
     }
 
     public function save(array $attributes)
@@ -34,15 +49,26 @@ class ComicServices extends BaseServices
             $entity = $this->model->where('comic_code',$attributes['comic_code'])->first();
             if ($entity) {
                 $entity->fill($attributes)->save();
+
+                $summayContent['comic_id'] = $entity->id;
+                $summayContent['content'] = $attributes['summary_contents'];
+                $this->summaryContentServices->save($summayContent);
                 return $entity;
             } else {
                 return null;
             }
         } else {
             $attributes['comic_code'] = "COMIC-" . $this->model->max('id') + 1;
-            return $this->model->create($attributes);
+            $entity=$this->model->create($attributes);
+
+            $summayContent['comic_id'] = $entity->id;
+            $summayContent['content'] = $attributes['summary_contents'];
+            $this->summaryContentServices->save($summayContent);
+            return $entity;
         }
     }
+
+
 
     public function uploadGGDrive($request,&$comic)
     {
@@ -55,16 +81,12 @@ class ComicServices extends BaseServices
 
         $driveService = Storage::disk('google');
 
-        $newPermission = new Google_Service_Drive_Permission();
-        $newPermission->setType('anyone');
-        $newPermission->setRole('reader');
-
-        $folderId = file_get_contents(public_path() . '/token.txt');
+        $newPermission = app()->make('googlePermission');
+        $folderId = app()->make('googleFolderId');
 
         $fileToUpload = $this->postGGDrive($driveService, $file['link_avatar']['file'], $folderId);
         if ($fileToUpload) {
             $driveService->permissions->create($fileToUpload->id, $newPermission);
-
             $file['link_avatar']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
         }
 
@@ -72,7 +94,6 @@ class ComicServices extends BaseServices
         $fileToUpload = $this->postGGDrive($driveService, $file['link_comic_name']['file'], $folderId);
         if ($fileToUpload) {
             $driveService->permissions->create($fileToUpload->id, $newPermission);
-
             $file['link_comic_name']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
         }
 
@@ -80,7 +101,6 @@ class ComicServices extends BaseServices
         $fileToUpload = $this->postGGDrive($driveService, $file['link_bg']['file'], $folderId);
         if ($fileToUpload) {
             $driveService->permissions->create($fileToUpload->id, $newPermission);
-
             $file['link_bg']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
         }
 
@@ -88,7 +108,6 @@ class ComicServices extends BaseServices
         $fileToUpload = $this->postGGDrive($driveService, $file['link_banner']['file'], $folderId);
         if ($fileToUpload) {
             $driveService->permissions->create($fileToUpload->id, $newPermission);
-
             $file['link_banner']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
         }
 
@@ -108,37 +127,35 @@ class ComicServices extends BaseServices
         return $file;
     }
 
-    public function postGGDrive($driveService, $file, $folderId)
-    {
-        if (!$file) {
-            return null;
-        }
-        $name = $file->getClientOriginalName();
-        $type = $file->getClientMimeType();
 
-        $content = file_get_contents($file->getRealPath());
-
-        $fileMetadata = new Google_Service_Drive_DriveFile(array(
-            'name' => $this->generateRandomString(15) . '_' . time() . '_' . $name,
-            'parents' => array($folderId)));
-        $file = $driveService->files->create($fileMetadata, array(
-            'data' => $content,
-            'mimeType' => $type,
-            'uploadType' => 'multipart',
-            'fields' => 'id'));
-        return $file;
-    }
 
     public function show($comicCode)
     {
-        $data = $this->model->with('chapters')->with('hashtags')->where('comic_code', $comicCode)->first();
+        $data = $this->model->with('chapters')
+            ->with('summaryContents')
+            ->with('hashtags')->where('comic_code', $comicCode)->first();
+        if (!empty($data) && !$data->chapters->isEmpty()) {
+            $now = Carbon::now();
+            $data['diff_time'] = $now->diffInDays($data->chapters->last()->publish_at);
+            $data['diff_time'] = $data['diff_time']<=0?'Mới cập nhật':'Cách đây '.$data['diff_time'].' ngày';
+            $data->chapters->each(function ($item){
+                foreach (Chapter::TIME as $key => $value) {
+                        if ($item[$value])
+                            $item[$value] = Carbon::parse($item[$value])->tz(config('app.timezone'))->format('d/m/Y');
+                }
+            });
+        }
         return $data;
     }
+
 
     public function delete($comicCode)
     {
         $entity = $this->model
             ->where('comic_code', $comicCode)->first();
+        // xoa img tren ggdrive
+        $result = collect($entity)->only(['link_bg', 'link_avatar', 'link_comic_name','link_banner','link_comic_small_name']);
+        $this->deteleGGDrive($result->toArray());
         return !empty($entity) ? $entity->delete() : null;
     }
 }

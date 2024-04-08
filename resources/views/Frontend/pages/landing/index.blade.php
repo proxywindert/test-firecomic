@@ -84,14 +84,14 @@
                             <div class="label-time-content">
                                 <div class="time">
                                     <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">
-                                    <span>3 tuần trước</span>
+                                    <span class=" content-overflow">{{ $comic?->diff_time }}</span>
                                 </div>
                                 <div class="comic-name">
                                     <img src="{!! asset($comic->link_comic_name) !!}" alt="">
                                 </div>
                             </div>
                             <div class="chapter">
-                                <span>5 Chap</span>
+                                <span class=" content-overflow">{{ $comic?->chapters->last()->chapter_name }}</span>
                             </div>
                         </a>
                     </div>

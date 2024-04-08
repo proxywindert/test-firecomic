@@ -217,14 +217,14 @@
                         <div class="card card-pr-detail">
                             <div class="content">
                                 <div class="content-body">
-                                    <a href="{{ route('view-comic', ['comic_code' => $comic->comic?->comic_code,'chapter_number' => $comic->nextChapter?->chapter_number??$comic->chapter_number]) }}"
+                                    <a href="{{ route('view-comic',['comic_code' => $comic->comic?->comic_code,'id' => $comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id]) }}"
                                        class="next-chapter">
                                         <div class="next-chapter-img">
-                                            <img src="{!! asset($comic->link_small_icon) !!}" alt="">
+                                            <img src="{!! asset($comic?->nextChapter?$comic?->nextChapter?->link_small_icon:$comic?->link_small_icon) !!}" alt="">
                                         </div>
                                         <div class="next-chapter-info">
                                             <p class="chapter-number content-overflow">
-                                                {{ $comic?->nextChapter?->chapter_name ?? '' }}
+                                                {{ $comic?->nextChapter ? $comic?->nextChapter?->chapter_name : $comic?->chapter_name }}
                                             </p>
                                             <span class="type content-overflow">miễn phí</span>
                                         </div>
@@ -599,10 +599,10 @@
             });
 
             document.querySelector('.navigationBar-content-right').addEventListener('click', function () {
-                window.location.href = "{{ route('view-comic', ['comic_code' => $comic->comic?->comic_code,'chapter_number' => $comic->nextChapter?->chapter_number??$comic->chapter_number]) }}";
+                window.location.href = "{{ route('view-comic', ['comic_code' => $comic->comic?->comic_code,'id' => $comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id]) }}";
             });
             document.querySelector('.navigationBar-content-left').addEventListener('click', function () {
-                window.location.href = "{{ route('view-comic', ['comic_code' => $comic->comic?->comic_code,'chapter_number' => $comic->prvChapter?->chapter_number??'1']) }}";
+                window.location.href = "{{ route('view-comic', ['comic_code' => $comic->comic?->comic_code,'id' => $comic->prvChapter?$comic?->prvChapter?->id:$comic?->id]) }}";
             });
 
         });

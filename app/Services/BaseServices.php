@@ -3,6 +3,8 @@
 
 namespace App\Services;
 use App\Models\BaseModel as Model;
+use Google_Service_Drive_DriveFile;
+use Illuminate\Support\Facades\Storage;
 
 class BaseServices
 {
@@ -21,5 +23,43 @@ class BaseServices
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function deteleGGDrive($urls){
+        try {
+            $driveService = Storage::disk('google');
+            $pattern = "/https:\/\/lh3.googleusercontent.com\/d\/(.*?)=w1000/i";
+            foreach ($urls as $url){
+                preg_match($pattern, $url,$matches);
+                $folderId = $matches[1]??null;
+                if($folderId)
+                    $driveService->files->delete($folderId);
+            }
+        }catch (\Exception $e){
+
+        }
+
+        return true;
+    }
+
+    public function postGGDrive($driveService, $file, $folderId)
+    {
+        if (!$file) {
+            return null;
+        }
+        $name = $file->getClientOriginalName();
+        $type = $file->getClientMimeType();
+
+        $content = file_get_contents($file->getRealPath());
+
+        $fileMetadata = new Google_Service_Drive_DriveFile(array(
+            'name' => $this->generateRandomString(15) . '_' . time() . '_' . $name,
+            'parents' => array($folderId)));
+        $file = $driveService->files->create($fileMetadata, array(
+            'data' => $content,
+            'mimeType' => $type,
+            'uploadType' => 'multipart',
+            'fields' => 'id'));
+        return $file;
     }
 }

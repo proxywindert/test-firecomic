@@ -20,6 +20,13 @@
             </ol>
         </section>
         <section class="content-header">
+            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#modal-search" id="clickCollapse">
+                <span class="fa fa-search"></span>&nbsp;&nbsp;&nbsp;<span id="iconSearch" class="glyphicon"></span>
+            </button>
+            @include('Backend.pages.comics._form_search_comics_list')
+        </section>
+
+        <section class="content-header">
             <div>
                 <button type="button" class="btn btn-info btn-default">
                     <a href="{{ route('comics.create')}}"><i class="fa fa-user-plus"></i>{{trans('common.button.add')}}
@@ -57,11 +64,11 @@
                                                  alt="Photo">
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-primary btn-sm" href="#">
-                                                <i class="fas fa-folder">
-                                                </i>
-                                                View
-                                            </a>
+{{--                                            <a class="btn btn-primary btn-sm" href="#">--}}
+{{--                                                <i class="fas fa-folder">--}}
+{{--                                                </i>--}}
+{{--                                                View--}}
+{{--                                            </a>--}}
                                             <a class="btn btn-info btn-sm" href="{{ route('comics.edit',['code'=>$comic->comic_code]) }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
@@ -77,7 +84,7 @@
                                                 Delete
                                             </a>
                                             <form id="delete-form-{{ $comic->comic_code }}"
-                                                  action="{{ route('comics.delete', ['code' => $comic->comic_code]) }}?XDEBUG_SESSION_START=19407"
+                                                  action="{{ route('comics.delete', ['code' => $comic->comic_code]) }}?XDEBUG_SESSION_START=10538"
                                                   method="POST" style="display: none;">
                                                 @method('DELETE')
                                                 @csrf
@@ -87,7 +94,18 @@
                                 @endforeach
                                 </tbody>
                             </table>
-
+                            <div class="row">
+                                @if($comics->hasPages())
+                                    <div class="col-sm-5">
+                                        <div class="dataTables_info" style="float:left" id="example2_info" role="status" aria-live="polite">
+                                            {{getInformationDataTable($comics)}}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        {{  $comics->appends($param)->render('Backend.components.pagination.custom') }}
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                         <!-- /.box-body -->
                     </div>

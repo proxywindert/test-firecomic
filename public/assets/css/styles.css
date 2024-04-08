@@ -419,10 +419,11 @@
 .container .cards .card .chapter {
   position: absolute;
   bottom: 10px;
-  font-size: 10px;
+  font-size: 22px;
   font-weight: 800;
   background-color: black;
   left: 17px;
+  max-width: 300px;
 }
 
 .container .cards .card .chapter > span {

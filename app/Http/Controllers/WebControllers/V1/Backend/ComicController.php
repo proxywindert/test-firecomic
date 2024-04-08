@@ -3,20 +3,22 @@
 namespace App\Http\Controllers\WebControllers\V1\Backend;
 
 use App\Http\Controllers\BaseController;
+use App\Services\ChapterServices;
 use App\Services\ComicServices;
 use Google_Service_Drive_DriveFile;
 use Google_Service_Drive_Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use function mysql_xdevapi\getSession;
 
 class ComicController extends BaseController
 {
     private $comicService;
-
-    public function __construct(ComicServices $comicService)
+    private $chapterServices;
+    public function __construct(ComicServices $comicService,
+                                ChapterServices $chapterServices)
     {
+        $this->chapterServices = $chapterServices;
         $this->comicService = $comicService;
         parent::__construct();
     }
@@ -27,7 +29,8 @@ class ComicController extends BaseController
     public function index(Request $request)
     {
         $comics = $this->comicService->index($request);
-        return view('Backend.pages.comics.list', compact('comics'));
+        $param = ($request->except(['page']));
+        return view('Backend.pages.comics.list', compact('comics','param'));
     }
 
     /**
@@ -46,7 +49,8 @@ class ComicController extends BaseController
         $comic = $request->only([
             'comic_name',
             'bg_color',
-            'tranfer_color'
+            'tranfer_color',
+            'summary_contents'
         ]);
 
         DB::beginTransaction();
@@ -78,10 +82,12 @@ class ComicController extends BaseController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request,string $id)
     {
         $comic = $this->comicService->show($id);
-        return view('Backend.pages.comics.edit', compact('comic'));
+        $chapters = $this->chapterServices->findByComics($request,$comic->id);
+        $param= $request->except(['page']);
+        return view('Backend.pages.comics.edit', compact('comic','chapters','param'));
     }
 
     /**
@@ -92,7 +98,8 @@ class ComicController extends BaseController
         $comic = $request->only([
             'comic_name',
             'bg_color',
-            'tranfer_color'
+            'tranfer_color',
+            'summary_contents'
         ]);
         $comic['comic_code'] = $id;
 
