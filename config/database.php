@@ -51,12 +51,12 @@ return [
 	
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL',"postgres://test_spring_user:XfcWuXiY7Yd2lZqimdOoIXeitE4pJsyu@dpg-cn8f4h21hbls73daiseg-a.oregon-postgres.render.com/test_spring"),
-            'host' => env('DB_HOST', "dpg-cn8f4h21hbls73daiseg-a.oregon-postgres.render.com"),
+            'url' => env('DATABASE_URL',"postgres://test_spring_user:nBqjLW73LGpeImzWG452u8Y8D6nK6nSu@dpg-coakhkkf7o1s73ds61d0-a.singapore-postgres.render.com/test_spring_1q40"),
+            'host' => env('DB_HOST', "dpg-coakhkkf7o1s73ds61d0-a.singapore-postgres.render.com"),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'test_spring'),
+            'database' => env('DB_DATABASE', 'test_spring_1q40'),
             'username' => env('DB_USERNAME', 'test_spring_user'),
-            'password' => env('DB_PASSWORD', 'XfcWuXiY7Yd2lZqimdOoIXeitE4pJsyu'),
+            'password' => env('DB_PASSWORD', 'nBqjLW73LGpeImzWG452u8Y8D6nK6nSu'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,

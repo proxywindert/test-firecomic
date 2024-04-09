@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Storage;
 class ComicServices extends BaseServices
 {
     private $summaryContentServices;
-    public function __construct(ComicModel $model,SummaryContentServices $summaryContentServices)
+    private $taggedServices;
+
+    public function __construct(ComicModel $model, SummaryContentServices $summaryContentServices, TaggedServices $taggedServices)
     {
+        $this->taggedServices = $taggedServices;
         $this->summaryContentServices = $summaryContentServices;
         parent::__construct($model);
     }
@@ -34,9 +37,14 @@ class ComicServices extends BaseServices
 
         if (!$data->isEmpty()) {
             $now = Carbon::now();
-            $data->each(function ($item) use($now){
-                $item['diff_time'] = $now->diffInDays($item->chapters->last()->publish_at);
-                $item['diff_time'] = $item['diff_time']<=0?'Mới cập nhật':'Cách đây '.$item['diff_time'].' ngày';
+            $data->each(function ($item) use ($now) {
+                if ($item ?->chapters ?->last()?->publish_at){
+                    $item['diff_time'] = $now->diffInDays($item ?->chapters ?->last() ?->publish_at);
+                    $item['diff_time'] = $item['diff_time'] <= 0 ? 'Mới cập nhật' : 'Cách đây ' . $item['diff_time'] . ' ngày';
+                }else{
+                    $item['diff_time'] = 'Mới cập nhật';
+                }
+
             });
         }
 
@@ -46,31 +54,66 @@ class ComicServices extends BaseServices
     public function save(array $attributes)
     {
         if (!empty($attributes['comic_code'])) {
-            $entity = $this->model->where('comic_code',$attributes['comic_code'])->first();
+            $entity = $this->model->where('comic_code', $attributes['comic_code'])->first();
             if ($entity) {
                 $entity->fill($attributes)->save();
 
-                $summayContent['comic_id'] = $entity->id;
-                $summayContent['content'] = $attributes['summary_contents'];
-                $this->summaryContentServices->save($summayContent);
+                $this->updateSummaryContents($attributes, $entity);
+                $this->updateTaggeds($attributes, $entity);
                 return $entity;
             } else {
                 return null;
             }
         } else {
             $attributes['comic_code'] = "COMIC-" . $this->model->max('id') + 1;
-            $entity=$this->model->create($attributes);
-
-            $summayContent['comic_id'] = $entity->id;
-            $summayContent['content'] = $attributes['summary_contents'];
-            $this->summaryContentServices->save($summayContent);
+            $entity = $this->model->create($attributes);
+            $this->addSummaryContents($attributes, $entity);
+            $this->addTaggeds($attributes, $entity);
             return $entity;
         }
     }
 
+    public function updateSummaryContents($attributes, $entity)
+    {
+        $summayContent['id'] = $entity ?->summaryContents ?->id;
+        $summayContent['comic_id'] = $entity['id'];
+        $summayContent['content'] = $attributes['summary_contents'];
+        $this->summaryContentServices->save($summayContent);
+    }
+
+    public function addSummaryContents($attributes, $entity)
+    {
+        $summayContent['comic_id'] = $entity['id'];
+        $summayContent['content'] = $attributes['summary_contents'];
+        $this->summaryContentServices->save($summayContent);
+    }
+
+    public function updateTaggeds($attributes, $entity)
+    {
+        // lay ra tat cả tagged của entity
+        $oldTaggeds = $entity->hashtags->pluck('id')->all();
+        $listtemp = [];
+        foreach ($attributes['tagged'] as $index => $tagged) {
+            if (in_array($tagged, $oldTaggeds)) {
+                $listtemp[] = $tagged;
+            } else {
+                $this->taggedServices->save(['comic_id' => $entity->id, 'hashtag_id' => $tagged]);
+            }
+        }
+        // lọc các id cần xóa
+        $listdelete = array_diff($oldTaggeds, $listtemp);
+        $this->taggedServices->deleteByComicIdandHashtagId($entity->id, $listdelete);
+    }
 
 
-    public function uploadGGDrive($request,&$comic)
+    public function addTaggeds($attributes, $entity)
+    {
+        foreach ($attributes['tagged'] as $index => $tagged) {
+            $this->taggedServices->save(['comic_id' => $entity->id, 'hashtag_id' => $tagged]);
+        }
+    }
+
+    public function uploadGGDrive($request, &$comic)
     {
         $file = [];
         $file['link_banner']['file'] = $request->file('link_banner');
@@ -111,37 +154,44 @@ class ComicServices extends BaseServices
             $file['link_banner']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
         }
 
-        if(!empty($file['link_banner']['url'])){
+        if (!empty($file['link_banner']['url'])) {
             $comic['link_banner'] = $file['link_banner']['url'];
         }
-        if(!empty($file['link_bg']['url'])){
+        if (!empty($file['link_bg']['url'])) {
             $comic['link_bg'] = $file['link_bg']['url'];
         }
-        if(!empty($file['link_comic_name']['url'])){
+        if (!empty($file['link_comic_name']['url'])) {
             $comic['link_comic_name'] = $file['link_comic_name']['url'];
         }
-        if(!empty($file['link_avatar']['url'])){
+        if (!empty($file['link_avatar']['url'])) {
             $comic['link_avatar'] = $file['link_avatar']['url'];
         }
 
         return $file;
     }
 
-
+    public function findByComicCode($comic_code){
+        return $this->model->where('comic_code',$comic_code)->first();
+    }
 
     public function show($comicCode)
     {
         $data = $this->model->with('chapters')
             ->with('summaryContents')
             ->with('hashtags')->where('comic_code', $comicCode)->first();
-        if (!empty($data) && !$data->chapters->isEmpty()) {
+        if (!empty($data)) {
             $now = Carbon::now();
-            $data['diff_time'] = $now->diffInDays($data->chapters->last()->publish_at);
-            $data['diff_time'] = $data['diff_time']<=0?'Mới cập nhật':'Cách đây '.$data['diff_time'].' ngày';
-            $data->chapters->each(function ($item){
+            if($data->chapters->last()?->publish_at){
+                $data['diff_time'] = $now->diffInDays($data->chapters->last()->publish_at);
+                $data['diff_time'] = $data['diff_time'] <= 0 ? 'Mới cập nhật' : 'Cách đây ' . $data['diff_time'] . ' ngày';
+            }else{
+                $data['diff_time'] ='Mới cập nhật';
+            }
+
+            $data->chapters->each(function ($item) {
                 foreach (Chapter::TIME as $key => $value) {
-                        if ($item[$value])
-                            $item[$value] = Carbon::parse($item[$value])->tz(config('app.timezone'))->format('d/m/Y');
+                    if ($item[$value])
+                        $item[$value] = Carbon::parse($item[$value])->tz(config('app.timezone'))->format('d/m/Y');
                 }
             });
         }
@@ -154,7 +204,7 @@ class ComicServices extends BaseServices
         $entity = $this->model
             ->where('comic_code', $comicCode)->first();
         // xoa img tren ggdrive
-        $result = collect($entity)->only(['link_bg', 'link_avatar', 'link_comic_name','link_banner','link_comic_small_name']);
+        $result = collect($entity)->only(['link_bg', 'link_avatar', 'link_comic_name', 'link_banner', 'link_comic_small_name']);
         $this->deteleGGDrive($result->toArray());
         return !empty($entity) ? $entity->delete() : null;
     }

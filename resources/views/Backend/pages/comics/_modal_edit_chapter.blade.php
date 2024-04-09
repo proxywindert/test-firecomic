@@ -21,7 +21,7 @@
                         <div class="row">
                             <div class="col col-md-6">
                                 <div class="form-group">
-                                    <label>chapter_name</label>
+                                    <label>{{trans('chapter.chapter_name')}}</label>
                                     <input
                                         type="text" class="form-control" name="chapter_name"
                                         placeholder="chapter_name">
@@ -29,7 +29,7 @@
                             </div>
                             <div class="col col-md-6">
                                 <div class="form-group">
-                                    <label>chapter_number</label>
+                                    <label>{{trans('chapter.chapter_number')}}</label>
                                     <input
                                         type="number" class="form-control" name="chapter_number"
                                         placeholder="chapter_number">
@@ -41,7 +41,7 @@
                             <div class="col col-md-6">
 
                                 <div class="form-group">
-                                    <label>publish_at</label>
+                                    <label>{{trans('chapter.publish_at')}}</label>
                                     <div class='input-group date form_datetime'>
                                         <input name="publish_at" type='text' value="" class="form-control" placeholder="yyyy-MM-dd HH:mm"/>
                                         <span class="input-group-addon">
@@ -68,7 +68,7 @@
                         <div class="row">
                             <div class="col col-md-6">
                                 <div class="form-group">
-                                    <label>status</label>
+                                    <label>{{trans('chapter.status')}}</label>
                                     <input
                                         type="text" class="form-control" name="status"
                                         placeholder="status">
@@ -79,7 +79,7 @@
                                     <img name="link_small_icon" class="small-comic-img img-responsive"
                                          src="{!! asset(old('link_small_icon', isset($comic["link_small_icon"]) ? $comic["link_small_icon"] : null)) !!}"
                                          alt="Photo">
-                                    <label>link_small_icon</label>
+                                    <label>{{trans('chapter.link_small_icon')}}</label>
                                     <input type="file" name="link_small_icon">
                                     <p class="help-block">link_small_icon.</p>
                                 </div>
@@ -89,16 +89,18 @@
                         <div class="row">
                             <div class="col col-md-6">
                                 <div class="form-group">
-                                    <label>prv_chapter_id</label>
+                                    <label>{{trans('chapter.prv_chapter_id')}}</label>
                                     <input
+                                        disabled
                                         type="number" class="form-control" name="prv_chapter_id"
                                         placeholder="prv_chapter_id">
                                 </div>
                             </div>
                             <div class="col col-md-6">
                                 <div class="form-group">
-                                    <label>next_chapter_id</label>
+                                    <label>{{trans('chapter.next_chapter_id')}}</label>
                                     <input
+                                        disabled
                                         type="number" class="form-control" name="next_chapter_id"
                                         placeholder="next_chapter_id">
                                 </div>
@@ -110,9 +112,8 @@
                                     <img name="content_images-link_img" class="small-comic-img img-responsive"
                                          src="{!! asset(old('content_images', isset($comic["content_images"]) ? $comic["content_images"] : null)) !!}"
                                          alt="Photo">
-                                    <label>content_images-link_img</label>
+                                    <label>{{trans('chapter.content_images_link_img')}}</label>
                                     <input type="file" name="content_images-link_img">
-                                    <p class="help-block">content_images-link_img.</p>
                                 </div>
                             </div>
 

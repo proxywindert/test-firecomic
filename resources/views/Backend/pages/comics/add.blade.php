@@ -24,16 +24,33 @@
                     <h3 class="box-title">Comics</h3>
 
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
                         </button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="box-body">
                     <div id="msg">
-                        {{ session()->get('msg') }}
+                        @if(session()->get('msgSuccess'))
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-check"></i> Alert!</h4>
+                                {{ session()->get('msgSuccess') }}
+                            </div>
+                        @endif
+                        @if(session()->get('msgFail'))
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                {{ session()->get('msgFail') }}
+                            </div>
+                        @endif
+
                     </div>
-                    <form role="form" method="POST" action="{{ route('comics.store') }}?XDEBUG_SESSION_START=19407"
+                    <form id="form-add-commic" role="form" method="POST"
+                          action="{{ route('comics.store') }}?XDEBUG_SESSION_START=19919"
                           enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="box-body">
@@ -42,15 +59,22 @@
                                 <div class="col col-md-6">
                                     <div class="form-group">
                                         <label for="comic_name">Nội dung tóm tắt</label>
-                                        <textarea rows="6" class="form-control" id="summary_contents" name="summary_contents"
-                                                  placeholder="summary_contents"> </textarea>
+                                        <textarea rows="6" class="form-control" id="summary_contents"
+                                                  name="summary_contents"
+                                                  placeholder="summary_contents">{!! old('summary_contents', isset($comic["summary_contents"]) ? $comic["summary_contents"] : null) !!}</textarea>
+                                        <label id="lb_error_summary_contents"
+                                               style="color: red;">{{$errors->first('summary_contents')}}</label>
                                     </div>
                                 </div>
                                 <div class="col col-md-6">
                                     <div class="form-group">
                                         <label for="comic_name">comic_name</label>
-                                        <input type="text" class="form-control" id="comic_name" name="comic_name"
+                                        <input
+                                            value="{!! old('comic_name', isset($comic["comic_name"]) ? $comic["comic_name"] : null) !!}"
+                                            type="text" class="form-control" id="comic_name" name="comic_name"
                                                placeholder="comic_name">
+                                        <label id="lb_error_comic_name"
+                                               style="color: red;">{{$errors->first('comic_name')}}</label>
                                     </div>
                                 </div>
 
@@ -60,14 +84,18 @@
                                 <div class="col col-md-6">
                                     <div class="form-group">
                                         <label for="bg_color">bg_color</label>
-                                        <input type="text" class="form-control" id="bg_color" name="bg_color"
+                                        <input
+                                            value="{!! old('bg_color', isset($comic["bg_color"]) ? $comic["bg_color"] : null) !!}"
+                                            type="text" class="form-control" id="bg_color" name="bg_color"
                                                placeholder="bg_color">
                                     </div>
                                 </div>
                                 <div class="col col-md-6">
                                     <div class="form-group">
                                         <label for="tranfer_color">tranfer_color</label>
-                                        <input type="text" class="form-control" id="tranfer_color" name="tranfer_color"
+                                        <input
+                                            value="{!! old('tranfer_color', isset($comic["tranfer_color"]) ? $comic["tranfer_color"] : null) !!}"
+                                            type="text" class="form-control" id="tranfer_color" name="tranfer_color"
                                                placeholder="tranfer_color">
                                     </div>
                                 </div>
@@ -115,6 +143,26 @@
                                         <p class="help-block">link_bg.</p>
                                     </div>
                                 </div>
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                        <label>tagged
+{{--                                            {{ dd(old('tagged')) }}--}}
+                                        </label><br/>
+                                        <select multiple class="form-control select2 width80" name="tagged[]" id="tagged">
+                                            @foreach($hashtags as $hashtag)
+                                                <option
+                                                    value="{{ $hashtag->id }}"
+                                                    {{ (in_array($hashtag->id ,old('tagged',[])))?'selected="selected"':'' }}
+                                                >
+                                                    {{ $hashtag->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <label id="lb_error_id_hashtag"
+                                               style="color: red; ">{{$errors->first('hashtag')}}</label>
+                                    </div>
+                                </div>
+
                             </div>
 
 
@@ -133,4 +181,19 @@
             <!-- /.box -->
         </section>
     </div>
+@endsection
+@section('addtional_scripts')
+    <script
+        src="{!! asset('assets/admin/templates/js/bower_components/select2/dist/js/select2.full.min.js') !!}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tagged').select2({
+                multiple: true,
+            });
+            $('#form-add-commic').submit((event) => {
+                document.getElementById('preloader').setAttribute("style", "display:block");
+            })
+        })
+
+    </script>
 @endsection

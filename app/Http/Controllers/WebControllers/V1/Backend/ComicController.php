@@ -5,19 +5,23 @@ namespace App\Http\Controllers\WebControllers\V1\Backend;
 use App\Http\Controllers\BaseController;
 use App\Services\ChapterServices;
 use App\Services\ComicServices;
+use App\Services\HashtagServices;
 use Google_Service_Drive_DriveFile;
 use Google_Service_Drive_Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-
+use App\Http\Requests\ComicRequest;
 class ComicController extends BaseController
 {
     private $comicService;
     private $chapterServices;
+    private $hashtagServices;
     public function __construct(ComicServices $comicService,
-                                ChapterServices $chapterServices)
+                                ChapterServices $chapterServices,
+    HashtagServices $hashtagServices)
     {
+        $this->hashtagServices = $hashtagServices;
         $this->chapterServices = $chapterServices;
         $this->comicService = $comicService;
         parent::__construct();
@@ -36,23 +40,24 @@ class ComicController extends BaseController
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('Backend.pages.comics.add');
+        $hashtags = $this->hashtagServices->index($request);
+        return view('Backend.pages.comics.add',compact('hashtags'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ComicRequest $request)
     {
         $comic = $request->only([
             'comic_name',
             'bg_color',
             'tranfer_color',
-            'summary_contents'
+            'summary_contents',
+            'tagged'
         ]);
-
         DB::beginTransaction();
         try {
             $this->comicService->uploadGGDrive($request,$comic);
@@ -60,12 +65,11 @@ class ComicController extends BaseController
             $result = $this->comicService->save($comic);
             DB::commit();
 
-            $request->session()->flash('msg', trans('employee.msg_add.success'));
+            $request->session()->flash('msgSuccess', trans('comic.msg_content.msg_add_success'));
             return redirect()->route('comics.edit', ['code' => $result->comic_code]);
         } catch (\Exception $e) {
             DB::rollback();
-            $request->session()->flash('msg', trans('employee.msg_add.fail'));
-            $request->session()->flash('msg', $e->getMessage());
+            $request->session()->flash('msgFail', $e->getMessage());
             return back()->with(['comic' => $comic]);
         }
     }
@@ -87,7 +91,8 @@ class ComicController extends BaseController
         $comic = $this->comicService->show($id);
         $chapters = $this->chapterServices->findByComics($request,$comic->id);
         $param= $request->except(['page']);
-        return view('Backend.pages.comics.edit', compact('comic','chapters','param'));
+        $hashtags = $this->hashtagServices->index($request);
+        return view('Backend.pages.comics.edit', compact('comic','chapters','param','hashtags'));
     }
 
     /**
@@ -99,7 +104,8 @@ class ComicController extends BaseController
             'comic_name',
             'bg_color',
             'tranfer_color',
-            'summary_contents'
+            'summary_contents',
+            'tagged'
         ]);
         $comic['comic_code'] = $id;
 
@@ -110,11 +116,11 @@ class ComicController extends BaseController
             $result = $this->comicService->save($comic);
             DB::commit();
 
-            $request->session()->flash('msg', trans('employee.msg_add.success'));
+            $request->session()->flash('msgSuccess', trans('comic.msg_content.msg_edit_success'));
             return redirect()->route('comics.edit', ['code' => $result->comic_code]);
         } catch (\Exception $e) {
             DB::rollback();
-            $request->session()->flash('msg', $e->getMessage());
+            $request->session()->flash('msgFail', $e->getMessage());
             return back()->with(['comic' => $comic]);
         }
     }
@@ -127,7 +133,7 @@ class ComicController extends BaseController
         $result = $this->comicService->delete($id);
         $comics = $this->comicService->index($request);
         if (!$result) {
-            $request->session()->flash('msg', trans('employee.msg_add.fail'));
+            $request->session()->flash('msgFail', trans('comic.msg_content.msg_delete_fail'));
         }
         return view('Backend.pages.comics.list', compact('comics'));
     }

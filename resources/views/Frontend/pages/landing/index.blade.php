@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="chapter">
-                                <span class=" content-overflow">{{ $comic?->chapters->last()->chapter_name }}</span>
+                                <span class=" content-overflow">{{ $comic?->chapters?->last()?->chapter_name??'' }}</span>
                             </div>
                         </a>
                     </div>

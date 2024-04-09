@@ -11,6 +11,7 @@ return[
 
     'nav'=>[
         'comic' => 'Bộ truyện',
+        'hashtag' => 'Từ khóa',
 
 
         'dashboard' => 'Tổng quát',
@@ -21,6 +22,7 @@ return[
         'absence' => 'Xin vắng nghỉ',
         'list'=>[
             'comic' => 'Danh sách các bộ truyện',
+            'hashtag' => 'Danh sách các từ khóa',
 
             'employee' => 'Danh sách Nhân Viên',
             'vendor' => 'Danh sách Nhân Viên Ngoài',
@@ -34,6 +36,7 @@ return[
         ],
         'add'=>[
             'comic' => 'Thêm bộ truyện',
+            'hashtag' => 'Thêm từ khóa',
 
             'employee' => 'Thêm Nhân Viên',
             'vendor' => 'Thêm Nhân Viên Ngoài',

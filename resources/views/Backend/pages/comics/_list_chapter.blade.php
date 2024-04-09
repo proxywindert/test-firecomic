@@ -1,15 +1,19 @@
 <table id="chapter-list" class="table table-bordered table-striped table-fit">
     <thead>
     <tr>
+        <th>{{trans('chapter.id')}}</th>
         <th>{{trans('chapter.chapter_name')}}</th>
         <th>{{trans('chapter.link_small_icon')}}</th>
-        <th>{{trans('comic.edit')}}</th>
+        <th>{{trans('common.edit')}}</th>
     </tr>
     </thead>
     <tbody class="context-menu">
     @foreach($chapters as $chapter)
         <tr class="comic-menu" id="chapter-id-{{$chapter->id}}"
             data-chapter-id="{{$chapter->id}}">
+            <td class="comic-name">
+                <span>{{$chapter->id}}</span>
+            </td>
             <td class="comic-name">
                 <span>{{$chapter->chapter_name}}</span>
             </td>

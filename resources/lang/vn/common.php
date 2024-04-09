@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'edit'=>'Thao tác',
     'pagination'=>[
         'first'=>'← Trang đầu',
         'previous'=>'← Trước',

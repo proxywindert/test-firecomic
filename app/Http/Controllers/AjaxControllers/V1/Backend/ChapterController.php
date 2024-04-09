@@ -64,10 +64,10 @@ class ChapterController extends BaseController
             $result = $this->chapterServices->save($request,$comic);
             DB::commit();
 
-            return $this->responseJson('Lưu thành công',200,['redirect'=>route('comics.edit',['code'=>$result->comic->comic_code])]);
+            return $this->responseJson( trans('chapter.msg_content.msg_add_success'),200,['redirect'=>route('comics.edit',['code'=>$result->comic->comic_code])]);
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->responseErrorJson('Lưu thất bại',$e->getMessage(),500);
+            return $this->responseErrorJson( trans('chapter.msg_content.msg_delete_fail'),$e->getMessage(),500);
         }
     }
 
@@ -113,10 +113,10 @@ class ChapterController extends BaseController
             $result = $this->chapterServices->save($request,$comic);
             DB::commit();
 
-            return $this->responseJson('Cập nhật thành công',200,['redirect'=>route('comics.edit',['code'=>$comic['comic_code']])]);
+            return $this->responseJson( trans('chapter.msg_content.msg_edit_success'),200,['redirect'=>route('comics.edit',['code'=>$comic['comic_code']])]);
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->responseJson('Cập nhật thất bại',500,$e->getMessage());
+            return $this->responseJson( trans('chapter.msg_content.msg_edit_fail'),500,$e->getMessage());
         }
     }
 
@@ -127,8 +127,8 @@ class ChapterController extends BaseController
     {
         $result = $this->chapterServices->delete($id);
         if (!$result) {
-            return $this->responseJson('Xóa  thất bại',500,'');
+            return $this->responseJson( trans('chapter.msg_content.msg_delete_fail'),500,'');
         }
-        return $this->responseJson('Xóa  thành công',200,"");
+        return $this->responseJson( trans('chapter.msg_content.msg_delete_success'),200,"");
     }
 }

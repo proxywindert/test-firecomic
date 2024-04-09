@@ -13,10 +13,15 @@ return [
     |
     */
     'title'=>'Danh sách Comics',
-    'id'=>'ID',
-    'name'=>'Tên Comic',
-    'link_banner'=>'Hình banner',
-
+    'id'=>'ID Chapter',
+    'chapter_name'=>'Tên Chapter',
+    'link_small_icon'=>'Hình icon chapter',
+    'chapter_number'=> 'Chapter thứ mấy',
+    'publish_at' => 'Ngày phát hành chapter',
+    'status' => 'Trạng thái (free/waiting)',
+    'content_images_link_img'=>'Hình nội dung chapter',
+    'next_chapter_id'=> 'ID Chapter tiếp theo',
+    'prv_chapter_id' =>'ID Chapter trước',
 
     'po'=>'Tên PO',
     'members'=>'Tên Thành Viên',
@@ -26,18 +31,16 @@ return [
     'msg_error' => 'msg_error',
     'confirm_add_team' => 'Bạn có muốn thêm một Team mới không?',
     'msg_content' => [
-        'msg_add_success'=>'Thêm Comic thành công!!',
-        'msg_edit_success'=>'Chỉnh sửa Comic thành công!!',
-        'msg_delete_fail'=>'Xóa Comic thất bại!!',
+        'msg_add_success'=>'Thêm Hashtag thành công!!',
+        'msg_edit_success'=>'Chỉnh sửa Hashtag thành công!!',
+        'msg_delete_fail'=>'Xóa Hashtag thất bại!!',
 
         'msg_dupe_po_member' => 'PO này đã tồn tại trong Team !!',
 
         'msg_dupe_member' => 'Nhân viên này đã tồn tại trong Team !!',
         'msg_team_name_already' => 'Tên Team đã tồn tại !!',
-
         'msg_add_fail'=>'Thêm Team không thành công!!',
         'msg_error_add_team'=> 'Có lỗi',
-
         'msg_edit_fail'=>'Chỉnh sửa Team thất bại!!',
         'msg_add_member1'=>'Thành viên trùng với PO, Vui lòng chọn thành viên khác !!!',
         'msg_add_member2'=>'Lỗi!!! Thành viên đã tồn tại!!!'

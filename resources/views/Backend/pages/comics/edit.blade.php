@@ -36,11 +36,27 @@
                 </div>
                 <div class="box-body">
                     <div id="msg">
-                        {{ session()->get('msg') }}
+                        @if(session()->get('msgSuccess'))
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-check"></i> Alert!</h4>
+                                {{ session()->get('msgSuccess') }}
+                            </div>
+                        @endif
+                        @if(session()->get('msgFail'))
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                {{ session()->get('msgFail') }}
+                            </div>
+                        @endif
+
                     </div>
-                    <form role="form" method="POST"
-                          action="{{ route('comics.patch',['code'=>$comic->comic_code]) }}?XDEBUG_SESSION_START=11657"
-                          enctype="multipart/form-data">
+                    <form
+                        id="form-edit-comic"
+                        role="form" method="POST"
+                        action="{{ route('comics.patch',['code'=>$comic->comic_code]) }}?XDEBUG_SESSION_START=16783"
+                        enctype="multipart/form-data">
                         @method('PATCH')
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" id="comice_code" value="{{$comic["comice_code"]}}"/>
@@ -140,14 +156,39 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <img class="small-comic-img img-responsive"
-                                     src="{!! asset(old('link_bg', isset($comic["link_bg"]) ? $comic["link_bg"] : null)) !!}"
-                                     alt="Photo">
-                                <label for="link_bg">link_bg</label>
-                                <input type="file" name="link_bg" id="link_bg">
-                                <p class="help-block">link_bg.</p>
+                            <div class="row">
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                        <label>tagged</label><br/>
+                                        <select multiple class="form-control select2 width80" name="tagged[]"
+                                                id="tagged">
+
+                                            @foreach($hashtags as $hashtag)
+                                                <option
+                                                    value="{{ $hashtag->id }}"
+                                                    {{ (is_array(getArray($comic?->hashtags)) && in_array($hashtag->id ,getArray($comic->hashtags)))?'selected="selected"':'' }}
+                                                >
+                                                    {{ $hashtag->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <label id="lb_error_id_hashtag"
+                                               style="color: red; ">{{$errors->first('hashtag')}}</label>
+                                    </div>
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                        <img class="small-comic-img img-responsive"
+                                             src="{!! asset(old('link_bg', isset($comic["link_bg"]) ? $comic["link_bg"] : null)) !!}"
+                                             alt="Photo">
+                                        <label for="link_bg">link_bg</label>
+                                        <input type="file" name="link_bg" id="link_bg">
+                                        <p class="help-block">link_bg.</p>
+                                    </div>
+                                </div>
                             </div>
+
+
                         </div>
 
                         <div class="box-footer">
@@ -165,7 +206,8 @@
         <!-- /.content -->
         <section class="content-header">
             <div>
-                <button type="button" class="btn btn-info btn-default" data-target="#modal-add-chapter" data-toggle="modal">
+                <button type="button" class="btn btn-info btn-default" data-target="#modal-add-chapter"
+                        data-toggle="modal">
                     <a href="#"><i
                             class="fa fa-user-plus"></i>{{trans('common.button.add_chapter')}}
                     </a>
@@ -200,33 +242,46 @@
     </div>
 @endsection
 @section('addtional_scripts')
+    <script
+        src="{!! asset('assets/admin/templates/js/bower_components/select2/dist/js/select2.full.min.js') !!}"></script>
+
     <script type="text/javascript">
-        $(function() {
-            let formDatetime = $('.form_datetime')
-            formDatetime.datetimepicker({
-                weekStart: 1,
-                todayBtn: 1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                forceParse: 0,
-                showMeridian: 1
+        $(document).ready(function () {
+            $('#form-edit-commic').submit((event) => {
+                document.getElementById('preloader').setAttribute("style", "display:block");
+            })
+            $('#tagged').select2({
+                multiple: true,
             });
-            formDatetime.datetimepicker('setDate', new Date());
-            formDatetime.datetimepicker('update');
-            formDatetime.val(moment(new Date()).format("YYYY-MM-DD H:mm"));
-        });
+            $(function () {
+                let formDatetime = $('.form_datetime')
+                formDatetime.datetimepicker({
+                    weekStart: 1,
+                    todayBtn: 1,
+                    autoclose: 1,
+                    todayHighlight: 1,
+                    startView: 2,
+                    forceParse: 0,
+                    showMeridian: 1
+                });
+                formDatetime.datetimepicker('setDate', new Date());
+                formDatetime.datetimepicker('update');
+                formDatetime.val(moment(new Date()).format("YYYY-MM-DD H:mm"));
+            });
+        })
+
     </script>
     <script>
-        const context = {
-            'X-CSRF-TOKEN': `{{ csrf_token() }}`,
-            'X-HTTP-Method-Override': 'PATCH'
-        }
+
         let editChater = document.querySelectorAll('a[data-name="edit-chapter"]');
-        editChater.forEach(item=>{
-            item.addEventListener('click',  (event) => {
+        editChater.forEach(item => {
+            item.addEventListener('click', (event) => {
                 event.preventDefault();
                 document.getElementById('preloader').setAttribute("style", "display:block");
+                const context = {
+                    'X-CSRF-TOKEN': `{{ csrf_token() }}`,
+                    'X-HTTP-Method-Override': 'GET'
+                }
                 // truyen du lieu cho form edit
                 apiGet(context, `http://localhost/admin/comics/${item.getAttribute('data-comic-id')}/chapters/edit/${item.getAttribute('data-chapter-id')}?XDEBUG_SESSION_START=11657`
                 )
@@ -238,7 +293,7 @@
                         let chapter_name = document.querySelector('#form-edit-chapter input[name="chapter_name"]');
                         chapter_name.value = data.chapter_name
                         let chapter_number = document.querySelector('#form-edit-chapter input[name="chapter_number"]');
-                        chapter_number.value= data.chapter_number
+                        chapter_number.value = data.chapter_number
                         let publish_at = document.querySelector('#form-edit-chapter input[name="publish_at"]');
                         publish_at.value = data.publish_at
                         // let free_at = document.querySelector('#form-edit-chapter input[name="free_at"]');
@@ -246,12 +301,16 @@
                         let comic_id = document.querySelector('#form-edit-chapter input[id="comic_id"]');
                         comic_id.value = data.comic_id
                         let chapter_id = document.querySelector('#form-edit-chapter input[id="chapter_id"]');
-                        chapter_id.value= data.id
+                        chapter_id.value = data.id
+                        let prv_chapter_id = document.querySelector('#form-edit-chapter input[name="prv_chapter_id"]');
+                        prv_chapter_id.value = data.prv_chapter_id ?? ''
+                        let next_chapter_id = document.querySelector('#form-edit-chapter input[name="next_chapter_id"]');
+                        next_chapter_id.value = data.next_chapter_id ?? ''
                         let status = document.querySelector('#form-edit-chapter input[name="status"]');
                         status.value = data.status
                         // Lấy tệp tin từ input type="file" và thêm vào FormData
                         let link_small_icon = document.querySelector('#form-edit-chapter img[name="link_small_icon"]');
-                        link_small_icon.src= data.link_small_icon
+                        link_small_icon.src = data.link_small_icon
                         let content_images_link_img = document.querySelector('#form-edit-chapter img[name="content_images-link_img"]');
                         data.content_images.forEach(item => {
                             content_images_link_img.src = item.link_img
@@ -297,6 +356,10 @@
             formData.append('_method', 'patch');
 
             document.getElementById('preloader').setAttribute("style", "display:block");
+            const context = {
+                'X-CSRF-TOKEN': `{{ csrf_token() }}`,
+                'X-HTTP-Method-Override': 'PATCH'
+            }
             apiPost(context, `http://localhost/admin/comics/${comic_code.value}/chapters/${chapter_id.value}?XDEBUG_SESSION_START=10321`,
                 formData)
                 .then(response => {
@@ -304,10 +367,10 @@
                     document.getElementById('preloader').setAttribute("style", "display:none");
                     // Xử lý kết quả trả về
                     let data = response.data.data
-                    if(response.data.code !== 200){
-                        showToast(response.data.message,"danger",5000);
-                    }else{
-                        showToast(response.data.message,"success",5000);
+                    if (response.data.code !== 200) {
+                        showToast(response.data.message, "danger", 5000);
+                    } else {
+                        showToast(response.data.message, "success", 5000);
                         document.location = data.redirect;
                     }
 
@@ -346,17 +409,21 @@
             formData.append('status', status.value);
             formData.append('comic_id', comic_id.value);
             document.getElementById('preloader').setAttribute("style", "display:block");
-            apiPost(context, `http://localhost/admin/comics/${comic_code}/chapters/?XDEBUG_SESSION_START=11657`,
+            const context = {
+                'X-CSRF-TOKEN': `{{ csrf_token() }}`,
+                'X-HTTP-Method-Override': 'POST'
+            }
+            apiPost(context, `http://localhost/admin/comics/${comic_code.value}/chapters/?XDEBUG_SESSION_START=11657`,
                 formData)
                 .then(response => {
                     $('#modal-add-chapter').modal('hide')
                     document.getElementById('preloader').setAttribute("style", "display:none");
                     // Xử lý kết quả trả về
                     let data = response.data.data
-                    if(response.data.code !== 200){
-                        showToast(response.data.message,"danger",5000);
-                    }else{
-                        showToast(response.data.message,"success",5000);
+                    if (response.data.code !== 200) {
+                        showToast(response.data.message, "danger", 5000);
+                    } else {
+                        showToast(response.data.message, "success", 5000);
                         document.location = data.redirect;
                     }
                 })
@@ -370,7 +437,7 @@
     </script>
     <script>
         let deleteChapter = document.querySelectorAll('a[data-name="delete-chapter"]')
-        deleteChapter.forEach(item=>{
+        deleteChapter.forEach(item => {
             item.addEventListener('click', (event) => {
                 event.preventDefault();
                 const context = {
@@ -384,10 +451,10 @@
                         document.getElementById('preloader').setAttribute("style", "display:none");
                         // Xử lý kết quả trả về
                         let data = response.data.data
-                        if(response.data.code !== 200){
-                            showToast(response.data.message,"danger",5000);
-                        }else{
-                            showToast(response.data.message,"success",5000);
+                        if (response.data.code !== 200) {
+                            showToast(response.data.message, "danger", 5000);
+                        } else {
+                            showToast(response.data.message, "success", 5000);
                         }
                     })
                     .catch(error => {

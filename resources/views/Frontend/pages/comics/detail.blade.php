@@ -139,7 +139,7 @@
                 </div>
                 <div id="content-tab" class="content-anchor">
                     <input type="hidden" name="comic_code" value="{{$comic->comic_code}}"/>
-                    <a href="{{ route('view-comic', ['comic_code' => $comic->comic_code,'id' => $comic?->chapters?$comic?->chapters[0]->id:'1']) }}"
+                    <a href="{{ route('view-comic', ['comic_code' => $comic->comic_code,'id' => $comic?->chapters->isEmpty()?'1':$comic?->chapters[0]->id]) }}"
                        class="chapter">
                         <div class="watch-first-chap">
                                 <span>

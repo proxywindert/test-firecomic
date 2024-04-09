@@ -10,6 +10,8 @@ return new class extends Migration
     {
         Schema::table('comics', function (Blueprint $table) {
             $table->string('link_banner')->nullable()->after('link_bg');
+            $table->string('bg_color')->nullable()->after('genre_id');
+
         });
     }
 

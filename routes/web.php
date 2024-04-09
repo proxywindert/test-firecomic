@@ -8,6 +8,7 @@ use App\Http\Controllers\WebControllers\V1\Frontend\LandingController;
 use App\Http\Controllers\WebControllers\V1\Backend\LandingController as AdmLandingController;
 use App\Http\Controllers\WebControllers\V1\Backend\ComicController as AdmComicController;
 use App\Http\Controllers\AjaxControllers\V1\Backend\ChapterController as AdmChapterController;
+use App\Http\Controllers\WebControllers\V1\Backend\HashtagController as AdmHashtagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +30,10 @@ Route::get('/users', function () {
 Route::get('/', [LandingController::class, 'index']);
 
 Route::group(array('prefix' => 'comics'), function () {
-    Route::get('/content/search', [ComicController::class, 'searchByhashTag'])->name('searchByhashTag');
+    Route::get('/content/search', [ComicController::class, 'searchByhashTag'])->name('search');
     Route::get('/content/keywork/{hashtag}', [ComicController::class, 'searchByhashTag'])->name('searchByhashTag');
-    Route::get('/content/{comic_code}', [ComicController::class, 'show'])->name('comic-info');
-    Route::get('/viewer/{comic_code}/chapter/{id}', [ChapterController::class, 'show'])->name('view-comic');
+    Route::get('/content/{comic_code}', [ComicController::class, 'show'])->name('comic-info')->middleware('viewed');
+    Route::get('/viewer/{comic_code}/chapter/{id}', [ChapterController::class, 'show'])->name('view-comic')->middleware('viewed');
 });
 
 Route::group(array('prefix' => 'admin'), function () {
@@ -55,5 +56,14 @@ Route::group(array('prefix' => 'admin'), function () {
             Route::post('/', [AdmChapterController::class, 'store'])->name('store');
             Route::delete('/{id}', [AdmChapterController::class, 'destroy'])->name('delete');
         });
+    });
+    Route::group(array('prefix' => 'hashtags','as' => 'hashtags.'), function () {
+        Route::get('/', [AdmHashtagController::class, 'index'])->name('list');
+        Route::get('/create', [AdmHashtagController::class, 'create'])->name('create');
+        Route::get('/edit/{id}', [AdmHashtagController::class, 'edit'])->name('edit');
+        Route::patch('/{id}', [AdmHashtagController::class, 'update'])->name('patch');
+        Route::get('/{id}', [AdmHashtagController::class, 'show']);
+        Route::post('/', [AdmHashtagController::class, 'store'])->name('store');
+        Route::delete('/{id}', [AdmHashtagController::class, 'destroy'])->name('delete');
     });
 });

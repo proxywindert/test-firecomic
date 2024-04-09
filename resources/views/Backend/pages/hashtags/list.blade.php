@@ -10,24 +10,25 @@
         <section class="content-header">
             <h1>
                 {{trans('comic.title')}}
-                <small>Firecomic</small>
+                <small>Nal solution</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{ route('dashboard')}}"><i class="fa fa-dashboard"></i> {{trans('common.path.home')}}</a>
+                <li><a href="{{asset('/dashboard')}}"><i class="fa fa-dashboard"></i> {{trans('common.path.home')}}</a>
                 </li>
+                <li><a href="{{ route('hashtags.list')}}"> {{trans('hashtags.path.team')}}</a></li>
+                <li><a href="#">{{trans('common.path.list')}}</a></li>
             </ol>
         </section>
         <section class="content-header">
             <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#modal-search" id="clickCollapse">
                 <span class="fa fa-search"></span>&nbsp;&nbsp;&nbsp;<span id="iconSearch" class="glyphicon"></span>
             </button>
-            @include('Backend.pages.comics._form_search_comics_list')
         </section>
 
         <section class="content-header">
             <div>
                 <button type="button" class="btn btn-info btn-default">
-                    <a href="{{ route('comics.create')}}"><i class="fa fa-user-plus"></i>{{trans('common.button.add')}}
+                    <a href="{{ route('hashtags.create')}}"><i class="fa fa-user-plus"></i>{{trans('common.button.add')}}
                     </a>
                 </button>
             </div>
@@ -45,23 +46,20 @@
                             <table id="comic-list" class="table table-bordered table-striped table-fit">
                                 <thead>
                                 <tr>
-
-                                    <th>{{trans('comic.name')}}</th>
-                                    <th>{{trans('comic.link_banner')}}</th>
-                                    <th>{{trans('common.edit')}}</th>
+                                    <th>{{trans('hashtags.name')}}</th>
+                                    <th>{{trans('hashtags.slug')}}</th>
+                                    <th>{{trans('comic.edit')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody class="context-menu">
-                                @foreach($comics as $comic)
-                                    <tr class="comic-menu" id="comic-id-{{$comic->id}}"
-                                        data-comic-id="{{$comic->id}}">
-
+                                @foreach($hashtags as $hashtag)
+                                    <tr class="comic-menu" id="hashtag-id-{{$hashtag->id}}"
+                                        data-hashtag-id="{{$hashtag->id}}">
                                         <td class="comic-name">
-                                            <span>{{$comic->comic_name}}</span>
+                                            <span>{{$hashtag->name}}</span>
                                         </td>
-                                        <td>
-                                            <img class="small-comic-img img-fluid" src="{{asset($comic->link_banner)}}"
-                                                 alt="Photo">
+                                        <td class="comic-name">
+                                            <span>{{$hashtag->slug}}</span>
                                         </td>
                                         <td class="project-actions text-right">
 {{--                                            <a class="btn btn-primary btn-sm" href="#">--}}
@@ -69,7 +67,7 @@
 {{--                                                </i>--}}
 {{--                                                View--}}
 {{--                                            </a>--}}
-                                            <a class="btn btn-info btn-sm" href="{{ route('comics.edit',['code'=>$comic->comic_code]) }}">
+                                            <a class="btn btn-info btn-sm" href="{{ route('hashtags.edit',['id'=>$hashtag->id]) }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit
@@ -77,14 +75,14 @@
                                             <a class="btn btn-danger btn-sm"
                                                href="#"
                                                onclick="event.preventDefault();
-                                                   document.getElementById('delete-form-{{ $comic->comic_code }}').submit();"
+                                                   document.getElementById('delete-form-{{ $hashtag->id }}').submit();"
                                             >
                                                 <i class="fas fa-trash">
                                                 </i>
                                                 Delete
                                             </a>
-                                            <form id="delete-form-{{ $comic->comic_code }}"
-                                                  action="{{ route('comics.delete', ['code' => $comic->comic_code]) }}?XDEBUG_SESSION_START=10538"
+                                            <form id="delete-form-{{ $hashtag->id }}"
+                                                  action="{{ route('hashtags.delete', ['id' => $hashtag->id]) }}?XDEBUG_SESSION_START=19655"
                                                   method="POST" style="display: none;">
                                                 @method('DELETE')
                                                 @csrf
@@ -94,18 +92,6 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="row">
-                                @if($comics->hasPages())
-                                    <div class="col-sm-5">
-                                        <div class="dataTables_info" style="float:left" id="example2_info" role="status" aria-live="polite">
-                                            {{getInformationDataTable($comics)}}
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-7">
-                                        {{  $comics->appends($param)->render('Backend.components.pagination.custom') }}
-                                    </div>
-                                @endif
-                            </div>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -119,8 +105,4 @@
     </div>
 @endsection
 
-
-@section('addtional_scripts')
-    <script src="{!! asset('assets/admin/templates/js/bower_components/jquery/dist/jquery.min.js') !!}"></script>
-@endsection
 

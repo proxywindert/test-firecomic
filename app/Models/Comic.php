@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Services\ChapterServices;
+use App\Services\HashtagServices;
+use App\Services\TaggedServices;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,12 +41,17 @@ class Comic extends BaseModel
         parent::boot();
 
         static::deleting(function ($model) {
-            $model->load('chapters');
+            $model->load('chapters','taggeds');
             $chapterServices = app()->make(ChapterServices::class);
+            $taggedsServices = app()->make(TaggedServices::class);
             if (!$model->chapters->isEmpty()) {
                 foreach ($model->chapters as $chapter){
                     $chapterServices->delete($chapter->id);
-//                    $chapter->delete($chapter->id);
+                }
+            }
+            if(!$model->taggeds->isEmpty()){
+                foreach ($model->taggeds as $tagged){
+                    $taggedsServices->delete($tagged->id);
                 }
             }
             $model->summaryContents()->delete();
@@ -54,6 +61,10 @@ class Comic extends BaseModel
 
     public function chapters(){
         return $this->hasMany(Chapter::class,'comic_id');
+    }
+
+    public function taggeds(){
+        return $this->hasMany(Tagged::class,'comic_id');
     }
 
     public function hashtags(){

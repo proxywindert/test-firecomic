@@ -13,6 +13,12 @@ return new class extends Migration
             $table->bigInteger('artist_id')->nullable()->change();
             $table->bigInteger('author_id')->nullable()->change();
             $table->bigInteger('publisher_id')->nullable()->change();
+            $table->string('link_bg_color')->nullable()->change();
+            $table->string('link_avatar')->nullable()->change();
+            $table->string('link_comic_name')->nullable()->change();
+            $table->string('tranfer_color')->nullable()->change();
+            $table->integer('total_view')->default(0)->change();
+            $table->integer('total_like')->default(0)->change();
         });
     }
 
