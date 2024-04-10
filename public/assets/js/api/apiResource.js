@@ -1,15 +1,4 @@
 
-async function apiGetWithCallBack (context, url,callback, options = {}) {
-    try {
-        callback();
-        const opt = getCommonOptions(context)
-        const response = await axios.get(`${url}`, Object.assign(opt, options))
-        return response
-    } catch (e) {
-        handleError(context, e)
-        throw e
-    }
-}
 
 
 async function apiGet (context, url, options = {}) {

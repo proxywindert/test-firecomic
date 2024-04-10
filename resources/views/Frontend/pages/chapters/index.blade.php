@@ -55,14 +55,13 @@
         <div class="container-fluid">
             <div class="comic-content">
                 <div class="list-img">
-                    <div class="img-item">
-                        @foreach($comic->contentImages as $item)
-                            <img src="{!! asset($item->link_img) !!}" alt="">
+                    <div id="img-item" class="img-item">
+                        @foreach($contentImages as $item)
+                            <img src="{!! asset($item->link_img) !!}" alt="firemcomic" >
                         @endforeach
                         @php
                             unset($item);
                         @endphp
-
                     </div>
                 </div>
             </div>
@@ -140,79 +139,79 @@
                             </div>
                         </div>
 
-{{--                        <div class="card card-pr-detail">--}}
-{{--                            <div class="header">--}}
-{{--                                <div class="content-header">--}}
-{{--                                    <a href="" class="row-header">--}}
-{{--                                        <h3 class="tittle-comment-header">12 bình luận</h3>--}}
-{{--                                        <div class="small-arrow">--}}
-{{--                                            <img--}}
-{{--                                                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgb3BhY2l0eT0iMC4xIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHJ4PSIxMiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTExLjQ3NzYgNy40MDM5M0wxMS40NzUzIDcuNDA2MTdDMTEuMTMxNSA3LjExNjE5IDEwLjYxNyA3LjEzMzEyIDEwLjI5MzEgNy40NTY5N0M5Ljk2OTMgNy43ODA4MSA5Ljk1MjM3IDguMjk1MzUgMTAuMjQyNCA4LjYzOTEzTDEwLjI0MDEgOC42NDEzN0wxMy41OTg5IDEyLjAwMDFMMTAuMjQwMSAxNS4zNTg5TDEwLjI0MjQgMTUuMzYxMUM5Ljk1MjM3IDE1LjcwNDkgOS45NjkzIDE2LjIxOTQgMTAuMjkzMSAxNi41NDMzQzEwLjYxNyAxNi44NjcxIDExLjEzMTUgMTYuODg0MSAxMS40NzUzIDE2LjU5NDFMMTEuNDc3NSAxNi41OTYzTDExLjUzMDYgMTYuNTQzM0wxNS41MDgxIDEyLjU2NThDMTUuODIwNSAxMi4yNTM0IDE1LjgyMDUgMTEuNzQ2OSAxNS41MDgxIDExLjQzNDRMMTEuNDc3NiA3LjQwMzkzWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="--}}
-{{--                                                class="w-24 h-24" alt="">--}}
-{{--                                        </div>--}}
-{{--                                    </a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="content">--}}
-{{--                                <div class="content-body">--}}
-{{--                                    <div class="list-comment">--}}
-{{--                                        <div class="comment">--}}
-{{--                                            <div class="header-comment">--}}
-{{--                                                <div class="tittle-comment">--}}
-{{--                                                    <div class="tittle-comment-img">--}}
-{{--                                                        <img src="{!! asset("assets/images/best.svg") !!}"--}}
-{{--                                                             alt="TỐT NHẤT">--}}
-{{--                                                    </div>--}}
-{{--                                                    <p class="tittle-comment-user"> Nguời không xác định</p>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="date-comment">--}}
-{{--                                                    <span>15.7.23</span>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="content-comment">--}}
-{{--                                                <div class="content content-overflow">--}}
-{{--                                                    Trước hết, các cơ quan liên quan đến sự sống còn như mắt, thận,--}}
-{{--                                                    gan,… được cho mượn (tất cả các chi phí phẫu thuật liên quan--}}
-{{--                                                    cũng được miễn), chúng tôi ấn định ngày hết hạn và cho bạn lựa--}}
-{{--                                                    chọn trong khoảng thời gian đó. Bạn có muốn không? loại bỏ mắt--}}
-{{--                                                    hoặc nội tạng, hay chúng tôi sẽ làm việc đó (bây giờ bạn tự thú--}}
-{{--                                                    với tư cách là nghi phạm giết người)?) Bạn có định làm điều đó--}}
-{{--                                                    không? Sau đó, tôi sẽ chỉ suy luận rằng bạn sẽ làm những gì bạn--}}
-{{--                                                    được yêu cầu làm.--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+                        {{--                        <div class="card card-pr-detail">--}}
+                        {{--                            <div class="header">--}}
+                        {{--                                <div class="content-header">--}}
+                        {{--                                    <a href="" class="row-header">--}}
+                        {{--                                        <h3 class="tittle-comment-header">12 bình luận</h3>--}}
+                        {{--                                        <div class="small-arrow">--}}
+                        {{--                                            <img--}}
+                        {{--                                                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgb3BhY2l0eT0iMC4xIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHJ4PSIxMiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTExLjQ3NzYgNy40MDM5M0wxMS40NzUzIDcuNDA2MTdDMTEuMTMxNSA3LjExNjE5IDEwLjYxNyA3LjEzMzEyIDEwLjI5MzEgNy40NTY5N0M5Ljk2OTMgNy43ODA4MSA5Ljk1MjM3IDguMjk1MzUgMTAuMjQyNCA4LjYzOTEzTDEwLjI0MDEgOC42NDEzN0wxMy41OTg5IDEyLjAwMDFMMTAuMjQwMSAxNS4zNTg5TDEwLjI0MjQgMTUuMzYxMUM5Ljk1MjM3IDE1LjcwNDkgOS45NjkzIDE2LjIxOTQgMTAuMjkzMSAxNi41NDMzQzEwLjYxNyAxNi44NjcxIDExLjEzMTUgMTYuODg0MSAxMS40NzUzIDE2LjU5NDFMMTEuNDc3NSAxNi41OTYzTDExLjUzMDYgMTYuNTQzM0wxNS41MDgxIDEyLjU2NThDMTUuODIwNSAxMi4yNTM0IDE1LjgyMDUgMTEuNzQ2OSAxNS41MDgxIDExLjQzNDRMMTEuNDc3NiA3LjQwMzkzWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="--}}
+                        {{--                                                class="w-24 h-24" alt="">--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </a>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+                        {{--                            <div class="content">--}}
+                        {{--                                <div class="content-body">--}}
+                        {{--                                    <div class="list-comment">--}}
+                        {{--                                        <div class="comment">--}}
+                        {{--                                            <div class="header-comment">--}}
+                        {{--                                                <div class="tittle-comment">--}}
+                        {{--                                                    <div class="tittle-comment-img">--}}
+                        {{--                                                        <img src="{!! asset("assets/images/best.svg") !!}"--}}
+                        {{--                                                             alt="TỐT NHẤT">--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                    <p class="tittle-comment-user"> Nguời không xác định</p>--}}
+                        {{--                                                </div>--}}
+                        {{--                                                <div class="date-comment">--}}
+                        {{--                                                    <span>15.7.23</span>--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+                        {{--                                            <div class="content-comment">--}}
+                        {{--                                                <div class="content content-overflow">--}}
+                        {{--                                                    Trước hết, các cơ quan liên quan đến sự sống còn như mắt, thận,--}}
+                        {{--                                                    gan,… được cho mượn (tất cả các chi phí phẫu thuật liên quan--}}
+                        {{--                                                    cũng được miễn), chúng tôi ấn định ngày hết hạn và cho bạn lựa--}}
+                        {{--                                                    chọn trong khoảng thời gian đó. Bạn có muốn không? loại bỏ mắt--}}
+                        {{--                                                    hoặc nội tạng, hay chúng tôi sẽ làm việc đó (bây giờ bạn tự thú--}}
+                        {{--                                                    với tư cách là nghi phạm giết người)?) Bạn có định làm điều đó--}}
+                        {{--                                                    không? Sau đó, tôi sẽ chỉ suy luận rằng bạn sẽ làm những gì bạn--}}
+                        {{--                                                    được yêu cầu làm.--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+                        {{--                                        </div>--}}
 
-{{--                                        <div class="comment">--}}
-{{--                                            <div class="header-comment">--}}
-{{--                                                <div class="tittle-comment">--}}
-{{--                                                    <div class="tittle-comment-img">--}}
-{{--                                                        <img src="{!! asset("assets/images/best.svg") !!}"--}}
-{{--                                                             alt="TỐT NHẤT">--}}
-{{--                                                    </div>--}}
-{{--                                                    <p class="tittle-comment-user"> Nguời không xác định</p>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="date-comment">--}}
-{{--                                                    <span>15.7.23</span>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="content-comment">--}}
-{{--                                                <div class="content content-overflow">--}}
-{{--                                                    Trước hết, các cơ quan liên quan đến sự sống còn như mắt, thận,--}}
-{{--                                                    gan,… được cho mượn (tất cả các chi phí phẫu thuật liên quan--}}
-{{--                                                    cũng được miễn), chúng tôi ấn định ngày hết hạn và cho bạn lựa--}}
-{{--                                                    chọn trong khoảng thời gian đó. Bạn có muốn không? loại bỏ mắt--}}
-{{--                                                    hoặc nội tạng, hay chúng tôi sẽ làm việc đó (bây giờ bạn tự thú--}}
-{{--                                                    với tư cách là nghi phạm giết người)?) Bạn có định làm điều đó--}}
-{{--                                                    không? Sau đó, tôi sẽ chỉ suy luận rằng bạn sẽ làm những gì bạn--}}
-{{--                                                    được yêu cầu làm.--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                                        <div class="comment">--}}
+                        {{--                                            <div class="header-comment">--}}
+                        {{--                                                <div class="tittle-comment">--}}
+                        {{--                                                    <div class="tittle-comment-img">--}}
+                        {{--                                                        <img src="{!! asset("assets/images/best.svg") !!}"--}}
+                        {{--                                                             alt="TỐT NHẤT">--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                    <p class="tittle-comment-user"> Nguời không xác định</p>--}}
+                        {{--                                                </div>--}}
+                        {{--                                                <div class="date-comment">--}}
+                        {{--                                                    <span>15.7.23</span>--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+                        {{--                                            <div class="content-comment">--}}
+                        {{--                                                <div class="content content-overflow">--}}
+                        {{--                                                    Trước hết, các cơ quan liên quan đến sự sống còn như mắt, thận,--}}
+                        {{--                                                    gan,… được cho mượn (tất cả các chi phí phẫu thuật liên quan--}}
+                        {{--                                                    cũng được miễn), chúng tôi ấn định ngày hết hạn và cho bạn lựa--}}
+                        {{--                                                    chọn trong khoảng thời gian đó. Bạn có muốn không? loại bỏ mắt--}}
+                        {{--                                                    hoặc nội tạng, hay chúng tôi sẽ làm việc đó (bây giờ bạn tự thú--}}
+                        {{--                                                    với tư cách là nghi phạm giết người)?) Bạn có định làm điều đó--}}
+                        {{--                                                    không? Sau đó, tôi sẽ chỉ suy luận rằng bạn sẽ làm những gì bạn--}}
+                        {{--                                                    được yêu cầu làm.--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
 
                         <div class="card card-pr-detail">
                             <div class="content">
@@ -220,7 +219,9 @@
                                     <a href="{{ route('view-comic',['comic_code' => $comic->comic?->comic_code,'id' => $comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id]) }}"
                                        class="next-chapter">
                                         <div class="next-chapter-img">
-                                            <img src="{!! asset($comic?->nextChapter?$comic?->nextChapter?->link_small_icon:$comic?->link_small_icon) !!}" alt="">
+                                            <img
+                                                src="{!! asset($comic?->nextChapter?$comic?->nextChapter?->link_small_icon:$comic?->link_small_icon) !!}"
+                                                alt="">
                                         </div>
                                         <div class="next-chapter-info">
                                             <p class="chapter-number content-overflow">
@@ -590,7 +591,47 @@
     <script src="{!! asset("assets/js/header-pr-detail.js") !!}"></script>
     <script src="{!! asset("assets/js/slider.js") !!}"></script>
     <script>
+        const currentUrl = `{{ route('ajax.comics.chapters.show',['comic_code'=>$comic?->comic?->comic_code,'id'=>$comic?->id]) }}`;
+        var isLoadComplete = true
+        var isStopLoad = false;
+
         window.addEventListener('load', (event) => {
+            localStorage.setItem('currentPage', {{ $contentImages->currentPage() }});
+            localStorage.setItem('limit', {{ $contentImages->perPage() }});
+            const link_bg_preview = $(`#img-item`)
+
+            window.addEventListener('scroll', function () {
+                    // moi khi scroll thi moi tai img
+                    if (isLoadComplete && !isStopLoad) {
+                        isLoadComplete = false
+                        let page = parseInt(localStorage.getItem('currentPage')) + 1 ?? 1;
+                        const context = {
+                            'X-CSRF-TOKEN': `{{ csrf_token() }}`,
+                        }
+                        apiGet(context, currentUrl + `?page=${page}&XDEBUG_SESSION_START=14087`)
+                            .then(response => {
+                                let data = response.data.data
+                                if(data && data.length <1){
+                                    isStopLoad =true;
+                                    return
+                                }
+
+                                if(data.length>=1){
+                                    data.forEach(item => {
+                                        link_bg_preview.append(` <img src="${item.link_img}" alt="firemcomic">`);
+                                    })
+                                }
+
+                                let page = parseInt(localStorage.getItem('currentPage'))+1
+                                localStorage.setItem('currentPage', page);
+                            })
+                            .catch(error => {
+                            }).finally(() => {
+                            isLoadComplete = true;
+                        });
+                    }
+            });
+
             console.log('Trang web đã tải hoàn tất');
             document.getElementById('preloader').setAttribute("style", "display:none");
             fakeHeaderMenu.style.opacity = 1;

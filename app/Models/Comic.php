@@ -44,16 +44,17 @@ class Comic extends BaseModel
             $model->load('chapters','taggeds');
             $chapterServices = app()->make(ChapterServices::class);
             $taggedsServices = app()->make(TaggedServices::class);
-            if (!$model->chapters->isEmpty()) {
+            if(isset($model->chapters)){
                 foreach ($model->chapters as $chapter){
                     $chapterServices->delete($chapter->id);
                 }
             }
-            if(!$model->taggeds->isEmpty()){
+            if(isset($model->taggeds)){
                 foreach ($model->taggeds as $tagged){
                     $taggedsServices->delete($tagged->id);
                 }
             }
+
             $model->summaryContents()->delete();
             return true;
         });

@@ -55,7 +55,7 @@
     src="{!! asset('assets/admin/templates/js/bower_components/bootstrap-datetimepicker/dist/js/bootstrap-datetimepicker.js') !!}"></script>
 
 
-
+<script src="{!! asset('assets/admin/templates/js/common/commonJs.js') !!}"></script>
 <script src="{!! asset('assets/admin/templates/js/go_to_top/go_to_top.js') !!}"></script>
 @yield('addtional_scripts')
 

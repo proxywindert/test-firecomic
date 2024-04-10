@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('content_images', function (Blueprint $table) {
             $table->id();
-            $table->string('link_img');
+            $table->string('link_img')->nullable();
 
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('updated_by')->nullable();

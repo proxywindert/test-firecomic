@@ -66,14 +66,14 @@
                         </div>
 
                         <div class="row">
-                            <div class="col col-md-6">
-                                <div class="form-group">
-                                    <label>{{trans('chapter.status')}}</label>
-                                    <input
-                                        type="text" class="form-control" name="status"
-                                        placeholder="status">
-                                </div>
-                            </div>
+{{--                            <div class="col col-md-6">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label>{{trans('chapter.status')}}</label>--}}
+{{--                                    <input--}}
+{{--                                        type="text" class="form-control" name="status"--}}
+{{--                                        placeholder="status">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <img name="link_small_icon" class="small-comic-img img-responsive"
@@ -107,13 +107,18 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col col-md-6">
+                            <div class="col col-md-12">
                                 <div class="form-group">
-                                    <img name="content_images-link_img" class="small-comic-img img-responsive"
-                                         src="{!! asset(old('content_images', isset($comic["content_images"]) ? $comic["content_images"] : null)) !!}"
-                                         alt="Photo">
+                                    <div id="link_bg_preview" style="display: flex">
+                                        <div class="imgs">
+
+                                        </div>
+{{--                                    <img name="content_images-link_img" class="small-comic-img img-responsive"--}}
+{{--                                         src="{!! asset(old('content_images', isset($comic["content_images"]) ? $comic["content_images"] : null)) !!}"--}}
+{{--                                         alt="Photo">--}}
+                                    </div>
                                     <label>{{trans('chapter.content_images_link_img')}}</label>
-                                    <input type="file" name="content_images-link_img">
+                                    <input multiple  type="file" name="content_images-link_img[]">
                                 </div>
                             </div>
 

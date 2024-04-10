@@ -40,8 +40,8 @@ class Chapter extends BaseModel
 
         static::deleting(function ($model) {
             $model->load('contentImages');
-            if (!$model->contentImages->isEmpty()) {
-                $contentImageServices = app()->make(ContentImageServices::class);
+            $contentImageServices = app()->make(ContentImageServices::class);
+            if(isset($model->contentImages)){
                 foreach ($model->contentImages as $contentImage){
                     $contentImageServices->delete($contentImage->id);
                 }

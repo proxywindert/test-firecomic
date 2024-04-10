@@ -88,11 +88,11 @@
                         <div class="row">
                             <div class="col col-md-6">
                                 <div class="form-group">
-                                    <img class="small-comic-img img-responsive"
-                                         src="{!! asset(old('content_images', isset($comic["content_images"]) ? $comic["content_images"] : null)) !!}"
-                                         alt="Photo">
+{{--                                    <img class="small-comic-img img-responsive"--}}
+{{--                                         src="{!! asset(old('content_images', isset($comic["content_images"]) ? $comic["content_images"] : null)) !!}"--}}
+{{--                                         alt="Photo">--}}
                                     <label >{{trans('chapter.content_images_link_img')}}-link_img</label>
-                                    <input type="file" name="content_images-link_img" >
+                                    <input multiple type="file" name="content_images-link_img[]" >
                                 </div>
                             </div>
                         </div>

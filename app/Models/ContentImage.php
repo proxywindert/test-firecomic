@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContentImage extends BaseModel
 {
+    const LIMIT_PAGE = 10;
     protected $table = "content_images";
     protected $fillable =[
 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->dateTime('publish_at')->nullable();
             $table->dateTime('free_at')->nullable();
             // trang thai free/waiting
-            $table->string('status')->default('waiting');
+            $table->string('status')->default('waiting')->nullable();
             $table->integer('chapter_number');
             $table->bigInteger('next_chapter_id')->nullable();
             $table->bigInteger('prv_chapter_id')->nullable();

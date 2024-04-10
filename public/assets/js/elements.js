@@ -2,6 +2,7 @@
 var lastScrollTop = 0;
 var isClick = false;
 var opacity = 0; // Giá trị mặc định của opacity
+ // Chiều cao của màn hình trình duyệt
 const viewportHeight = window.innerHeight;
 const fakeHeaderMenu = document.querySelector('.fake-block-search');
 const navigationBar = document.getElementById('navigationBar-content');

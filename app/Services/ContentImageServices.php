@@ -22,6 +22,14 @@ class ContentImageServices extends BaseServices
         return $query->paginate($limit);
     }
 
+    public function findByChapterId($request, $id)
+    {
+        $limit = $request->get('limit', 1);
+        $query = $this->model;
+        $query = $query->where('chapter_id', $id);
+        return $query->paginate($limit);
+    }
+
     public function show($chapterNumber)
     {
 
@@ -30,7 +38,7 @@ class ContentImageServices extends BaseServices
     public function save(array $attributes)
     {
         if (!empty($attributes['id'])) {
-            $entity = $this->model->where('id',$attributes['id'])->first();
+            $entity = $this->model->where('id', $attributes['id'])->first();
             if ($entity) {
                 $entity->fill($attributes)->save();
                 return $entity;
@@ -42,7 +50,7 @@ class ContentImageServices extends BaseServices
         }
     }
 
-    public function uploadGGDrive($request,&$comic)
+    public function uploadGGDrive($request, &$comic)
     {
         $file = [];
         $file['link_img']['file'] = $request->file('link_img');
@@ -53,16 +61,19 @@ class ContentImageServices extends BaseServices
 
         $folderId = app()->make('googleFolderId');
 
-        $fileToUpload = $this->postGGDrive($driveService, $file['link_img']['file'], $folderId);
-        if ($fileToUpload) {
-            $driveService->permissions->create($fileToUpload->id, $newPermission);
-            $file['link_img']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
+        $file['link_img']['url'] = [];
+
+        if (isset($file['link_img']['file'])) {
+            foreach ($file['link_img']['file'] as $itemImg) {
+                $fileToUpload = $this->postGGDrive($driveService, $itemImg, $folderId);
+                if ($fileToUpload) {
+                    $driveService->permissions->create($fileToUpload->id, $newPermission);
+                    $file['link_img']['url'][] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
+                }
+
+            }
         }
 
-
-        if(!empty($file['link_img']['url'])){
-            $comic['link_img'] = $file['link_img']['url'];
-        }
 
         return $file;
     }

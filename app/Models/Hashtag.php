@@ -26,7 +26,7 @@ class Hashtag extends BaseModel
         static::deleting(function ($model) {
             $model->load('tagges');
             $taggedsServices = app()->make(TaggedServices::class);
-            if(!$model?->tagges?->isEmpty()){
+            if(isset($model->tagges)){
                 foreach ($model->tagges as $tagged){
                     $taggedsServices->delete($tagged->id);
                 }

@@ -11,3 +11,7 @@ var extract_date = {
         return ((a < b) ? 1 : ((a > b) ? -1 : 0));
     }
 }
+
+function getDomainName(){
+    return window.location.protocol+"\\"+window.location.hostname
+}

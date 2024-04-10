@@ -46,6 +46,8 @@
 {{--@include('Frontend.layouts.footer')--}}
 <script src="{!! asset('assets/js/menu.js') !!}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{!! asset('assets/js/api/apiResource.js') !!}"></script>
+<script src="{!! asset('assets/js/axios/axios.min.js') !!}"></script>
 @yield('addtional_scripts')
 <script>
     // document.onkeydown = function (event) {

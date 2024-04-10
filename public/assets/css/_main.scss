@@ -49,11 +49,13 @@
 .container .cards .card .chapter{
     position:absolute;
     bottom:10px;
-    font-size: 22px;
+    font-size: 15px;
     font-weight: 800;
     background-color: black;
     left: 17px;
     max-width: 300px;
+    border-radius: 8px;
+    line-height: 1.8;
 }
 
 .container .cards .card .chapter > span{

@@ -93,13 +93,16 @@ class ComicServices extends BaseServices
         // lay ra tat cả tagged của entity
         $oldTaggeds = $entity->hashtags->pluck('id')->all();
         $listtemp = [];
-        foreach ($attributes['tagged'] as $index => $tagged) {
-            if (in_array($tagged, $oldTaggeds)) {
-                $listtemp[] = $tagged;
-            } else {
-                $this->taggedServices->save(['comic_id' => $entity->id, 'hashtag_id' => $tagged]);
+        if(isset($attributes['tagged'])){
+            foreach ($attributes['tagged'] as $index => $tagged) {
+                if (in_array($tagged, $oldTaggeds)) {
+                    $listtemp[] = $tagged;
+                } else {
+                    $this->taggedServices->save(['comic_id' => $entity->id, 'hashtag_id' => $tagged]);
+                }
             }
         }
+
         // lọc các id cần xóa
         $listdelete = array_diff($oldTaggeds, $listtemp);
         $this->taggedServices->deleteByComicIdandHashtagId($entity->id, $listdelete);
@@ -108,9 +111,12 @@ class ComicServices extends BaseServices
 
     public function addTaggeds($attributes, $entity)
     {
-        foreach ($attributes['tagged'] as $index => $tagged) {
-            $this->taggedServices->save(['comic_id' => $entity->id, 'hashtag_id' => $tagged]);
+        if(isset($attributes['tagged'])){
+            foreach ($attributes['tagged'] as $index => $tagged) {
+                $this->taggedServices->save(['comic_id' => $entity->id, 'hashtag_id' => $tagged]);
+            }
         }
+
     }
 
     public function uploadGGDrive($request, &$comic)

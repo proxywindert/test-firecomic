@@ -8,6 +8,7 @@ use App\Http\Controllers\WebControllers\V1\Frontend\LandingController;
 use App\Http\Controllers\WebControllers\V1\Backend\LandingController as AdmLandingController;
 use App\Http\Controllers\WebControllers\V1\Backend\ComicController as AdmComicController;
 use App\Http\Controllers\AjaxControllers\V1\Backend\ChapterController as AdmChapterController;
+use App\Http\Controllers\AjaxControllers\V1\Frontend\ChapterController as FrontendChapterController;
 use App\Http\Controllers\WebControllers\V1\Backend\HashtagController as AdmHashtagController;
 
 /*
@@ -34,6 +35,17 @@ Route::group(array('prefix' => 'comics'), function () {
     Route::get('/content/keywork/{hashtag}', [ComicController::class, 'searchByhashTag'])->name('searchByhashTag');
     Route::get('/content/{comic_code}', [ComicController::class, 'show'])->name('comic-info')->middleware('viewed');
     Route::get('/viewer/{comic_code}/chapter/{id}', [ChapterController::class, 'show'])->name('view-comic')->middleware('viewed');
+
+    Route::get('/api', [FrontendChapterController::class, 'show'])->name('show');
+});
+
+Route::group(array('prefix' => 'ajax','as'=>'ajax.'), function () {
+    Route::group(array('prefix' => 'comics','as' => 'comics.'), function () {
+        Route::group(array('prefix' => '{comic_code}/chapters','as' => 'chapters.'), function () {
+            Route::get('/{id}', [FrontendChapterController::class, 'show'])->name('show');
+        });
+    });
+
 });
 
 Route::group(array('prefix' => 'admin'), function () {

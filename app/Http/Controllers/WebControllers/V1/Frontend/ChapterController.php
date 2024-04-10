@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\WebControllers\V1\Frontend;
 
 use App\Http\Controllers\BaseController;
+use App\Models\ContentImage;
 use App\Services\ChapterServices;
+use App\Services\ContentImageServices;
 use Illuminate\Http\Request;
 
 class ChapterController extends BaseController
 {
     private $chapterServices;
-
-    public function __construct(ChapterServices $chapterServices)
+    private  $contentImageServices;
+    public function __construct(ChapterServices $chapterServices,ContentImageServices $contentImageServices)
     {
+        $this->contentImageServices = $contentImageServices;
         $this->chapterServices = $chapterServices;
         parent::__construct();
     }
@@ -21,11 +24,12 @@ class ChapterController extends BaseController
         return view('Frontend.pages.comics.index');
     }
 
-    public function show($comic_code,$id)
+    public function show(Request $request,$comic_code,$id)
     {
-        $comic = $this->chapterServices->getChapterByComicCodeAndChapterNumber($comic_code,$id);
+        $comic = $this->chapterServices->findByComicCodeAndChapterId($comic_code,$id);
+        $contentImages =$comic? $this->contentImageServices->findByChapterId($request,$comic->id):[];
         $comic->with('nextChapter','prvChapter');
-        return view('Frontend.pages.chapters.index',compact('comic'));
+        return view('Frontend.pages.chapters.index',compact('comic','contentImages'));
     }
 
 }

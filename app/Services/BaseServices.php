@@ -29,12 +29,15 @@ class BaseServices
         try {
             $driveService = Storage::disk('google');
             $pattern = "/https:\/\/lh3.googleusercontent.com\/d\/(.*?)=w1000/i";
-            foreach ($urls as $url){
-                preg_match($pattern, $url,$matches);
-                $folderId = $matches[1]??null;
-                if($folderId)
-                    $driveService->files->delete($folderId);
+            if(isset($urls)){
+                foreach ($urls as $url){
+                    preg_match($pattern, $url,$matches);
+                    $folderId = $matches[1]??null;
+                    if($folderId)
+                        $driveService->files->delete($folderId);
+                }
             }
+
         }catch (\Exception $e){
 
         }
