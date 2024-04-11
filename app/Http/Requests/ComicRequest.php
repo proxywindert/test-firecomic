@@ -16,7 +16,8 @@ class ComicRequest extends FormRequest
     {
         return [
             'comic_name' => 'required',
-            'summary_contents'=> 'required'
+            'summary_contents'=> 'required',
+            'tagged'=>'required',
         ];
     }
 
@@ -66,6 +67,7 @@ class ComicRequest extends FormRequest
     public function messages()
     {
         return [
+            'tagged.required'=>'Bắt buộc nhập',
             'summary_contents.required' => 'Bắt buộc nhập',
             'comic_name.required' => 'Bắt buộc nhập',
         ];

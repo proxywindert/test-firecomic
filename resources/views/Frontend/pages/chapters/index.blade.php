@@ -595,6 +595,13 @@
         var isLoadComplete = true
         var isStopLoad = false;
 
+        document.addEventListener("DOMContentLoaded", function () {
+            new IOlazy({
+                image: 'img',
+                threshold: 0.1,
+            });
+        });
+
         window.addEventListener('load', (event) => {
             localStorage.setItem('currentPage', {{ $contentImages->currentPage() }});
             localStorage.setItem('limit', {{ $contentImages->perPage() }});
@@ -618,7 +625,7 @@
 
                                 if(data.length>=1){
                                     data.forEach(item => {
-                                        link_bg_preview.append(` <img src="${item.link_img}" alt="firemcomic">`);
+                                        link_bg_preview.append(` <img  src="${item.link_img}" alt="firemcomic">`);
                                     })
                                 }
 

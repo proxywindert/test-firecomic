@@ -92,11 +92,21 @@
                                 </div>
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <label for="tranfer_color">tranfer_color</label>
-                                        <input
-                                            value="{!! old('tranfer_color', isset($comic["tranfer_color"]) ? $comic["tranfer_color"] : null) !!}"
-                                            type="text" class="form-control" id="tranfer_color" name="tranfer_color"
-                                               placeholder="tranfer_color">
+                                        <label>tagged
+                                            {{--                                            {{ dd(old('tagged')) }}--}}
+                                        </label><br/>
+                                        <select multiple class="form-control select2 width80" name="tagged[]" id="tagged">
+                                            @foreach($hashtags as $hashtag)
+                                                <option
+                                                    value="{{ $hashtag->id }}"
+                                                    {{ (in_array($hashtag->id ,old('tagged',[])))?'selected="selected"':'' }}
+                                                >
+                                                    {{ $hashtag->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <label id="lb_error_id_hashtag"
+                                               style="color: red; ">{{$errors->first('hashtag')}}</label>
                                     </div>
                                 </div>
 
@@ -143,25 +153,7 @@
                                         <p class="help-block">link_bg.</p>
                                     </div>
                                 </div>
-                                <div class="col col-md-6">
-                                    <div class="form-group">
-                                        <label>tagged
-{{--                                            {{ dd(old('tagged')) }}--}}
-                                        </label><br/>
-                                        <select multiple class="form-control select2 width80" name="tagged[]" id="tagged">
-                                            @foreach($hashtags as $hashtag)
-                                                <option
-                                                    value="{{ $hashtag->id }}"
-                                                    {{ (in_array($hashtag->id ,old('tagged',[])))?'selected="selected"':'' }}
-                                                >
-                                                    {{ $hashtag->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <label id="lb_error_id_hashtag"
-                                               style="color: red; ">{{$errors->first('hashtag')}}</label>
-                                    </div>
-                                </div>
+
 
                             </div>
 

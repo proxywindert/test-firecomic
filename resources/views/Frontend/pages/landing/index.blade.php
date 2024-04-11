@@ -74,124 +74,36 @@
                     <div class="card">
                         <a href="{{ route('comic-info', ['comic_code' => $comic->comic_code]) }}">
                             <picture>
-                                <img class="bg-img" src="{!! asset($comic->link_bg) !!}"
-                                     alt="">
+                                <img class="lazyload bg-img" src="{!! asset('assets/images/loadspinner.svg') !!}" data-src="{!! asset($comic->link_bg) !!}" alt="HentaiVN - Ảnh 9 - Kanojo Saimin - Chap 2 - Hypnosis Girlfriend">
+{{--                                <img class="lazyload" data-src="{!! asset($comic->link_bg) !!}"--}}
+{{--                                     alt="">--}}
                             </picture>
                             <picture>
-                                <img class="char-img"
-                                     src="{!! asset($comic->link_banner) !!}" alt="">
+                                <img class="lazyload char-img"
+                                     src="{!! asset('assets/images/loadspinner.svg') !!}"
+                                     data-src="{!! asset($comic->link_banner) !!}" alt="">
                             </picture>
                             <div class="label-time-content">
                                 <div class="time">
-                                    <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">
+                                    <img class="lazyload"
+                                         src="{!! asset('assets/images/loadspinner.svg') !!}"
+                                         data-src="{!! asset("assets/images/time-border.svg") !!}" alt="">
                                     <span class=" content-overflow">{{ $comic?->diff_time }}</span>
                                 </div>
                                 <div class="comic-name">
-                                    <img src="{!! asset($comic->link_comic_name) !!}" alt="">
+                                    <img class="lazyload"
+                                         src="{!! asset('assets/images/loadspinner.svg') !!}"
+                                         data-src="{!! asset($comic->link_comic_name) !!}" alt="">
                                 </div>
                             </div>
                             <div class="chapter">
-                                <span class=" content-overflow">{{ $comic?->chapters?->last()?->chapter_name??'' }}</span>
+                                <span
+                                    class=" content-overflow">{{ $comic?->chapters?->last()?->chapter_name??'' }}</span>
                             </div>
                         </a>
                     </div>
                 @endforeach
 
-
-{{--                <div class="card">--}}
-{{--                    <a href="{{ route('comic-info', ['comic_code' => 'cm-1']) }}">--}}
-{{--                        <picture>--}}
-{{--                            <img class="bg-img" src="{!! asset("assets/images/dynamic-image-1") !!}" alt="">--}}
-{{--                        </picture>--}}
-{{--                        <picture>--}}
-{{--                            <img class="char-img" src="{!! asset("assets/images/dynamic-image") !!}" alt="">--}}
-{{--                        </picture>--}}
-{{--                        <div class="label-time-content">--}}
-{{--                            <div class="time">--}}
-{{--                                <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">--}}
-{{--                                <span>3 tuần trước</span>--}}
-{{--                            </div>--}}
-{{--                            <div class="comic-name">--}}
-{{--                                <img src="{!! asset("assets/images/comic-name") !!}" alt="">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="chapter">--}}
-{{--                            <span>5 Chap</span>--}}
-{{--                        </div>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-
-{{--                <div class="card">--}}
-{{--                    <a href="{{ route('comic-info', ['comic_code' => 'cm-2']) }}">--}}
-
-{{--                        <picture>--}}
-{{--                            <img class="bg-img" src="{!! asset("assets/images/thánh-avatar-comic-bg") !!}" alt="">--}}
-{{--                        </picture>--}}
-{{--                        <picture>--}}
-{{--                            <img class="char-img" src="{!! asset("assets/images/thánh-avatar-comic-char") !!}" alt="">--}}
-{{--                        </picture>--}}
-{{--                        <div class="label-time-content">--}}
-{{--                            <div class="time">--}}
-{{--                                <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">--}}
-{{--                                <span>3 tuần trước</span>--}}
-{{--                            </div>--}}
-{{--                            <div class="comic-name">--}}
-{{--                                <img src="{!! asset("assets/images/thánh-avatar-comic.png") !!}" alt="">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="chapter">--}}
-{{--                            <span>5 Chap</span>--}}
-{{--                        </div>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--                <div class="card">--}}
-{{--                    <a href="{{ route('comic-info', ['comic_code' => 'cm-2']) }}">--}}
-
-{{--                        <picture>--}}
-{{--                            <img class="bg-img" src="{!! asset("assets/images/sống-avatar-comic-bg") !!}" alt="">--}}
-{{--                        </picture>--}}
-
-{{--                        <picture>--}}
-{{--                            <img class="char-img" src="{!! asset("assets/images/sống-avatar-comic-char") !!}" alt="">--}}
-{{--                        </picture>--}}
-{{--                        <div class="label-time-content">--}}
-{{--                            <div class="time">--}}
-{{--                                <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">--}}
-{{--                                <span>3 tuần trước</span>--}}
-{{--                            </div>--}}
-{{--                            <div class="comic-name">--}}
-{{--                                <img src="{!! asset("assets/images/sống-avatar-comic") !!}" alt="">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="chapter">--}}
-{{--                            <span>5 Chap</span>--}}
-{{--                        </div>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--                <div class="card">--}}
-{{--                    <a href="{{ route('comic-info', ['comic_code' => 'cm-1']) }}">--}}
-
-{{--                        <picture>--}}
-{{--                            <img class="bg-img" src="{!! asset("assets/images/dam-avatar-comic-bg") !!}" alt="">--}}
-{{--                        </picture>--}}
-
-{{--                        <picture>--}}
-{{--                            <img class="char-img" src="{!! asset("assets/images/dam-avatar-comic-char" ) !!}" alt="">--}}
-{{--                        </picture>--}}
-{{--                        <div class="label-time-content">--}}
-{{--                            <div class="time">--}}
-{{--                                <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">--}}
-{{--                                <span>3 tuần trước</span>--}}
-{{--                            </div>--}}
-{{--                            <div class="comic-name">--}}
-{{--                                <img src="{!! asset("assets/images/dam-avatar-comic") !!}" alt="">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="chapter">--}}
-{{--                            <span>5 Chap</span>--}}
-{{--                        </div>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
             </div>
 
         </div>
@@ -209,5 +121,22 @@
                 </div>
             </div>
         </div>
+        <div id="test">
+
+        </div>
+        <div id="test1">
+
+        </div>
     </div>
+
+@endsection
+@section('addtional_scripts')
+
+    <script >
+        document.addEventListener("DOMContentLoaded", function () {
+            new IOlazy({
+                image: 'img'
+            });
+        });
+    </script>
 @endsection

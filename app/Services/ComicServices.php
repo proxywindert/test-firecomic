@@ -56,6 +56,13 @@ class ComicServices extends BaseServices
         if (!empty($attributes['comic_code'])) {
             $entity = $this->model->where('comic_code', $attributes['comic_code'])->first();
             if ($entity) {
+                if($attributes['bg_color']){
+                    $attributes['tranfer_color']="background:linear-gradient(to bottom, rgba({$attributes['bg_color']},0) 2%, rgba({$attributes['bg_color']},0.7) 50%,  rgba({$attributes['bg_color']}))";
+                    $attributes['bg_color']="rgba({$attributes['bg_color']})";
+                }else{
+                    $attributes['tranfer_color']='';
+                }
+
                 $entity->fill($attributes)->save();
 
                 $this->updateSummaryContents($attributes, $entity);
@@ -65,7 +72,14 @@ class ComicServices extends BaseServices
                 return null;
             }
         } else {
-            $attributes['comic_code'] = "COMIC-" . $this->model->max('id') + 1;
+            $attributes['comic_code'] = "COMIC-".($this->model->max('id') + 1);
+            if($attributes['bg_color']){
+                $attributes['tranfer_color']="background:linear-gradient(to bottom, rgba({$attributes['bg_color']},0) 2%, rgba({$attributes['bg_color']},0.7) 50%,  rgba({$attributes['bg_color']}))";
+                $attributes['bg_color']="rgba({$attributes['bg_color']})";
+            }else{
+                $attributes['tranfer_color']='';
+            }
+
             $entity = $this->model->create($attributes);
             $this->addSummaryContents($attributes, $entity);
             $this->addTaggeds($attributes, $entity);
