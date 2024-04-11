@@ -18,7 +18,10 @@
                 <span>{{$chapter->chapter_name}}</span>
             </td>
             <td>
-                <img class="small-comic-img img-fluid" src="{{asset($chapter->link_small_icon)}}"
+                <img
+                    class="lazyload small-comic-img img-fluid"
+                    src="{!! asset('assets/images/loadspinner.svg') !!}"
+                    data-src="{{asset($chapter->link_small_icon)}}"
                      alt="Photo">
             </td>
             <td class="project-actions text-right">

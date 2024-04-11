@@ -57,6 +57,9 @@
 
 <script src="{!! asset('assets/admin/templates/js/common/commonJs.js') !!}"></script>
 <script src="{!! asset('assets/admin/templates/js/go_to_top/go_to_top.js') !!}"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+
+<script src="{!! asset('assets/js/iolazy.min.js') !!}"></script>
 @yield('addtional_scripts')
 
 <script>

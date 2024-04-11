@@ -31,6 +31,10 @@
     background-color: transparent;
 }
 
+.image-list .comic:hover {
+    cursor: pointer;
+}
+
 .list-comic .comic .tranfer-comic,
 .image-list .comic .tranfer-comic{
     width: 100%;

@@ -254,285 +254,37 @@
                                                  alt="" class="rotate-180">
                                         </button>
                                         <ul class="image-list">
-
-                                            <div class="comic">
-                                                <picture class="bg-content-comic">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic1/bg.jpg") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <picture class="comic-avatar">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic1/avatar.png") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <div class="tranfer-comic"
-                                                     style="background-image: linear-gradient(rgba(146, 114, 57, 0) 0%, rgba(146, 114, 57, 0.5) 33.04%, rgba(146, 114, 57, 0.9) 66.09%, rgb(146, 114, 57) 100%);">
-                                                </div>
-                                                <div class="comic-name">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic1/name.png") !!}"
-                                                        alt="">
-                                                </div>
-                                                <div class="extend-info">
-                                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>
-                                                </div>
-                                            </div>
-                                            <div class="comic">
-                                                <picture class="bg-content-comic">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic2/bg.jpg") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <picture class="comic-avatar">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic2/avatar.png") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <div class="tranfer-comic"
-                                                     style="background-image: linear-gradient(rgba(45, 102, 161, 0) 0%, rgba(45, 102, 161, 0.5) 33.04%, rgba(45, 102, 161, 0.9) 66.09%, rgb(45, 102, 161) 100%);">
-                                                </div>
-                                                <div class="comic-name">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic2/name.png") !!}"
-                                                        alt="">
-                                                </div>
-                                                <div class="extend-info">
-                                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>
-                                                </div>
-                                            </div>
-                                            <div class="comic">
-                                                <picture class="bg-content-comic">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic3/bg.jpg") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <picture class="comic-avatar">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic3/avatar.png") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <div class="tranfer-comic"
-                                                     style="background-image: linear-gradient(rgba(147, 81, 123, 0) 0%, rgba(147, 81, 123, 0.5) 33.04%, rgba(147, 81, 123, 0.9) 66.09%, rgb(147, 81, 123) 100%);">
-                                                </div>
-                                                <div class="comic-name">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic3/name.png") !!}"
-                                                        alt="">
-                                                </div>
-                                                <div class="extend-info">
-                                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>
-                                                </div>
-                                            </div>
-                                            <div class="comic">
-                                                <picture class="bg-content-comic">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic4/bg.jpg") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <picture class="comic-avatar">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic4/avatar.png") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <div class="tranfer-comic"
-                                                     style="background-image: linear-gradient(rgba(24, 31, 45, 0) 0%, rgba(24, 31, 45, 0.5) 33.04%, rgba(24, 31, 45, 0.9) 66.09%, rgb(24, 31, 45) 100%);">
-                                                </div>
-                                                <div class="comic-name">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic4/name.png") !!}"
-                                                        alt="">
-                                                </div>
-                                                <div class="extend-info">
-                                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>
-                                                </div>
-                                            </div>
-                                            <div class="comic">
-                                                <picture class="bg-content-comic">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic5/bg.jpg") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <picture class="comic-avatar">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic5/avatar.png") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <div class="tranfer-comic"
-                                                     style="background-image: linear-gradient(rgba(115, 0, 5, 0) 0%, rgba(115, 0, 5, 0.5) 33.04%, rgba(115, 0, 5, 0.9) 66.09%, rgb(115, 0, 5) 100%);">
-                                                </div>
-                                                <div class="comic-name">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic5/name.png") !!}"
-                                                        alt="">
-                                                </div>
-                                                <div class="extend-info">
-                                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>
-                                                </div>
-                                            </div>
-                                            <div class="comic">
-                                                <picture class="bg-content-comic">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic6/bg.jpg") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <picture class="comic-avatar">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic6/avatar.png") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <div class="tranfer-comic"
-                                                     style="background-image: linear-gradient(rgba(135, 182, 66, 0) 0%, rgba(135, 182, 66, 0.5) 33.04%, rgba(135, 182, 66, 0.9) 66.09%, rgb(135, 182, 66) 100%);">
-                                                </div>
-                                                <div class="comic-name">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic6/name.png") !!}"
-                                                        alt="">
-                                                </div>
-                                                <div class="extend-info">
-                                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>
-                                                </div>
-                                            </div>
-                                            <div class="comic">
-                                                <picture class="bg-content-comic">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic1/bg.jpg") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <picture class="comic-avatar">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic1/avatar.png") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <div class="tranfer-comic"
-                                                     style="background-image: linear-gradient(rgba(146, 114, 57, 0) 0%, rgba(146, 114, 57, 0.5) 33.04%, rgba(146, 114, 57, 0.9) 66.09%, rgb(146, 114, 57) 100%);">
-                                                </div>
-                                                <div class="comic-name">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic1/name.png") !!}"
-                                                        alt="">
-                                                </div>
-                                                <div class="extend-info">
-                                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>
-                                                </div>
-                                            </div>
-                                            <div class="comic">
-                                                <picture class="bg-content-comic">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic2/bg.jpg") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <picture class="comic-avatar">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic2/avatar.png") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <div class="tranfer-comic"
-                                                     style="background-image: linear-gradient(rgba(45, 102, 161, 0) 0%, rgba(45, 102, 161, 0.5) 33.04%, rgba(45, 102, 161, 0.9) 66.09%, rgb(45, 102, 161) 100%);">
-                                                </div>
-                                                <div class="comic-name">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic2/name.png") !!}"
-                                                        alt="">
-                                                </div>
-                                                <div class="extend-info">
-                                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>
-                                                </div>
-                                            </div>
-                                            <div class="comic">
-                                                <picture class="bg-content-comic">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic3/bg.jpg") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <picture class="comic-avatar">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic3/avatar.png") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <div class="tranfer-comic"
-                                                     style="background-image: linear-gradient(rgba(147, 81, 123, 0) 0%, rgba(147, 81, 123, 0.5) 33.04%, rgba(147, 81, 123, 0.9) 66.09%, rgb(147, 81, 123) 100%);">
-                                                </div>
-                                                <div class="comic-name">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic3/name.png") !!}"
-                                                        alt="">
-                                                </div>
-                                                <div class="extend-info">
-                                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>
-                                                </div>
-                                            </div>
-                                            <div class="comic">
-                                                <picture class="bg-content-comic">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic4/bg.jpg") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <picture class="comic-avatar">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic4/avatar.png") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <div class="tranfer-comic"
-                                                     style="background-image: linear-gradient(rgba(24, 31, 45, 0) 0%, rgba(24, 31, 45, 0.5) 33.04%, rgba(24, 31, 45, 0.9) 66.09%, rgb(24, 31, 45) 100%);">
-                                                </div>
-                                                <div class="comic-name">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic4/name.png") !!}"
-                                                        alt="">
-                                                </div>
-                                                <div class="extend-info">
-                                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>
-                                                </div>
-                                            </div>
-                                            <div class="comic">
-                                                <picture class="bg-content-comic">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic5/bg.jpg") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <picture class="comic-avatar">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic5/avatar.png") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <div class="tranfer-comic"
-                                                     style="background-image: linear-gradient(rgba(115, 0, 5, 0) 0%, rgba(115, 0, 5, 0.5) 33.04%, rgba(115, 0, 5, 0.9) 66.09%, rgb(115, 0, 5) 100%);">
-                                                </div>
-                                                <div class="comic-name">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic5/name.png") !!}"
-                                                        alt="">
-                                                </div>
-                                                <div class="extend-info">
-                                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>
-                                                </div>
-                                            </div>
-                                            <div class="comic">
-                                                <picture class="bg-content-comic">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic6/bg.jpg") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <picture class="comic-avatar">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic6/avatar.png") !!}"
-                                                        alt="">
-                                                </picture>
-                                                <div class="tranfer-comic"
-                                                     style="background-image: linear-gradient(rgba(135, 182, 66, 0) 0%, rgba(135, 182, 66, 0.5) 33.04%, rgba(135, 182, 66, 0.9) 66.09%, rgb(135, 182, 66) 100%);">
-                                                </div>
-                                                <div class="comic-name">
-                                                    <img
-                                                        src="{!! asset("assets/images/detail1/relation/comic6/name.png") !!}"
-                                                        alt="">
-                                                </div>
-                                                <div class="extend-info">
-                                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>
-                                                </div>
-                                            </div>
-
-
+                                            @foreach($relations as $relation)
+                                                <a href="{{ route('comic-info',['comic_code'=>$relation->comic_code]) }}" class="comic">
+                                                    <picture class="bg-content-comic">
+                                                        <img
+                                                            class="lazyload"
+                                                            src="{!! $relation->link_bg?getLinkSpinImg():'' !!}"
+                                                            data-src="{!! $relation->link_bg !!}"
+                                                            alt="">
+                                                    </picture>
+                                                    <picture class="comic-avatar">
+                                                        <img
+                                                            class="lazyload"
+                                                            src="{!! $relation->link_avatar?getLinkSpinImg():'' !!}"
+                                                            data-src="{!! $relation->link_avatar !!}"
+                                                            alt="">
+                                                    </picture>
+                                                    <div class="tranfer-comic"
+                                                         style="{{ $relation->tranfer_color }}">
+                                                    </div>
+                                                    <div class="comic-name">
+                                                        <img
+                                                            class="lazyload"
+                                                            src="{!! $relation->link_comic_small_name?getLinkSpinImg():'' !!}"
+                                                            data-src="{!! $relation->link_comic_small_name !!}"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="extend-info">
+                                                        <span class="label-free-span bg-color-yellow"> miễn phí</span>
+                                                    </div>
+                                                </a>
+                                            @endforeach
                                         </ul>
                                         <button id="next-slide" class="slide-button material-symbols-rounded">
                                             <img width="20" height="20"
@@ -590,21 +342,42 @@
     <script src="{!! asset("assets/js/utils.js") !!}"></script>
     <script src="{!! asset("assets/js/header-pr-detail.js") !!}"></script>
     <script src="{!! asset("assets/js/slider.js") !!}"></script>
-    <script>
-        const currentUrl = `{{ route('ajax.comics.chapters.show',['comic_code'=>$comic?->comic?->comic_code,'id'=>$comic?->id]) }}`;
-        var isLoadComplete = true
-        var isStopLoad = false;
-
+    <script >
         document.addEventListener("DOMContentLoaded", function () {
             new IOlazy({
                 image: 'img',
                 threshold: 0.1,
             });
         });
+    </script>
+    <script>
+        const currentUrl = `{{ route('ajax.comics.chapters.show',['comic_code'=>$comic?->comic?->comic_code,'id'=>$comic?->id]) }}`;
+        const spinImgurl = "{!! getLinkSpinImg() !!}"
+        let isLoadComplete = true
+        let isStopLoad = false;
+        let lazyImageObserver;
+        localStorage.setItem('currentPage', {{ $contentImages->currentPage() }});
+        localStorage.setItem('limit', {{ $contentImages->perPage() }});
+
+        document.addEventListener("DOMContentLoaded", function () {
+             lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        const lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.removeAttribute('data-src');
+                        lazyImageObserver.unobserve(lazyImage);
+                    }
+                });
+            },{
+                root: null, // Quan sát theo viewport
+                rootMargin: '0px', // Không có margin xung quanh phần tử gốc
+                threshold: 0.1 // Kích hoạt sự kiện khi phần tử hiển thị ít nhất 10% trong vùng nhìn thấy
+            });
+        });
 
         window.addEventListener('load', (event) => {
-            localStorage.setItem('currentPage', {{ $contentImages->currentPage() }});
-            localStorage.setItem('limit', {{ $contentImages->perPage() }});
+
             const link_bg_preview = $(`#img-item`)
 
             window.addEventListener('scroll', function () {
@@ -622,17 +395,20 @@
                                     isStopLoad =true;
                                     return
                                 }
-
                                 if(data.length>=1){
                                     data.forEach(item => {
-                                        link_bg_preview.append(` <img  src="${item.link_img}" alt="firemcomic">`);
+                                        let newElement = $(`<img class="lazyload" src="${spinImgurl}" data-src="${item.link_img}" alt="firemcomic">`)
+                                        link_bg_preview.append(newElement);
+                                        lazyImageObserver.observe(newElement.get(0));
                                     })
                                 }
+
 
                                 let page = parseInt(localStorage.getItem('currentPage'))+1
                                 localStorage.setItem('currentPage', page);
                             })
                             .catch(error => {
+                                console.log(error)
                             }).finally(() => {
                             isLoadComplete = true;
                         });

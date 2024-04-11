@@ -193,6 +193,7 @@
     width: 90px;
     height: 54px;
     position: relative;
+	flex-shrink:0;
 }
 
 .next-chapter-img::after {
@@ -217,6 +218,7 @@
 
 .next-chapter .small-arrow {
     margin-left: auto;
+	flex-shrink: 0;
 }
 
 .next-chapter .next-chapter-info {

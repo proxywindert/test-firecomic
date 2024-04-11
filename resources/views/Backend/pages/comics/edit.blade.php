@@ -121,8 +121,9 @@
                             <div class="row">
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <img class="small-comic-img img-responsive"
-                                             src="{!! asset(old('link_avatar', isset($comic["link_avatar"]) ? $comic["link_avatar"] : null)) !!}"
+                                        <img class="lazyload small-comic-img img-responsive"
+                                             src="{!! asset('assets/images/loadspinner.svg') !!}"
+                                             data-src="{!! asset(old('link_avatar', isset($comic["link_avatar"]) ? $comic["link_avatar"] : null)) !!}"
                                              alt="Photo">
                                         <label for="link_avatar">link_avatar</label>
                                         <input type="file" name="link_avatar" id="link_avatar">
@@ -131,8 +132,9 @@
                                 </div>
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <img class="small-comic-img img-responsive"
-                                             src="{!! asset(old('link_banner', isset($comic["link_banner"]) ? $comic["link_banner"] : null)) !!}"
+                                        <img class="lazyload small-comic-img img-responsive"
+                                             src="{!! asset('assets/images/loadspinner.svg') !!}"
+                                             data-src="{!! asset(old('link_banner', isset($comic["link_banner"]) ? $comic["link_banner"] : null)) !!}"
                                              alt="Photo">
                                         <label for="link_banner">link_banner</label>
                                         <input type="file" name="link_banner" id="link_banner">
@@ -144,8 +146,9 @@
                             <div class="row">
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <img class="small-comic-img img-responsive"
-                                             src="{!! asset(old('link_comic_name', isset($comic["link_comic_name"]) ? $comic["link_comic_name"] : null)) !!}"
+                                        <img class="lazyload small-comic-img img-responsive"
+                                             src="{!! asset('assets/images/loadspinner.svg') !!}"
+                                             data-src="{!! asset(old('link_comic_name', isset($comic["link_comic_name"]) ? $comic["link_comic_name"] : null)) !!}"
                                              alt="Photo">
                                         <label for="link_comic_name">link_comic_name</label>
                                         <input type="file" name="link_comic_name" id="link_comic_name">
@@ -154,8 +157,9 @@
                                 </div>
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <img class="small-comic-img img-responsive"
-                                             src="{!! asset(old('link_comic_small_name', isset($comic["link_comic_small_name"]) ? $comic["link_comic_small_name"] : null)) !!}"
+                                        <img class="lazyload small-comic-img img-responsive"
+                                             src="{!! asset('assets/images/loadspinner.svg') !!}"
+                                             data-src="{!! asset(old('link_comic_small_name', isset($comic["link_comic_small_name"]) ? $comic["link_comic_small_name"] : null)) !!}"
                                              alt="Photo">
                                         <label for="link_comic_small_name">link_comic_small_name</label>
                                         <input type="file" name="link_comic_small_name" id="link_comic_small_name">
@@ -169,8 +173,9 @@
                                 <div class="col col-md-6">
                                     <div class="form-group">
 
-                                            <img class="small-comic-img img-responsive"
-                                                 src="{!! asset(old('link_bg', isset($comic["link_bg"]) ? $comic["link_bg"] : null)) !!}"
+                                            <img class="lazyload small-comic-img img-responsive"
+                                                 src="{!! asset('assets/images/loadspinner.svg') !!}"
+                                                 data-src="{!! asset(old('link_bg', isset($comic["link_bg"]) ? $comic["link_bg"] : null)) !!}"
                                                  alt="Photo">
 
                                         <label for="link_bg">link_bg</label>
@@ -252,6 +257,11 @@
             //     // clear img
             //     $('#link_bg_preview').empty();
             // });
+
+            new IOlazy({
+                image: 'img',
+                threshold: 0.4
+            });
 
             $("#modal-add-chapter").on('hidden.bs.modal', function (e) {
                 console.log("Modal đã bị ẩn.");

@@ -8,24 +8,25 @@ use Illuminate\Http\Request;
 
 class ComicController extends BaseController
 {
-    private $comicService;
+    private $comicServices;
 
-    public function __construct(ComicServices $comicService)
+    public function __construct(ComicServices $comicServices)
     {
-        $this->comicService = $comicService;
+        $this->comicServices = $comicServices;
         parent::__construct();
     }
 
     public function searchByhashTag(Request $request,$hashtag)
     {
         $request['hashtag'] = $hashtag;
-        $comics = $this->comicService->index($request);
+        $comics = $this->comicServices->index($request);
         return view('Frontend.pages.comics.search',compact('comics'));
     }
 
-    public function show($comic_code)
+    public function show(Request $request,$comic_code)
     {
-        $comic = $this->comicService->show($comic_code);
-        return view('Frontend.pages.comics.detail',compact('comic'));
+        $relations = $this->comicServices->getRelationComic($comic_code);
+        $comic = $this->comicServices->show($comic_code);
+        return view('Frontend.pages.comics.detail',compact('comic','relations'));
     }
 }

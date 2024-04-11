@@ -18,7 +18,8 @@
             </ol>
         </section>
         <section class="content-header">
-            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#modal-search" id="clickCollapse">
+            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#modal-search"
+                    id="clickCollapse">
                 <span class="fa fa-search"></span>&nbsp;&nbsp;&nbsp;<span id="iconSearch" class="glyphicon"></span>
             </button>
             @include('Backend.pages.comics._form_search_comics_list')
@@ -47,6 +48,7 @@
                                 <tr>
 
                                     <th>{{trans('comic.name')}}</th>
+                                    <th>Hashtag</th>
                                     <th>{{trans('comic.link_banner')}}</th>
                                     <th>{{trans('common.edit')}}</th>
                                 </tr>
@@ -59,17 +61,25 @@
                                         <td class="comic-name">
                                             <span>{{$comic->comic_name}}</span>
                                         </td>
+                                        <td class="comic-name">
+                                            @foreach($comic->hashtags as $hashtag)
+                                                <span class="label label-success">{{$hashtag->name}}</span>
+                                            @endforeach
+                                        </td>
                                         <td>
-                                            <img class="small-comic-img img-fluid" src="{{asset($comic->link_banner)}}"
+                                            <img class="lazyload small-comic-img img-fluid"
+                                                 src="{!! asset('assets/images/loadspinner.svg') !!}"
+                                                 data-src="{{asset($comic->link_banner)}}"
                                                  alt="Photo">
                                         </td>
                                         <td class="project-actions text-right">
-{{--                                            <a class="btn btn-primary btn-sm" href="#">--}}
-{{--                                                <i class="fas fa-folder">--}}
-{{--                                                </i>--}}
-{{--                                                View--}}
-{{--                                            </a>--}}
-                                            <a class="btn btn-info btn-sm" href="{{ route('comics.edit',['code'=>$comic->comic_code]) }}">
+                                            {{--                                            <a class="btn btn-primary btn-sm" href="#">--}}
+                                            {{--                                                <i class="fas fa-folder">--}}
+                                            {{--                                                </i>--}}
+                                            {{--                                                View--}}
+                                            {{--                                            </a>--}}
+                                            <a class="btn btn-info btn-sm"
+                                               href="{{ route('comics.edit',['code'=>$comic->comic_code]) }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit
@@ -97,7 +107,8 @@
                             <div class="row">
                                 @if($comics->hasPages())
                                     <div class="col-sm-5">
-                                        <div class="dataTables_info" style="float:left" id="example2_info" role="status" aria-live="polite">
+                                        <div class="dataTables_info" style="float:left" id="example2_info" role="status"
+                                             aria-live="polite">
                                             {{getInformationDataTable($comics)}}
                                         </div>
                                     </div>
@@ -121,6 +132,13 @@
 
 
 @section('addtional_scripts')
-    <script src="{!! asset('assets/admin/templates/js/bower_components/jquery/dist/jquery.min.js') !!}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            new IOlazy({
+                image: 'img',
+                threshold: 0.4
+            });
+        });
+    </script>
 @endsection
 

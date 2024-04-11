@@ -53,20 +53,29 @@
                    <div class="card">
                        <a href="{{ route('comic-info', ['comic_code' => $comic->comic_code]) }}">
                            <picture>
-                               <img class="bg-img" src="{!! asset($comic->link_bg) !!}"
+                               <img
+                                   src="{!! $comic->link_bg?getLinkSpinImg():'' !!}"
+                                   class="lazyload bg-img" data-src="{!! asset($comic->link_bg) !!}"
                                     alt="">
                            </picture>
                            <picture>
-                               <img class="char-img"
-                                    src="{!! asset($comic->link_banner) !!}" alt="">
+                               <img class="lazyload char-img"
+                                    src="{!! $comic->link_banner?getLinkSpinImg():'' !!}"
+                                    data-src="{!! asset($comic->link_banner) !!}" alt="">
                            </picture>
                            <div class="label-time-content">
                                <div class="time">
-                                   <img src="{!! asset("assets/images/time-border.svg") !!}" alt="">
+                                   <img
+                                       class="lazyload"
+                                       src="{!! getLinkSpinImg() !!}"
+                                       data-src="{!! asset("assets/images/time-border.svg") !!}" alt="">
                                    <span class=" content-overflow">{{ $comic?->diff_time }}</span>
                                </div>
                                <div class="comic-name">
-                                   <img src="{!! asset($comic->link_comic_name) !!}" alt="">
+                                   <img
+                                       class="lazyload"
+                                       src="{!! $comic->link_comic_name?getLinkSpinImg():'' !!}"
+                                       data-src="{!! asset($comic->link_comic_name) !!}" alt="">
                                </div>
                            </div>
                            <div class="chapter">
@@ -81,6 +90,14 @@
     </div>
 @endsection
 @section("addtional_scripts")
+    <script >
+        document.addEventListener("DOMContentLoaded", function () {
+            new IOlazy({
+                image: 'img',
+                threshold: 0.1,
+            });
+        });
+    </script>
     <script>
         window.addEventListener('load',()=>{
             document.querySelector('.back-button').addEventListener('click',()=>{

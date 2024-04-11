@@ -51,6 +51,7 @@
 #comic-list .comic-name{
     text-align: start;
     vertical-align: middle;
+    max-width: 200px;
 }
 
 table {
@@ -62,6 +63,14 @@ table.table-fit {
     width: auto !important;
     table-layout: auto !important;
 }
+
+table.table-fit td img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
 table.table-fit thead th,
 table.table-fit tbody td,
 table.table-fit tfoot th,

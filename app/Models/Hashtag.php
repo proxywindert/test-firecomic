@@ -35,6 +35,9 @@ class Hashtag extends BaseModel
         });
     }
 
+    public function comics(){
+        return $this->belongsToMany(Comic::class,'taggeds','hashtag_id','comic_id');
+    }
     public function tagges()
     {
         return $this->hasMany(Tagged::class, 'hashtag_id');

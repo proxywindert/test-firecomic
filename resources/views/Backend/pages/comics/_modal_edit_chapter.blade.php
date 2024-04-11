@@ -76,7 +76,7 @@
 {{--                            </div>--}}
                             <div class="col col-md-6">
                                 <div class="form-group">
-                                    <img name="link_small_icon" class="small-comic-img img-responsive"
+                                    <img name="link_small_icon" class="lazyload small-comic-img img-responsive"
                                          src="{!! asset(old('link_small_icon', isset($comic["link_small_icon"]) ? $comic["link_small_icon"] : null)) !!}"
                                          alt="Photo">
                                     <label>{{trans('chapter.link_small_icon')}}</label>

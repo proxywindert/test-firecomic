@@ -26,4 +26,6 @@ function getArray($modal){
 }
 
 
-
+function getLinkSpinImg(){
+    return asset('assets/images/loadspinner.svg');
+}
