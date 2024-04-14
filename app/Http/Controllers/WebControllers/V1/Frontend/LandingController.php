@@ -23,11 +23,8 @@ class LandingController extends BaseController
 
     public function index(Request $request)
     {
-
-
         $genres = $this->genreService->index($request);
         $comics = $this->comicService->index($request);
-
         return view('Frontend.pages.landing.index',compact('genres','comics'));
     }
 

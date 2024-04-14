@@ -28,15 +28,15 @@ class ComicServices extends BaseServices
     public function index($request)
     {
         $limit = $request->get('limit', ComicModel::LIMIT_PAGE);
-        $query = $this->model;
+        $query = ComicModel::query();
         $hashtag = $request->get('hashtag');
         if ($hashtag && $hashtag != 'null') {
             $query = $query->whereHas('hashtags', function ($query) use ($hashtag) {
                 $query->where('hashtags.slug', $hashtag);
             });
         }
-        $query->with('chapters', function ($query) {
-            $query->orderBy('id', 'desc');
+        $query= $query->with('chapters', function ($query) {
+            $query->orderBy('id', 'asc');
         });
         $query = $query->orderBy('id', 'desc');
 

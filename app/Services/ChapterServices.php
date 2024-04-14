@@ -20,7 +20,7 @@ class ChapterServices extends BaseServices
     public function index($request)
     {
         $limit = $request->get('limit', ChapterModel::LIMIT_PAGE);
-        $query = $this->model;
+        $query = ChapterModel::query();
         $query = $query->with('contentImages');
         return $query->paginate($limit);
     }
