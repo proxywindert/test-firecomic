@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>FIRE COMIC</title>
+    <title>Firecomic</title>
     <meta name="twitter:title" content="Firecomic">
     <meta property="og:title" content="Firecomic">
     <meta name="theme-color" content="#121212">
