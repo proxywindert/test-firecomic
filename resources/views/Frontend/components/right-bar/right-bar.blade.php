@@ -12,6 +12,11 @@
                     </a>
                 </li>
                 <li>
+                    <a target="_blank" href="https://www.facebook.com/profile.php?id=61555659102327">
+                        <img src="{!! asset("assets/images/fb-icon.png") !!}" alt="">
+                    </a>
+                </li>
+                <li>
                     <a target="_blank" href="mailto:firecomic247@gmail.com">
                         <img src="{!! asset("assets/images/email.webp") !!}" alt="">
                     </a>
