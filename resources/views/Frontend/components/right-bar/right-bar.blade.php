@@ -12,7 +12,7 @@
                     </a>
                 </li>
                 <li>
-                    <a target="_blank" href="https://www.facebook.com/profile.php?id=61555659102327">
+                    <a target="_blank" href="fb://page/?id=61555659102327">
                         <img src="{!! asset("assets/images/fb-icon.png") !!}" alt="">
                     </a>
                 </li>
@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li>
-                    <a target="_blank" href="https://www.tiktok.com/@firecomic247">
+                    <a target="_blank" href="tiktok://user?username=firecomic247">
                         <img src="{!! asset("assets/images/tik-tok.png") !!}" alt="">
                     </a>
                 </li>

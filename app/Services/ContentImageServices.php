@@ -25,8 +25,8 @@ class ContentImageServices extends BaseServices
     public function findByChapterId($request, $id)
     {
         $limit = $request->get('limit', 1);
-        $query = $this->model;
-        $query = $query->where('chapter_id', $id);
+        $query = ContentImageModel::query();
+        $query = $query->where('chapter_id', $id)->orderBy('id', 'asc');
         return $query->paginate($limit);
     }
 

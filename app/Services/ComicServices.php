@@ -222,9 +222,14 @@ class ComicServices extends BaseServices
 
     public function show($comicCode)
     {
-        $data = $this->model->with('chapters')
+        $data = ComicModel::query();
+
+        $data = $data->with('chapters', function ($query) {
+            $query->orderBy('id', 'asc');
+        })
             ->with('summaryContents')
-            ->with('hashtags')->where('comic_code', $comicCode)->first();
+            ->with('hashtags')
+            ->where('comic_code', $comicCode)->first();
         if (!empty($data)) {
             $now = Carbon::now();
             if ($data ?->chapters ?->last() ?->publish_at){
