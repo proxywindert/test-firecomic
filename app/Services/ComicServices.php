@@ -35,7 +35,11 @@ class ComicServices extends BaseServices
                 $query->where('hashtags.slug', $hashtag);
             });
         }
-        $query->with('chapters');
+        $query->with('chapters',function ($query){
+            $query->orderBy('id', 'desc');
+        });
+        $query = $query->orderBy('id', 'desc');
+
         $data = $query->paginate($limit);
 
         if (!$data->isEmpty()) {

@@ -4,32 +4,32 @@
 <head>
     <meta charset="utf-8">
     <title>FIRE COMIC</title>
-    <meta name="twitter:title" content="FIRE COMIC">
-    <meta property="og:title" content="FIRE COMIC">
+    <meta name="twitter:title" content="Firecomic">
+    <meta property="og:title" content="Firecomic">
     <meta name="theme-color" content="#121212">
     <meta name="description"
-          content="Khám phá comic kích thích trí tưởng tượng của bạn tại FIRE COMIC. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
+          content="Khám phá comic kích thích trí tưởng tượng của bạn tại Firecomic. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
     <meta name="keywords" content="It's free if you wait, free comics">
-    <meta property="og:site_name" content="FIRE COMIC">
+    <meta property="og:site_name" content="Firecomic">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://firecomic.hioncoding.com/libs/client/images/common/logo.png?v=20240118">
+    <meta property="og:image" content="{!! asset("assets/images/logo.png") !!}">
     <meta property="og:locale" content="vi">
     <meta property="og:description"
-          content="Khám phá comic kích thích trí tưởng tượng của bạn tại FIRE COMIC. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
-    <meta property="og:url" content="https://firecomic.hioncoding.com">
+          content="Khám phá comic kích thích trí tưởng tượng của bạn tại Firecomic. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
+    <meta property="og:url" content="https://firecomic.onrender.com">
     <meta name="twitter:description"
-          content="Khám phá comic kích thích trí tưởng tượng của bạn tại FIRE COMIC. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
-    <meta name="twitter:image" content="https://firecomic.hioncoding.com/libs/client/images/common/logo.png?v=20240118">
+          content="Khám phá comic kích thích trí tưởng tượng của bạn tại Firecomic. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
+    <meta name="twitter:image" content="{!! asset("assets/images/logo.png") !!}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@kakaowebtoon_kr">
-    <meta name="twitter:url" content="https://firecomic.hioncoding.com">
-    <link rel="canonical" href="https://firecomic.hioncoding.com">
+    <meta name="twitter:url" content="https://firecomic.onrender.com">
+    <link rel="canonical" href="https://firecomic.onrender.com">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="https://firecomic.hioncoding.com/libs/client/images/common/logo.png?v=20240118"
+    <link rel="shortcut icon" href="{!! asset("assets/images/logo.png") !!}"
           type="image/x-icon">
-    <link rel="icon" href="https://firecomic.hioncoding.com/libs/client/images/common/logo.png?v=20240118"
+    <link rel="icon" href="{!! asset("assets/images/logo.png") !!}"
           sizes="144x144">
-    <link rel="apple-touch-icon" href="https://firecomic.hioncoding.com/libs/client/images/common/logo.png?v=20240118">
+    <link rel="apple-touch-icon" href="{!! asset("assets/images/logo.png") !!}">
     <meta name="next-head-count" content="25">
 
     <link rel="stylesheet" href="{!! asset('assets/css/styles.css') !!}">

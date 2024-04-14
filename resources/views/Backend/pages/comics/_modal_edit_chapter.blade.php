@@ -31,11 +31,12 @@
                                 <div class="form-group">
                                     <label>{{trans('chapter.chapter_number')}}</label>
                                     <input
-                                        type="number" class="form-control" name="chapter_number"
+                                        type="text" class="form-control" name="chapter_number"
                                         placeholder="chapter_number">
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="row">
                             <div class="col col-md-6">
@@ -51,29 +52,6 @@
 
                                 </div>
                             </div>
-{{--                            <div class="col col-md-6">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label>free_at</label>--}}
-{{--                                    <div class='input-group date form_datetime'>--}}
-{{--                                        <input name="free_at" type='text' value="" class="form-control" placeholder="yyyy-MM-dd HH:mm"/>--}}
-{{--                                        <span class="input-group-addon">--}}
-{{--                                                    <span class="glyphicon glyphicon-calendar"></span>--}}
-{{--                                                </span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-                        </div>
-
-                        <div class="row">
-{{--                            <div class="col col-md-6">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label>{{trans('chapter.status')}}</label>--}}
-{{--                                    <input--}}
-{{--                                        type="text" class="form-control" name="status"--}}
-{{--                                        placeholder="status">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <img name="link_small_icon" class="lazyload small-comic-img img-responsive"

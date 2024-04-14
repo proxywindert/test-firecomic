@@ -106,7 +106,7 @@
                                             @endforeach
                                         </select>
                                         <label id="lb_error_id_hashtag"
-                                               style="color: red; ">{{$errors->first('hashtag')}}</label>
+                                               style="color: red; ">{{$errors->first('tagged')}}</label>
                                     </div>
                                 </div>
 

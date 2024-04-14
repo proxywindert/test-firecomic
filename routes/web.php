@@ -28,7 +28,7 @@ Route::get('/users', function () {
     return view('users', compact('users'));
 });
 
-Route::get('/', [LandingController::class, 'index']);
+Route::get('/', [LandingController::class, 'index'])->name('landingPage');
 
 Route::group(array('prefix' => 'comics'), function () {
     Route::get('/content/search', [ComicController::class, 'searchByhashTag'])->name('search');

@@ -20,28 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-nav-header" id="tab-nav-header">
-            <button id="close-tab-nav-header" class="close-tab-nav-header">
-                <img src="{!! asset("assets/images/close.svg") !!}" alt="close">
-            </button>
-            <ul>
-                <li class="nav-item">
-                    <a href="" class="s13-bold-white">Liên hệ</a>
-                    <ul class="sub-contact">
-                        <li>
-                            <a target="_blank" href="https://m.me/AlexVrt1">
-                                <img src="{!! asset("assets/images/messenger.webp") !!}" alt="">
-                            </a>
-                        </li>
-                        <li>
-                            <a target="_blank" href="mailto:firecomic247@gmail.com">
-                                <img src="{!! asset("assets/images/email.webp") !!}" alt="">
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        @include('Frontend.components.right-bar.right-bar')
     </header>
 
 @endsection
@@ -165,8 +144,8 @@
                                         data-src="{!! asset($chapter->link_small_icon) !!}" alt="">
                                 </div>
                                 <div class="des">
-                                    <p class="title">
-                                        tập {{ $chapter->chapter_number }}
+                                    <p class="title content-overflow">
+                                        {{ $chapter->chapter_name }}
                                     </p>
                                     <p class="date">
                                         {{ $chapter->publish_at }}

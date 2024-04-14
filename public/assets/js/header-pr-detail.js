@@ -4,19 +4,31 @@ window.addEventListener('scroll', function () {
      // Chiều cao của cửa sổ trình duyệt
     var scrollPosition = window.scrollY || window.pageYOffset || document.documentElement.scrollTop; // Vị trí cuộn hiện tại
 
-    if ((contentHeight - (viewportHeight) <= scrollPosition) || scrollPosition == 0) {
-        // Trang đã cuộn xuống cuối cùng
+    // if ((contentHeight - (viewportHeight) <= scrollPosition) || scrollPosition == 0) {
+    //     // Trang đã cuộn xuống cuối cùng
+    //
+    //     visibleElement([headerMenu, fakeHeaderMenu]);
+    //     if (navigationBar)
+    //         visibleElement([navigationBar]);
+    //     // Thực hiện các hành động tương ứng ở đây
+    // } else {
+    //     if (navigationBar)
+    //         hiddenElement([navigationBar]);
+    //     hiddenElement([headerMenu, fakeHeaderMenu]);
+    // }
 
-        visibleElement([headerMenu, fakeHeaderMenu]);
-        if (navigationBar)
-            visibleElement([navigationBar]);
-        // Thực hiện các hành động tương ứng ở đây
-    } else {
+    if (scrollPosition > lastScrollTop) {
+        // Người dùng đang cuộn xuống
         if (navigationBar)
             hiddenElement([navigationBar]);
         hiddenElement([headerMenu, fakeHeaderMenu]);
+    }else{
+        visibleElement([headerMenu, fakeHeaderMenu]);
+        if (navigationBar)
+            visibleElement([navigationBar]);
+
     }
-    lastScrollTop = scrollPosition
+    lastScrollTop = scrollPosition <= 0 ? 0 : scrollPosition;
 });
 
 function hiddenElement(elements) {

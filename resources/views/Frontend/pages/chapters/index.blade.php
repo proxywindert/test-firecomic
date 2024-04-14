@@ -25,28 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-nav-header" id="tab-nav-header">
-            <button id="close-tab-nav-header" class="close-tab-nav-header">
-                <img src="{!! asset("assets/images/close.svg") !!}" alt="close">
-            </button>
-            <ul>
-                <li class="nav-item">
-                    <a href="" class="s13-bold-white">Liên hệ</a>
-                    <ul class="sub-contact">
-                        <li>
-                            <a target="_blank" href="https://m.me/AlexVrt1">
-                                <img src="{!! asset("assets/images/messenger.webp") !!}" alt="">
-                            </a>
-                        </li>
-                        <li>
-                            <a target="_blank" href="mailto:firecomic247@gmail.com">
-                                <img src="{!! asset("assets/images/email.webp") !!}" alt="">
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        @include('Frontend.components.right-bar.right-bar')
     </header>
 
 @endsection
@@ -82,62 +61,62 @@
 
                 <div class="content-anchor">
                     <div class="cards">
-                        <div class="ads card-pr-detail">
-                            <div class="content">
-                                <div class="content-body">
-                                    <div class="ads-img">
-                                        <img src="{!! asset("assets/images/detail1/ads/ads1.jpg") !!}" alt="">
-                                    </div>
-                                    <div class="ads-content">
-                                            <span class="ads-tittle content-overflow">
-                                                Toàn bộ phô mai mozza? Bánh wafer mozza nguyên miếng của Burger King
-                                                xuất hiện
-                                            </span>
-                                        <a href="" class="ads-link">Phím tắt</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                        <div class="ads card-pr-detail">--}}
+{{--                            <div class="content">--}}
+{{--                                <div class="content-body">--}}
+{{--                                    <div class="ads-img">--}}
+{{--                                        <img src="{!! asset("assets/images/detail1/ads/ads1.jpg") !!}" alt="">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="ads-content">--}}
+{{--                                            <span class="ads-tittle content-overflow">--}}
+{{--                                                Toàn bộ phô mai mozza? Bánh wafer mozza nguyên miếng của Burger King--}}
+{{--                                                xuất hiện--}}
+{{--                                            </span>--}}
+{{--                                        <a href="" class="ads-link">Phím tắt</a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                        <div class="like-card card-pr-detail">
-                            <div class="content">
-                                <div class="content-body">
-                                    <h3 class="like-tittle">
-                                        {{ $comic?->comic?->total_view ?? '' }}
-                                    </h3>
-                                    <div class="like-img">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160"
-                                             height="160" preserveAspectRatio="xMidYMid meet"
-                                             style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px);">
-                                            <defs>
-                                                <clipPath id="__lottie_element_92">
-                                                    <rect width="160" height="160" x="0" y="0"></rect>
-                                                </clipPath>
-                                            </defs>
-                                            <g clip-path="url(#__lottie_element_92)">
-                                                <g transform="matrix(1,0,0,1,-25,0.5)" opacity="1"
-                                                   style="display: block;">
-                                                    <g opacity="1"
-                                                       transform="matrix(1,0,0,1,104.9990005493164,79.31400299072266)">
-                                                        <path fill="rgb(254,254,255)" fill-opacity="1"
-                                                              d=" M-26.094999313354492,-6.776000022888184 C-26.094999313354492,-6.776000022888184 -27.26099967956543,-6.776000022888184 -27.26099967956543,-6.776000022888184 C-27.26099967956543,-6.776000022888184 -26.097000122070312,-6.7729997634887695 -26.097000122070312,-6.7729997634887695 C-26.097000122070312,-6.7729997634887695 -26.094999313354492,-6.776000022888184 -26.094999313354492,-6.776000022888184z M41.262001037597656,-16.722999572753906 C41.262001037597656,-16.722999572753906 16.54400062561035,-16.722999572753906 16.54400062561035,-16.722999572753906 C16.54400062561035,-16.722999572753906 19.424999237060547,-38.229000091552734 19.424999237060547,-38.229000091552734 C20.187999725341797,-43.92300033569336 16.799999237060547,-49.35599899291992 11.35200023651123,-51.17900085449219 C11.35200023651123,-51.17900085449219 5.699999809265137,-53.069000244140625 5.699999809265137,-53.069000244140625 C5.2789998054504395,-53.209999084472656 4.85099983215332,-53.277000427246094 4.429999828338623,-53.277000427246094 C2.7790000438690186,-53.277000427246094 1.2359999418258667,-52.24599838256836 0.6579999923706055,-50.604000091552734 C0.6579999923706055,-50.604000091552734 -5.573999881744385,-32.909000396728516 -5.573999881744385,-32.909000396728516 C-5.573999881744385,-32.909000396728516 -26.094999313354492,-6.776000022888184 -26.094999313354492,-6.776000022888184 C-26.094999313354492,-6.776000022888184 -26.097999572753906,-6.771999835968018 -26.097999572753906,-6.771999835968018 C-26.097999572753906,-6.771999835968018 -27.26099967956543,-6.776000022888184 -27.26099967956543,-6.776000022888184 C-27.26099967956543,-6.776000022888184 -53.262001037597656,-6.776000022888184 -53.262001037597656,-6.776000022888184 C-53.262001037597656,-6.776000022888184 -53.262001037597656,53.2239990234375 -53.262001037597656,53.2239990234375 C-53.262001037597656,53.2239990234375 -27.26099967956543,53.2239990234375 -27.26099967956543,53.2239990234375 C-27.26099967956543,53.2239990234375 -27.26099967956543,53.277000427246094 -27.26099967956543,53.277000427246094 C-27.26099967956543,53.277000427246094 30.570999145507812,53.277000427246094 30.570999145507812,53.277000427246094 C39.70800018310547,53.277000427246094 47.39400100708008,46.43299865722656 48.45000076293945,37.356998443603516 C48.45000076293945,37.356998443603516 53.18199920654297,-3.3359999656677246 53.18199920654297,-3.3359999656677246 C53.236000061035156,-3.7960000038146973 53.262001037597656,-4.258999824523926 53.262001037597656,-4.7230000495910645 C53.262001037597656,-11.350000381469727 47.88999938964844,-16.722999572753906 41.262001037597656,-16.722999572753906z M-26.097999572753906,46.2239990234375 C-26.097999572753906,46.2239990234375 -27.26099967956543,46.2239990234375 -27.26099967956543,46.2239990234375 C-27.26099967956543,46.2239990234375 -46.262001037597656,46.2239990234375 -46.262001037597656,46.2239990234375 C-46.262001037597656,46.2239990234375 -46.262001037597656,0.2240000069141388 -46.262001037597656,0.2240000069141388 C-46.262001037597656,0.2240000069141388 -27.26099967956543,0.2240000069141388 -27.26099967956543,0.2240000069141388 C-27.26099967956543,0.2240000069141388 -26.097999572753906,0.2240000069141388 -26.097999572753906,0.2240000069141388 C-26.097999572753906,0.2240000069141388 -26.097999572753906,46.2239990234375 -26.097999572753906,46.2239990234375z M46.229000091552734,-4.144999980926514 C46.229000091552734,-4.144999980926514 41.49700164794922,36.54800033569336 41.49700164794922,36.54800033569336 C40.85200119018555,42.095001220703125 36.154998779296875,46.277000427246094 30.570999145507812,46.277000427246094 C30.570999145507812,46.277000427246094 -19.097999572753906,46.277000427246094 -19.097999572753906,46.277000427246094 C-19.097999572753906,46.277000427246094 -19.097999572753906,-4.3520002365112305 -19.097999572753906,-4.3520002365112305 C-19.097999572753906,-4.3520002365112305 -0.06800000369548798,-28.584999084472656 -0.06800000369548798,-28.584999084472656 C-0.06800000369548798,-28.584999084472656 0.6449999809265137,-29.493999481201172 0.6449999809265137,-29.493999481201172 C0.6449999809265137,-29.493999481201172 1.0290000438690186,-30.58300018310547 1.0290000438690186,-30.58300018310547 C1.0290000438690186,-30.58300018310547 6.28000020980835,-45.49399948120117 6.28000020980835,-45.49399948120117 C6.28000020980835,-45.49399948120117 9.130999565124512,-44.540000915527344 9.130999565124512,-44.540000915527344 C11.392999649047852,-43.784000396728516 12.803999900817871,-41.52000045776367 12.48799991607666,-39.159000396728516 C12.48799991607666,-39.159000396728516 9.605999946594238,-17.652000427246094 9.605999946594238,-17.652000427246094 C9.605999946594238,-17.652000427246094 8.543000221252441,-9.722999572753906 8.543000221252441,-9.722999572753906 C8.543000221252441,-9.722999572753906 16.54400062561035,-9.722999572753906 16.54400062561035,-9.722999572753906 C16.54400062561035,-9.722999572753906 41.262001037597656,-9.722999572753906 41.262001037597656,-9.722999572753906 C44.02000045776367,-9.722999572753906 46.262001037597656,-7.479000091552734 46.262001037597656,-4.7230000495910645 C46.262001037597656,-4.53000020980835 46.250999450683594,-4.335999965667725 46.229000091552734,-4.144999980926514z">
-                                                        </path>
-                                                    </g>
-                                                </g>
-                                                <g style="display: none;">
-                                                    <g>
-                                                        <path></path>
-                                                    </g>
-                                                    <g>
-                                                        <path></path>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                        <div class="like-card card-pr-detail">--}}
+{{--                            <div class="content">--}}
+{{--                                <div class="content-body">--}}
+{{--                                    <h3 class="like-tittle">--}}
+{{--                                        {{ $comic?->comic?->total_view ?? '' }}--}}
+{{--                                    </h3>--}}
+{{--                                    <div class="like-img">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160"--}}
+{{--                                             height="160" preserveAspectRatio="xMidYMid meet"--}}
+{{--                                             style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px);">--}}
+{{--                                            <defs>--}}
+{{--                                                <clipPath id="__lottie_element_92">--}}
+{{--                                                    <rect width="160" height="160" x="0" y="0"></rect>--}}
+{{--                                                </clipPath>--}}
+{{--                                            </defs>--}}
+{{--                                            <g clip-path="url(#__lottie_element_92)">--}}
+{{--                                                <g transform="matrix(1,0,0,1,-25,0.5)" opacity="1"--}}
+{{--                                                   style="display: block;">--}}
+{{--                                                    <g opacity="1"--}}
+{{--                                                       transform="matrix(1,0,0,1,104.9990005493164,79.31400299072266)">--}}
+{{--                                                        <path fill="rgb(254,254,255)" fill-opacity="1"--}}
+{{--                                                              d=" M-26.094999313354492,-6.776000022888184 C-26.094999313354492,-6.776000022888184 -27.26099967956543,-6.776000022888184 -27.26099967956543,-6.776000022888184 C-27.26099967956543,-6.776000022888184 -26.097000122070312,-6.7729997634887695 -26.097000122070312,-6.7729997634887695 C-26.097000122070312,-6.7729997634887695 -26.094999313354492,-6.776000022888184 -26.094999313354492,-6.776000022888184z M41.262001037597656,-16.722999572753906 C41.262001037597656,-16.722999572753906 16.54400062561035,-16.722999572753906 16.54400062561035,-16.722999572753906 C16.54400062561035,-16.722999572753906 19.424999237060547,-38.229000091552734 19.424999237060547,-38.229000091552734 C20.187999725341797,-43.92300033569336 16.799999237060547,-49.35599899291992 11.35200023651123,-51.17900085449219 C11.35200023651123,-51.17900085449219 5.699999809265137,-53.069000244140625 5.699999809265137,-53.069000244140625 C5.2789998054504395,-53.209999084472656 4.85099983215332,-53.277000427246094 4.429999828338623,-53.277000427246094 C2.7790000438690186,-53.277000427246094 1.2359999418258667,-52.24599838256836 0.6579999923706055,-50.604000091552734 C0.6579999923706055,-50.604000091552734 -5.573999881744385,-32.909000396728516 -5.573999881744385,-32.909000396728516 C-5.573999881744385,-32.909000396728516 -26.094999313354492,-6.776000022888184 -26.094999313354492,-6.776000022888184 C-26.094999313354492,-6.776000022888184 -26.097999572753906,-6.771999835968018 -26.097999572753906,-6.771999835968018 C-26.097999572753906,-6.771999835968018 -27.26099967956543,-6.776000022888184 -27.26099967956543,-6.776000022888184 C-27.26099967956543,-6.776000022888184 -53.262001037597656,-6.776000022888184 -53.262001037597656,-6.776000022888184 C-53.262001037597656,-6.776000022888184 -53.262001037597656,53.2239990234375 -53.262001037597656,53.2239990234375 C-53.262001037597656,53.2239990234375 -27.26099967956543,53.2239990234375 -27.26099967956543,53.2239990234375 C-27.26099967956543,53.2239990234375 -27.26099967956543,53.277000427246094 -27.26099967956543,53.277000427246094 C-27.26099967956543,53.277000427246094 30.570999145507812,53.277000427246094 30.570999145507812,53.277000427246094 C39.70800018310547,53.277000427246094 47.39400100708008,46.43299865722656 48.45000076293945,37.356998443603516 C48.45000076293945,37.356998443603516 53.18199920654297,-3.3359999656677246 53.18199920654297,-3.3359999656677246 C53.236000061035156,-3.7960000038146973 53.262001037597656,-4.258999824523926 53.262001037597656,-4.7230000495910645 C53.262001037597656,-11.350000381469727 47.88999938964844,-16.722999572753906 41.262001037597656,-16.722999572753906z M-26.097999572753906,46.2239990234375 C-26.097999572753906,46.2239990234375 -27.26099967956543,46.2239990234375 -27.26099967956543,46.2239990234375 C-27.26099967956543,46.2239990234375 -46.262001037597656,46.2239990234375 -46.262001037597656,46.2239990234375 C-46.262001037597656,46.2239990234375 -46.262001037597656,0.2240000069141388 -46.262001037597656,0.2240000069141388 C-46.262001037597656,0.2240000069141388 -27.26099967956543,0.2240000069141388 -27.26099967956543,0.2240000069141388 C-27.26099967956543,0.2240000069141388 -26.097999572753906,0.2240000069141388 -26.097999572753906,0.2240000069141388 C-26.097999572753906,0.2240000069141388 -26.097999572753906,46.2239990234375 -26.097999572753906,46.2239990234375z M46.229000091552734,-4.144999980926514 C46.229000091552734,-4.144999980926514 41.49700164794922,36.54800033569336 41.49700164794922,36.54800033569336 C40.85200119018555,42.095001220703125 36.154998779296875,46.277000427246094 30.570999145507812,46.277000427246094 C30.570999145507812,46.277000427246094 -19.097999572753906,46.277000427246094 -19.097999572753906,46.277000427246094 C-19.097999572753906,46.277000427246094 -19.097999572753906,-4.3520002365112305 -19.097999572753906,-4.3520002365112305 C-19.097999572753906,-4.3520002365112305 -0.06800000369548798,-28.584999084472656 -0.06800000369548798,-28.584999084472656 C-0.06800000369548798,-28.584999084472656 0.6449999809265137,-29.493999481201172 0.6449999809265137,-29.493999481201172 C0.6449999809265137,-29.493999481201172 1.0290000438690186,-30.58300018310547 1.0290000438690186,-30.58300018310547 C1.0290000438690186,-30.58300018310547 6.28000020980835,-45.49399948120117 6.28000020980835,-45.49399948120117 C6.28000020980835,-45.49399948120117 9.130999565124512,-44.540000915527344 9.130999565124512,-44.540000915527344 C11.392999649047852,-43.784000396728516 12.803999900817871,-41.52000045776367 12.48799991607666,-39.159000396728516 C12.48799991607666,-39.159000396728516 9.605999946594238,-17.652000427246094 9.605999946594238,-17.652000427246094 C9.605999946594238,-17.652000427246094 8.543000221252441,-9.722999572753906 8.543000221252441,-9.722999572753906 C8.543000221252441,-9.722999572753906 16.54400062561035,-9.722999572753906 16.54400062561035,-9.722999572753906 C16.54400062561035,-9.722999572753906 41.262001037597656,-9.722999572753906 41.262001037597656,-9.722999572753906 C44.02000045776367,-9.722999572753906 46.262001037597656,-7.479000091552734 46.262001037597656,-4.7230000495910645 C46.262001037597656,-4.53000020980835 46.250999450683594,-4.335999965667725 46.229000091552734,-4.144999980926514z">--}}
+{{--                                                        </path>--}}
+{{--                                                    </g>--}}
+{{--                                                </g>--}}
+{{--                                                <g style="display: none;">--}}
+{{--                                                    <g>--}}
+{{--                                                        <path></path>--}}
+{{--                                                    </g>--}}
+{{--                                                    <g>--}}
+{{--                                                        <path></path>--}}
+{{--                                                    </g>--}}
+{{--                                                </g>--}}
+{{--                                            </g>--}}
+{{--                                        </svg>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         {{--                        <div class="card card-pr-detail">--}}
                         {{--                            <div class="header">--}}
@@ -314,16 +293,19 @@
                         width="24" height="24" alt="prev">
                 </button>
                 <button class="navigationBar-content-comment">
-                    <img
-                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgZmlsbD0iI0ZGRiIgZmlsbC1ydWxlPSJub256ZXJvIj4KICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTE3LjUgNS41YzUuMjQ3IDAgOS41IDQuMjUzIDkuNSA5LjVzLTQuMjUzIDkuNS05LjUgOS41SDE1bC02IDN2LTQuNzUzQzYuNTggMjEuMDI1IDUgMTguMTk3IDUgMTVjMC01LjI0NyA0LjI1My05LjUgOS41LTkuNWgzem0wIDJoLTNDMTAuMzU4IDcuNSA3IDEwLjg1OCA3IDE1YzAgMi43ODIgMS41MTUgNS4yMSAzLjc2NSA2LjUwNWwuMjM1LjEzdjIuNjE1bDMuNDk5LTEuNzVIMTcuNWM0LjE0MiAwIDcuNS0zLjM1OCA3LjUtNy41IDAtNC4wNi0zLjIyNy03LjM2OC03LjI1Ny03LjQ5NkwxNy41IDcuNXoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDQuMDAwMDAwLCAtNzQwLjAwMDAwMCkgdHJhbnNsYXRlKDIwLjAwMDAwMCwgNzMwLjAwMDAwMCkgdHJhbnNsYXRlKDE2LjAwMDAwMCwgMTAuMDAwMDAwKSB0cmFuc2xhdGUoNjguMDAwMDAwLCAwLjAwMDAwMCkiLz4KICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo="
-                        width="32" height="32" alt="comment">
+                    <img width="32" height="32" src="{!! asset("assets/images/logo.png") !!}" alt="">
+                </button>
+{{--                <button class="navigationBar-content-comment">--}}
+{{--                    <img--}}
+{{--                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgZmlsbD0iI0ZGRiIgZmlsbC1ydWxlPSJub256ZXJvIj4KICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTE3LjUgNS41YzUuMjQ3IDAgOS41IDQuMjUzIDkuNSA5LjVzLTQuMjUzIDkuNS05LjUgOS41SDE1bC02IDN2LTQuNzUzQzYuNTggMjEuMDI1IDUgMTguMTk3IDUgMTVjMC01LjI0NyA0LjI1My05LjUgOS41LTkuNWgzem0wIDJoLTNDMTAuMzU4IDcuNSA3IDEwLjg1OCA3IDE1YzAgMi43ODIgMS41MTUgNS4yMSAzLjc2NSA2LjUwNWwuMjM1LjEzdjIuNjE1bDMuNDk5LTEuNzVIMTcuNWM0LjE0MiAwIDcuNS0zLjM1OCA3LjUtNy41IDAtNC4wNi0zLjIyNy03LjM2OC03LjI1Ny03LjQ5NkwxNy41IDcuNXoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDQuMDAwMDAwLCAtNzQwLjAwMDAwMCkgdHJhbnNsYXRlKDIwLjAwMDAwMCwgNzMwLjAwMDAwMCkgdHJhbnNsYXRlKDE2LjAwMDAwMCwgMTAuMDAwMDAwKSB0cmFuc2xhdGUoNjguMDAwMDAwLCAwLjAwMDAwMCkiLz4KICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo="--}}
+{{--                        width="32" height="32" alt="comment">--}}
 
-                </button>
-                <button class="navigationBar-content-play">
-                    <img
-                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcuNSA1LjEzNTExQzcuNSA0Ljc0NzQ5IDcuOTIxOTcgNC41MDcyOCA4LjI1NTI3IDQuNzA1MThMMTkuODE3MiAxMS41NzAxQzIwLjE0MzUgMTEuNzYzOCAyMC4xNDM1IDEyLjIzNjIgMTkuODE3MiAxMi40Mjk5TDguMjU1MjcgMTkuMjk0OEM3LjkyMTk3IDE5LjQ5MjcgNy41IDE5LjI1MjUgNy41IDE4Ljg2NDlWNS4xMzUxMVoiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4K"
-                        width="24" height="24" alt="auto scroll">
-                </button>
+{{--                </button>--}}
+{{--                <button class="navigationBar-content-play">--}}
+{{--                    <img--}}
+{{--                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcuNSA1LjEzNTExQzcuNSA0Ljc0NzQ5IDcuOTIxOTcgNC41MDcyOCA4LjI1NTI3IDQuNzA1MThMMTkuODE3MiAxMS41NzAxQzIwLjE0MzUgMTEuNzYzOCAyMC4xNDM1IDEyLjIzNjIgMTkuODE3MiAxMi40Mjk5TDguMjU1MjcgMTkuMjk0OEM3LjkyMTk3IDE5LjQ5MjcgNy41IDE5LjI1MjUgNy41IDE4Ljg2NDlWNS4xMzUxMVoiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4K"--}}
+{{--                        width="24" height="24" alt="auto scroll">--}}
+{{--                </button>--}}
 
                 <button class="navigationBar-content-right">
                     <img
@@ -420,6 +402,10 @@
             fakeHeaderMenu.style.opacity = 1;
             document.querySelector('.back-button').addEventListener('click', function () {
                 window.location.href = "{{ route('comic-info', ['comic_code' =>$comic->comic->comic_code ]) }}";
+            });
+
+            document.querySelector('.navigationBar-content-comment').addEventListener('click', function () {
+                window.location.href = "{{ route('landingPage') }}";
             });
 
             document.querySelector('.navigationBar-content-right').addEventListener('click', function () {

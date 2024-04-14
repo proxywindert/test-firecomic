@@ -3,7 +3,7 @@
         <div class="container">
             <div class="copyright">
                 <a href="#">
-                    <p class="name">© FIRE COMIC</p>
+                    <p class="name">© Firecomic</p>
                 </a>
 
             </div>

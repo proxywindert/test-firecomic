@@ -15,7 +15,6 @@ class ApiChapterRequest extends FormRequest
     public function rules()
     {
         return [
-            'chapter_number' => 'required',
             'chapter_name'=> 'required'
         ];
     }
@@ -66,7 +65,6 @@ class ApiChapterRequest extends FormRequest
     public function messages()
     {
         return [
-            'chapter_number.required' => 'Bắt buộc nhập',
             'chapter_name.required' => 'Bắt buộc nhập',
         ];
     }
