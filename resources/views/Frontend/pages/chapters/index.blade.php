@@ -13,7 +13,7 @@
             </div>
             <div class="col-center">
                 <p class="chapter-name content-overflow">
-                    {!! $comic->chapter_name !!}
+                    {!! $comic?->chapter_name !!}
                 </p>
             </div>
             <div class="col-left">
@@ -195,7 +195,7 @@
                         <div class="card card-pr-detail">
                             <div class="content">
                                 <div class="content-body">
-                                    <a href="{{ route('view-comic',['comic_code' => $comic->comic?->comic_code,'id' => $comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id]) }}"
+                                    <a href="{{ route('view-comic',['comic_code' => ($comic?->comic?->comic_code)??$comic_code,'id' => ($comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id)??'1' ]) }}"
                                        class="next-chapter">
                                         <div class="next-chapter-img">
                                             <img
@@ -262,9 +262,9 @@
                         src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik02LjEzODQ2IDEyLjYzMTJDNi4xNTk4MiAxMi42NTczIDYuMTgyNyAxMi42ODI3IDYuMjA3MTEgMTIuNzA3MUw2LjkxNDIxIDEzLjQxNDJMMTMuMjc4MiAxOS43NzgyQzEzLjY2ODcgMjAuMTY4NyAxNC4zMDE5IDIwLjE2ODcgMTQuNjkyNCAxOS43NzgyQzE1LjA4MjkgMTkuMzg3NyAxNS4wODI5IDE4Ljc1NDUgMTQuNjkyNCAxOC4zNjRMOC4zMjg0MyAxMkwxNC42ODU2IDUuNjQyODhMMTQuNjkyNCA1LjYzNjA3QzE1LjA4MjkgNS4yNDU1NSAxNS4wODI5IDQuNjEyMzggMTQuNjkyNCA0LjIyMTg2QzE0LjMwMTkgMy44MzEzMyAxMy42Njg3IDMuODMxMzMgMTMuMjc4MiA0LjIyMTg2TDEzLjI3ODIgNC4yMjE4M0w2LjkxNDIxIDEwLjU4NThMNi4yMDcxMSAxMS4yOTI5QzUuODQwOTkgMTEuNjU5IDUuODE4MTEgMTIuMjM4NCA2LjEzODQ2IDEyLjYzMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K"
                         width="24" height="24" alt="prev">
                 </button>
-                <button class="navigationBar-content-comment">
-                    <img width="32" height="32" src="{!! asset("assets/images/logo.png") !!}" alt="">
-                </button>
+                <div class="navigationBar-content-comment">
+                    <img  src="{!! asset("assets/images/logo.png") !!}" alt="">
+                </div>
 {{--                <button class="navigationBar-content-comment">--}}
 {{--                    <img--}}
 {{--                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgZmlsbD0iI0ZGRiIgZmlsbC1ydWxlPSJub256ZXJvIj4KICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTE3LjUgNS41YzUuMjQ3IDAgOS41IDQuMjUzIDkuNSA5LjVzLTQuMjUzIDkuNS05LjUgOS41SDE1bC02IDN2LTQuNzUzQzYuNTggMjEuMDI1IDUgMTguMTk3IDUgMTVjMC01LjI0NyA0LjI1My05LjUgOS41LTkuNWgzem0wIDJoLTNDMTAuMzU4IDcuNSA3IDEwLjg1OCA3IDE1YzAgMi43ODIgMS41MTUgNS4yMSAzLjc2NSA2LjUwNWwuMjM1LjEzdjIuNjE1bDMuNDk5LTEuNzVIMTcuNWM0LjE0MiAwIDcuNS0zLjM1OCA3LjUtNy41IDAtNC4wNi0zLjIyNy03LjM2OC03LjI1Ny03LjQ5NkwxNy41IDcuNXoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDQuMDAwMDAwLCAtNzQwLjAwMDAwMCkgdHJhbnNsYXRlKDIwLjAwMDAwMCwgNzMwLjAwMDAwMCkgdHJhbnNsYXRlKDE2LjAwMDAwMCwgMTAuMDAwMDAwKSB0cmFuc2xhdGUoNjguMDAwMDAwLCAwLjAwMDAwMCkiLz4KICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo="--}}
@@ -303,7 +303,7 @@
         });
     </script>
     <script>
-        const currentUrl = `{{ route('ajax.comics.chapters.show',['comic_code'=>$comic?->comic?->comic_code,'id'=>$comic?->id]) }}`;
+        const currentUrl = `{{ route('ajax.comics.chapters.show',['comic_code'=>($comic?->comic?->comic_code)??$comic_code,'id'=>($comic?->id)??'1']) }}`;
         const spinImgurl = "{!! getLinkSpinImg() !!}"
         let isLoadComplete = true
         let isStopLoad = false;
@@ -371,7 +371,7 @@
             document.getElementById('preloader').setAttribute("style", "display:none");
             fakeHeaderMenu.style.opacity = 1;
             document.querySelector('.back-button').addEventListener('click', function () {
-                window.location.href = "{{ route('comic-info', ['comic_code' =>$comic->comic->comic_code ]) }}";
+                window.location.href = "{{ route('comic-info', ['comic_code' =>$comic?->comic?->comic_code ]) }}";
             });
 
             document.querySelector('.navigationBar-content-comment').addEventListener('click', function () {
@@ -379,10 +379,10 @@
             });
 
             document.querySelector('.navigationBar-content-right').addEventListener('click', function () {
-                window.location.href = "{{ route('view-comic', ['comic_code' => $comic->comic?->comic_code,'id' => $comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id]) }}";
+                window.location.href = "{{ route('view-comic', ['comic_code' => $comic?->comic?->comic_code,'id' => $comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id]) }}";
             });
             document.querySelector('.navigationBar-content-left').addEventListener('click', function () {
-                window.location.href = "{{ route('view-comic', ['comic_code' => $comic->comic?->comic_code,'id' => $comic->prvChapter?$comic?->prvChapter?->id:$comic?->id]) }}";
+                window.location.href = "{{ route('view-comic', ['comic_code' => $comic?->comic?->comic_code,'id' => $comic->prvChapter?$comic?->prvChapter?->id:$comic?->id]) }}";
             });
 
         });

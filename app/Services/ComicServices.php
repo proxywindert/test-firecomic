@@ -35,7 +35,7 @@ class ComicServices extends BaseServices
                 $query->where('hashtags.slug', $hashtag);
             });
         }
-        $query->with('chapters',function ($query){
+        $query->with('chapters', function ($query) {
             $query->orderBy('id', 'desc');
         });
         $query = $query->orderBy('id', 'desc');
@@ -46,8 +46,16 @@ class ComicServices extends BaseServices
             $now = Carbon::now();
             $data->each(function ($item) use ($now) {
                 if ($item ?->chapters ?->last() ?->publish_at){
-                    $item['diff_time'] = $now->diffInDays($item ?->chapters ?->last() ?->publish_at);
-                    $item['diff_time'] = $item['diff_time'] <= 0 ? 'Mới cập nhật' : 'Cách đây ' . $item['diff_time'] . ' ngày';
+                    $item['diff_time'] = $now->diffInMinutes($item ?->chapters ?->last() ?->publish_at);
+                    if ($item['diff_time'] <= 0) {
+                        $item['diff_time'] = 'Mới cập nhật';
+                    } else if ($item['diff_time'] <= 60) {
+                        $item['diff_time'] = 'Cách đây ' . $item['diff_time'] . ' phút';
+                    } else if ($item['diff_time'] <= 1440) {
+                        $item['diff_time'] = 'Cách đây ' . round(($item['diff_time'] / 60), 0, PHP_ROUND_HALF_DOWN) . ' giờ';
+                    } else {
+                        $item['diff_time'] = 'Cách đây ' . round(($item['diff_time'] / (60 * 24)), 0, PHP_ROUND_HALF_DOWN) . ' ngày';
+                    }
                 }else{
                     $item['diff_time'] = 'Mới cập nhật';
                 }
@@ -219,10 +227,18 @@ class ComicServices extends BaseServices
             ->with('hashtags')->where('comic_code', $comicCode)->first();
         if (!empty($data)) {
             $now = Carbon::now();
-            if ($data->chapters->last() ?->publish_at){
-                $data['diff_time'] = $now->diffInDays($data->chapters->last()->publish_at);
-                $data['diff_time'] = $data['diff_time'] <= 0 ? 'Mới cập nhật' : 'Cách đây ' . $data['diff_time'] . ' ngày';
-            }else{
+            if ($data ?->chapters ?->last() ?->publish_at){
+                $data['diff_time'] = $now->diffInMinutes($data ?->chapters ?->last() ?->publish_at);
+                    if ($data['diff_time'] <= 0) {
+                        $data['diff_time'] = 'Mới cập nhật';
+                    } else if ($data['diff_time'] <= 60) {
+                        $data['diff_time'] = 'Cách đây ' . $data['diff_time'] . ' phút';
+                    } else if ($data['diff_time'] <= 1440) {
+                        $data['diff_time'] = 'Cách đây ' . round(($data['diff_time'] / 60), 0, PHP_ROUND_HALF_DOWN) . ' giờ';
+                    } else {
+                        $data['diff_time'] = 'Cách đây ' . round(($data['diff_time'] / (60 * 24)), 0, PHP_ROUND_HALF_DOWN) . ' ngày';
+                    }
+                }else{
                 $data['diff_time'] = 'Mới cập nhật';
             }
 
@@ -236,7 +252,7 @@ class ComicServices extends BaseServices
         return $data;
     }
 
-    public function getRelationComic($comic_code,$limit=10)
+    public function getRelationComic($comic_code, $limit = 10)
     {
         // lấy ra các hashtag của comic này
         $comic = $this->findByComicCode($comic_code);
@@ -252,8 +268,8 @@ class ComicServices extends BaseServices
         // là tạo 1 câu query dài
         $hashtags = $hashtags->get()->toArray();
 
-        $query =  $this->model->whereIn('id',function ($query)use($hashtags){
-            $query->select('comic_id')->from('taggeds')->whereIn('hashtag_id',$hashtags);
+        $query = $this->model->whereIn('id', function ($query) use ($hashtags) {
+            $query->select('comic_id')->from('taggeds')->whereIn('hashtag_id', $hashtags);
         });
 
         return $query->limit($limit)->get();

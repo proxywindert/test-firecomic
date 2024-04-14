@@ -12,9 +12,10 @@ use Illuminate\Http\Request;
 class ChapterController extends BaseController
 {
     private $chapterServices;
-    private  $contentImageServices;
+    private $contentImageServices;
     private $comicServices;
-    public function __construct(ChapterServices $chapterServices,ContentImageServices $contentImageServices,ComicServices $comicServices)
+
+    public function __construct(ChapterServices $chapterServices, ContentImageServices $contentImageServices, ComicServices $comicServices)
     {
         $this->comicServices = $comicServices;
         $this->contentImageServices = $contentImageServices;
@@ -27,13 +28,18 @@ class ChapterController extends BaseController
         return view('Frontend.pages.comics.index');
     }
 
-    public function show(Request $request,$comic_code,$id)
+    public function show(Request $request, $comic_code, $id)
     {
-        $relations = $this->comicServices->getRelationComic($comic_code);
-        $comic = $this->chapterServices->findByComicCodeAndChapterId($comic_code,$id);
-        $contentImages =$comic? $this->contentImageServices->findByChapterId($request,$comic->id):[];
-        $comic->with('nextChapter','prvChapter');
-        return view('Frontend.pages.chapters.index',compact('comic','contentImages','relations'));
+        $comic = $this->chapterServices->findByComicCodeAndChapterId($comic_code, $id);
+        if ($comic) {
+            $relations = $this->comicServices->getRelationComic($comic_code);
+            $contentImages = $comic ? $this->contentImageServices->findByChapterId($request, $comic->id) : [];
+            $comic ?->with('nextChapter', 'prvChapter');
+            return view('Frontend.pages.chapters.index', compact('comic', 'contentImages', 'relations', 'comic_code'));
+        } else {
+            return redirect()->back();
+        }
+
     }
 
 }

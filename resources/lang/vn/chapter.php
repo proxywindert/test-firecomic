@@ -32,7 +32,9 @@ return [
     'confirm_add_team' => 'Bạn có muốn thêm một Team mới không?',
     'msg_content' => [
         'msg_add_success'=>'Thêm Chapter thành công!!',
+        'msg_add_fail'=>'Thêm Chapter thất bại!!',
         'msg_edit_success'=>'Chỉnh sửa Chapter thành công!!',
+        'msg_edit_fail'=>'Chỉnh sửa Chapter thất bại!!',
         'msg_delete_fail'=>'Xóa Chapter thất bại!!',
         'msg_delete_success'=>'Xóa Chapter thành công!!',
 
@@ -40,9 +42,8 @@ return [
 
         'msg_dupe_member' => 'Nhân viên này đã tồn tại trong Team !!',
         'msg_team_name_already' => 'Tên Team đã tồn tại !!',
-        'msg_add_fail'=>'Thêm Team không thành công!!',
         'msg_error_add_team'=> 'Có lỗi',
-        'msg_edit_fail'=>'Chỉnh sửa Team thất bại!!',
+
         'msg_add_member1'=>'Thành viên trùng với PO, Vui lòng chọn thành viên khác !!!',
         'msg_add_member2'=>'Lỗi!!! Thành viên đã tồn tại!!!'
     ],

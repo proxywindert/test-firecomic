@@ -68,7 +68,7 @@ class ChapterController extends BaseController
             return $this->responseJson( trans('chapter.msg_content.msg_add_success'),200,['redirect'=>route('comics.edit',['code'=>$result->comic->comic_code])]);
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->responseErrorJson( trans('chapter.msg_content.msg_delete_fail'),$e->getMessage(),500);
+            return $this->responseErrorJson( trans('chapter.msg_content.msg_add_fail'),$e->getMessage(),500);
         }
     }
 

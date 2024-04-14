@@ -277,7 +277,6 @@
 }
 
 .navigationBar-content-left,
-.navigationBar-content-comment,
 .navigationBar-content-play,
 .navigationBar-content-right {
     padding: 1px;
@@ -295,10 +294,17 @@
 .navigationBar-content-right > img {
     object-fit: cover;
 }
+
+.navigationBar-content-comment{
+    max-width: 100px;
+    height: auto;
+    flex-shrink: 0;
+    cursor: pointer;
+}
 .navigationBar-content-comment > img {
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: cover;
 }
 
 /* product detail end ------------------- */
