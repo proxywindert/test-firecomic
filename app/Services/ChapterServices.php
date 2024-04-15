@@ -34,7 +34,9 @@ class ChapterServices extends BaseServices
     public function findByComics($request, $id)
     {
         $limit = $request->get('limit', ChapterModel::LIMIT_PAGE);
-        $query = $this->model->where('comic_id', $id)->with('contentImages');
+        $query = ChapterModel::query();
+        $query=$query->orderBy('id','asc');
+        $query->where('comic_id', $id)->with('contentImages');
         return $query->paginate($limit);
     }
 
