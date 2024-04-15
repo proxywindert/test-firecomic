@@ -192,32 +192,34 @@
                         {{--                            </div>--}}
                         {{--                        </div>--}}
 
-                        <div class="card card-pr-detail">
-                            <div class="content">
-                                <div class="content-body">
-                                    <a href="{{ route('view-comic',['comic_code' => ($comic?->comic?->comic_code)??$comic_code,'id' => ($comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id)??'1' ]) }}"
-                                       class="next-chapter">
-                                        <div class="next-chapter-img">
-                                            <img
-                                                src="{!! asset($comic?->nextChapter?$comic?->nextChapter?->link_small_icon:$comic?->link_small_icon) !!}"
-                                                alt="">
-                                        </div>
-                                        <div class="next-chapter-info">
-                                            <p class="chapter-number content-overflow">
-                                                {{ $comic?->nextChapter ? $comic?->nextChapter?->chapter_name : $comic?->chapter_name }}
-                                            </p>
-                                            <span class="type content-overflow">miễn phí</span>
-                                        </div>
-                                        <div class="small-arrow">
-                                            <img
-                                                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgb3BhY2l0eT0iMC4xIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHJ4PSIxMiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTExLjQ3NzYgNy40MDM5M0wxMS40NzUzIDcuNDA2MTdDMTEuMTMxNSA3LjExNjE5IDEwLjYxNyA3LjEzMzEyIDEwLjI5MzEgNy40NTY5N0M5Ljk2OTMgNy43ODA4MSA5Ljk1MjM3IDguMjk1MzUgMTAuMjQyNCA4LjYzOTEzTDEwLjI0MDEgOC42NDEzN0wxMy41OTg5IDEyLjAwMDFMMTAuMjQwMSAxNS4zNTg5TDEwLjI0MjQgMTUuMzYxMUM5Ljk1MjM3IDE1LjcwNDkgOS45NjkzIDE2LjIxOTQgMTAuMjkzMSAxNi41NDMzQzEwLjYxNyAxNi44NjcxIDExLjEzMTUgMTYuODg0MSAxMS40NzUzIDE2LjU5NDFMMTEuNDc3NSAxNi41OTYzTDExLjUzMDYgMTYuNTQzM0wxNS41MDgxIDEyLjU2NThDMTUuODIwNSAxMi4yNTM0IDE1LjgyMDUgMTEuNzQ2OSAxNS41MDgxIDExLjQzNDRMMTEuNDc3NiA3LjQwMzkzWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="
-                                                class="w-24 h-24" alt="">
-                                        </div>
-                                    </a>
+                        @if(($comic?->nextChapter?->id))
+                            <div class="card card-pr-detail">
+                                <div class="content">
+                                    <div class="content-body">
+                                        <a href="{{ route('view-comic',['comic_code' => ($comic?->comic?->comic_code)??$comic_code,'id' => ($comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id)??'1' ]) }}"
+                                           class="next-chapter">
+                                            <div class="next-chapter-img">
+                                                <img
+                                                    src="{!! asset($comic?->nextChapter?$comic?->nextChapter?->link_small_icon:$comic?->link_small_icon) !!}"
+                                                    alt="">
+                                            </div>
+                                            <div class="next-chapter-info">
+                                                <p class="chapter-number content-overflow">
+                                                    {{ $comic?->nextChapter ? $comic?->nextChapter?->chapter_name : $comic?->chapter_name }}
+                                                </p>
+                                                <span class="type content-overflow">miễn phí</span>
+                                            </div>
+                                            <div class="small-arrow">
+                                                <img
+                                                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgb3BhY2l0eT0iMC4xIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHJ4PSIxMiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTExLjQ3NzYgNy40MDM5M0wxMS40NzUzIDcuNDA2MTdDMTEuMTMxNSA3LjExNjE5IDEwLjYxNyA3LjEzMzEyIDEwLjI5MzEgNy40NTY5N0M5Ljk2OTMgNy43ODA4MSA5Ljk1MjM3IDguMjk1MzUgMTAuMjQyNCA4LjYzOTEzTDEwLjI0MDEgOC42NDEzN0wxMy41OTg5IDEyLjAwMDFMMTAuMjQwMSAxNS4zNTg5TDEwLjI0MjQgMTUuMzYxMUM5Ljk1MjM3IDE1LjcwNDkgOS45NjkzIDE2LjIxOTQgMTAuMjkzMSAxNi41NDMzQzEwLjYxNyAxNi44NjcxIDExLjEzMTUgMTYuODg0MSAxMS40NzUzIDE2LjU5NDFMMTEuNDc3NSAxNi41OTYzTDExLjUzMDYgMTYuNTQzM0wxNS41MDgxIDEyLjU2NThDMTUuODIwNSAxMi4yNTM0IDE1LjgyMDUgMTEuNzQ2OSAxNS41MDgxIDExLjQzNDRMMTEuNDc3NiA3LjQwMzkzWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="
+                                                    class="w-24 h-24" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
+                        @endif
                         <div class="card card-pr-detail">
                             <div class="header">
                                 <div class="content-header">
@@ -257,11 +259,13 @@
         </div>
         <div class="container-fluid bottom-navigationBar">
             <div id="navigationBar-content" class="navigationBar-content">
-                <button class="navigationBar-content-left">
-                    <img
-                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik02LjEzODQ2IDEyLjYzMTJDNi4xNTk4MiAxMi42NTczIDYuMTgyNyAxMi42ODI3IDYuMjA3MTEgMTIuNzA3MUw2LjkxNDIxIDEzLjQxNDJMMTMuMjc4MiAxOS43NzgyQzEzLjY2ODcgMjAuMTY4NyAxNC4zMDE5IDIwLjE2ODcgMTQuNjkyNCAxOS43NzgyQzE1LjA4MjkgMTkuMzg3NyAxNS4wODI5IDE4Ljc1NDUgMTQuNjkyNCAxOC4zNjRMOC4zMjg0MyAxMkwxNC42ODU2IDUuNjQyODhMMTQuNjkyNCA1LjYzNjA3QzE1LjA4MjkgNS4yNDU1NSAxNS4wODI5IDQuNjEyMzggMTQuNjkyNCA0LjIyMTg2QzE0LjMwMTkgMy44MzEzMyAxMy42Njg3IDMuODMxMzMgMTMuMjc4MiA0LjIyMTg2TDEzLjI3ODIgNC4yMjE4M0w2LjkxNDIxIDEwLjU4NThMNi4yMDcxMSAxMS4yOTI5QzUuODQwOTkgMTEuNjU5IDUuODE4MTEgMTIuMjM4NCA2LjEzODQ2IDEyLjYzMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K"
-                        width="24" height="24" alt="prev">
-                </button>
+                @if(($comic?->prvChapter?->id))
+                    <button class="navigationBar-content-left">
+                        <img
+                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik02LjEzODQ2IDEyLjYzMTJDNi4xNTk4MiAxMi42NTczIDYuMTgyNyAxMi42ODI3IDYuMjA3MTEgMTIuNzA3MUw2LjkxNDIxIDEzLjQxNDJMMTMuMjc4MiAxOS43NzgyQzEzLjY2ODcgMjAuMTY4NyAxNC4zMDE5IDIwLjE2ODcgMTQuNjkyNCAxOS43NzgyQzE1LjA4MjkgMTkuMzg3NyAxNS4wODI5IDE4Ljc1NDUgMTQuNjkyNCAxOC4zNjRMOC4zMjg0MyAxMkwxNC42ODU2IDUuNjQyODhMMTQuNjkyNCA1LjYzNjA3QzE1LjA4MjkgNS4yNDU1NSAxNS4wODI5IDQuNjEyMzggMTQuNjkyNCA0LjIyMTg2QzE0LjMwMTkgMy44MzEzMyAxMy42Njg3IDMuODMxMzMgMTMuMjc4MiA0LjIyMTg2TDEzLjI3ODIgNC4yMjE4M0w2LjkxNDIxIDEwLjU4NThMNi4yMDcxMSAxMS4yOTI5QzUuODQwOTkgMTEuNjU5IDUuODE4MTEgMTIuMjM4NCA2LjEzODQ2IDEyLjYzMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K"
+                            width="24" height="24" alt="prev">
+                    </button>
+                @endif
                 <div class="navigationBar-content-comment">
                     <img  src="{!! asset("assets/images/logo.png") !!}" alt="">
                 </div>
@@ -277,11 +281,13 @@
 {{--                        width="24" height="24" alt="auto scroll">--}}
 {{--                </button>--}}
 
-                <button class="navigationBar-content-right">
-                    <img
-                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNy44NjE1IDEyLjYzMTJDMTcuODQwMiAxMi42NTczIDE3LjgxNzMgMTIuNjgyNyAxNy43OTI5IDEyLjcwNzFMMTcuMDg1OCAxMy40MTQyTDEwLjcyMTggMTkuNzc4MkMxMC4zMzEzIDIwLjE2ODcgOS42OTgxNCAyMC4xNjg3IDkuMzA3NjEgMTkuNzc4MkM4LjkxNzA5IDE5LjM4NzcgOC45MTcwOSAxOC43NTQ1IDkuMzA3NjEgMTguMzY0TDE1LjY3MTYgMTJMOS4zMTQ0NSA1LjY0Mjg4TDkuMzA3NTggNS42MzYwN0M4LjkxNzA2IDUuMjQ1NTUgOC45MTcwNiA0LjYxMjM4IDkuMzA3NTggNC4yMjE4NkM5LjY5ODEgMy44MzEzMyAxMC4zMzEzIDMuODMxMzMgMTAuNzIxOCA0LjIyMTg2TDEwLjcyMTggNC4yMjE4M0wxNy4wODU4IDEwLjU4NThMMTcuNzkyOSAxMS4yOTI5QzE4LjE1OSAxMS42NTkgMTguMTgxOSAxMi4yMzg0IDE3Ljg2MTUgMTIuNjMxMloiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo="
-                        width="24" height="24" alt="next">
-                </button>
+                @if(($comic?->nextChapter?->id))
+                    <button class="navigationBar-content-right">
+                        <img
+                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNy44NjE1IDEyLjYzMTJDMTcuODQwMiAxMi42NTczIDE3LjgxNzMgMTIuNjgyNyAxNy43OTI5IDEyLjcwNzFMMTcuMDg1OCAxMy40MTQyTDEwLjcyMTggMTkuNzc4MkMxMC4zMzEzIDIwLjE2ODcgOS42OTgxNCAyMC4xNjg3IDkuMzA3NjEgMTkuNzc4MkM4LjkxNzA5IDE5LjM4NzcgOC45MTcwOSAxOC43NTQ1IDkuMzA3NjEgMTguMzY0TDE1LjY3MTYgMTJMOS4zMTQ0NSA1LjY0Mjg4TDkuMzA3NTggNS42MzYwN0M4LjkxNzA2IDUuMjQ1NTUgOC45MTcwNiA0LjYxMjM4IDkuMzA3NTggNC4yMjE4NkM5LjY5ODEgMy44MzEzMyAxMC4zMzEzIDMuODMxMzMgMTAuNzIxOCA0LjIyMTg2TDEwLjcyMTggNC4yMjE4M0wxNy4wODU4IDEwLjU4NThMMTcuNzkyOSAxMS4yOTI5QzE4LjE1OSAxMS42NTkgMTguMTgxOSAxMi4yMzg0IDE3Ljg2MTUgMTIuNjMxMloiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo="
+                            width="24" height="24" alt="next">
+                    </button>
+                @endif
             </div>
         </div>
     </div>
@@ -298,7 +304,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             new IOlazy({
                 image: 'img',
-                threshold: 0.1,
+                threshold: 0.01,
             });
         });
     </script>
@@ -378,12 +384,12 @@
                 window.location.href = "{{ route('landingPage') }}";
             });
 
-            document.querySelector('.navigationBar-content-right').addEventListener('click', function () {
+            document.querySelector('.navigationBar-content-right')?document.querySelector('.navigationBar-content-right').addEventListener('click', function () {
                 window.location.href = "{{ route('view-comic', ['comic_code' => $comic?->comic?->comic_code,'id' => $comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id]) }}";
-            });
-            document.querySelector('.navigationBar-content-left').addEventListener('click', function () {
+            }):'';
+            document.querySelector('.navigationBar-content-left')?document.querySelector('.navigationBar-content-left').addEventListener('click', function () {
                 window.location.href = "{{ route('view-comic', ['comic_code' => $comic?->comic?->comic_code,'id' => $comic->prvChapter?$comic?->prvChapter?->id:$comic?->id]) }}";
-            });
+            }):'';
 
         });
     </script>

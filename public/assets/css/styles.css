@@ -207,6 +207,7 @@
 
 .container .banner {
   max-width: 144px;
+  margin-top: 10px;
 }
 
 .container .banner img {
@@ -214,7 +215,7 @@
   height: 100%;
   object-fit: cover;
   overflow: hidden;
-  margin-bottom: -24px;
+  margin-bottom: -3px;
 }
 
 .header-content {
@@ -1424,8 +1425,8 @@
 }
 
 .preloader .preloader-circle {
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
   position: relative;
   border-style: solid;
   border-width: 3px;

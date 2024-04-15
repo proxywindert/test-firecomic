@@ -102,10 +102,11 @@ class ChapterServices extends BaseServices
             // neu comic co hon 2 chapter : next = null , prv = chap ter vua ad ngay trc
 
             if ($chapters->count() >= 1) {
-                $attributes['prv_chapter_id'] = $chapters[$chapters->count() - 1]->id;
+                $oldChapter = $chapters[$chapters->count() - 1];
+                $attributes['prv_chapter_id'] = $oldChapter->id;
                 $entity = $this->model->create($attributes);
-                $chapters[$chapters->count() - 1]['next_chapter_id'] = $entity->id;
-                $chapters[$chapters->count() - 1]->save();
+                $oldChapter['next_chapter_id'] = $entity->id;
+                $oldChapter->save();
             }
 
             // add content img

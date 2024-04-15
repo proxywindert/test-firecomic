@@ -368,6 +368,8 @@
             let formData = new FormData(); // Tạo đối tượng FormData để chứa dữ liệu form
             let chapter_name = document.querySelector('#form-edit-chapter input[name="chapter_name"]');
             let chapter_number = document.querySelector('#form-edit-chapter input[name="chapter_number"]');
+            let prv_chapter_id = document.querySelector('#form-edit-chapter input[name="prv_chapter_id"]');
+            let next_chapter_id = document.querySelector('#form-edit-chapter input[name="next_chapter_id"]');
             let publish_at = document.querySelector('#form-edit-chapter input[name="publish_at"]');
             // let free_at = document.querySelector('#form-edit-chapter input[name="free_at"]');
             let comic_id = document.querySelector('#form-edit-chapter input[id="comic_id"]');
@@ -391,7 +393,8 @@
             }
 
             formData.append('chapter_name', chapter_name.value);
-            formData.append('chapter_number', chapter_number.value);
+            formData.append('prv_chapter_id', prv_chapter_id.value);
+            formData.append('next_chapter_id', next_chapter_id.value);
             // formData.append('status', status.value);
             formData.append('comic_id', comic_id.value);
             formData.append('id', chapter_id.value);
@@ -404,7 +407,7 @@
                 'X-CSRF-TOKEN': `{{ csrf_token() }}`,
                 'X-HTTP-Method-Override': 'PATCH'
             }
-            apiPost(context, `/admin/comics/${comic_code.value}/chapters/${chapter_id.value}?XDEBUG_SESSION_START=14087`,
+            apiPost(context, `/admin/comics/${comic_code.value}/chapters/${chapter_id.value}?XDEBUG_SESSION_START=16171`,
                 formData)
                 .then(response => {
                     $('#modal-edit-chapter').modal('hide')

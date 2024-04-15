@@ -69,7 +69,7 @@
                                 <div class="form-group">
                                     <label>{{trans('chapter.prv_chapter_id')}}</label>
                                     <input
-                                        disabled
+
                                         type="number" class="form-control" name="prv_chapter_id"
                                         placeholder="prv_chapter_id">
                                 </div>
@@ -78,7 +78,6 @@
                                 <div class="form-group">
                                     <label>{{trans('chapter.next_chapter_id')}}</label>
                                     <input
-                                        disabled
                                         type="number" class="form-control" name="next_chapter_id"
                                         placeholder="next_chapter_id">
                                 </div>
