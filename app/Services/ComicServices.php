@@ -47,6 +47,7 @@ class ComicServices extends BaseServices
             $data->each(function ($item) use ($now) {
                 if ($item ?->chapters ?->last() ?->publish_at){
                     $item['diff_time'] = $now->diffInMinutes($item ?->chapters ?->last() ?->publish_at);
+                    $item['diff_time_to_sort'] =  $now->diffInMinutes($item ?->chapters ?->last() ?->publish_at);
                     if ($item['diff_time'] <= 0) {
                         $item['diff_time'] = 'Mới cập nhật';
                     } else if ($item['diff_time'] <= 60) {
@@ -57,10 +58,16 @@ class ComicServices extends BaseServices
                         $item['diff_time'] = 'Cách đây ' . round(($item['diff_time'] / (60 * 24)), 0, PHP_ROUND_HALF_DOWN) . ' ngày';
                     }
                 }else{
+                    $item['diff_time_to_sort'] =  0;
                     $item['diff_time'] = 'Mới cập nhật';
                 }
 
             });
+
+            // sort
+            $data->setCollection(collect($data->items())->sortBy(function ($item){
+                return $item['diff_time_to_sort'];
+            }));
         }
 
         return $data;
