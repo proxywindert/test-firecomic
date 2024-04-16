@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Firecomic</title>
+    <title>
+        Đọc Truyện Tranh Online - Website chính thức - Khotruyenfull
+    </title>
     <meta name="twitter:title" content="Firecomic">
     <meta property="og:title" content="Firecomic">
     <meta name="theme-color" content="#121212">
@@ -28,8 +30,8 @@
     <link rel="shortcut icon" href="{!! asset("assets/images/logo.png") !!}"
           type="image/x-icon">
     <link rel="icon" href="{!! asset("assets/images/logo.png") !!}"
-          sizes="144x144">
-    <link rel="apple-touch-icon" href="{!! asset("assets/images/logo.png") !!}">
+          sizes="170x170">
+    <link rel="apple-touch-icon" href="{!! asset("assets/images/logo.png") !!}" sizes="170x170">
     <meta name="next-head-count" content="25">
 
     <link rel="stylesheet" href="{!! asset('assets/css/styles.css') !!}">

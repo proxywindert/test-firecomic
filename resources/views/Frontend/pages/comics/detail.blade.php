@@ -30,9 +30,8 @@
             <div>
                 <picture class="bg-content-home">
                     <img
-                        class="lazyload"
-                        src="{!! asset('assets/images/loadspinner.svg') !!}"
-                        data-src="{!! asset($comic->link_bg) !!}" alt="">
+                        class="bg-img-home"
+                        src="{!! asset($comic->link_bg) !!}" alt="">
                 </picture>
             </div>
 
@@ -132,9 +131,9 @@
                                 </span>
                         </div>
                     </a>
+
                     <div class="list-chapter">
                         @foreach($comic->chapters as $key => $chapter)
-                            {{--                            @if($key>0)--}}
                             <a href="{{ route('view-comic', ['comic_code' => $comic->comic_code,'id' => $chapter->id]) }}"
                                class="chapter">
                                 <div class="icon-img">
@@ -151,12 +150,11 @@
                                         {{ $chapter->publish_at }}
                                     </p>
                                 </div>
-{{--                                <div class="extend-info">--}}
-{{--                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>--}}
-{{--                                </div>--}}
+                                {{--                                <div class="extend-info">--}}
+                                {{--                                    <span class="label-free-span bg-color-yellow"> miễn phí</span>--}}
+                                {{--                                </div>--}}
 
                             </a>
-                            {{--                            @endif--}}
                         @endforeach
                     </div>
                 </div>
@@ -390,7 +388,7 @@
                                                  alt="" class="rotate-180">
                                         </button>
                                         <ul class="image-list">
-                                        @include('Frontend.components.relation-cards.cards')
+                                            @include('Frontend.components.relation-cards.cards')
                                         </ul>
 
                                         {{--                                        <ul class="image-list">--}}
@@ -681,7 +679,7 @@
     <script src="{!! asset('assets/js/header.js') !!}"></script>
     <script src="{!! asset('assets/js/slider.js') !!}"></script>
     <script src="{!! asset('assets/js/utils.js') !!}"></script>
-    <script >
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
             new IOlazy({
                 image: 'img',
@@ -690,7 +688,17 @@
         });
     </script>
     <script>
+        const bg_color = '{{$comic->bg_color}}'
         window.addEventListener('load', (event) => {
+            let wrapper_content = document.querySelector('.wrapper-content');
+            let bg_content_home = document.querySelector('.bg-content-home');
+            let bg_content = document.querySelector('.bg-content');
+
+            bg_content_home.style.height = (wrapper_content.offsetTop + wrapper_content.offsetHeight - 100)+"px"
+            bg_content.style.height = "100%"
+
+            document.querySelector('body').style.setProperty('background-color', `${bg_color}`)
+
             let tabcontent = document.querySelectorAll(".content-anchor");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
@@ -718,6 +726,8 @@
         });
 
         function changeTab(evt, tab) {
+
+
             let tabcontent = document.querySelectorAll(".content-anchor");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
@@ -728,6 +738,14 @@
             }
             document.getElementById(tab).style.display = "block";
             evt.currentTarget.parentElement.className += " active";
+
+            let wrapper_content = document.querySelector('.wrapper-content');
+            let bg_content_home = document.querySelector('.bg-content-home');
+            let bg_content = document.querySelector('.bg-content');
+
+            bg_content_home.style.height = (wrapper_content.offsetTop + wrapper_content.offsetHeight -100)+"px"
+            bg_content.style.height = "100%"
+
         }
     </script>
 @endsection

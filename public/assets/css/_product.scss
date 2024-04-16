@@ -7,7 +7,7 @@
 }
 
 .bg-content-home {
-    height: auto;
+    //max-height: 1000px;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -17,7 +17,10 @@
 }
 
 .bg-content-home img {
+    //height: 100%;
     width: 100%;
+    display: block;
+    object-fit: cover;
 }
 
 .wrapper-banner {
@@ -130,6 +133,7 @@
 }
 
 .wrapper-content {
+    //overflow: hidden;
     position: relative;
 	//height:100%;
 }
@@ -165,7 +169,7 @@
 }
 
 .list-chapter {
-    max-height: 70vh;
+    height: 100%;
     overflow-y: scroll;
     scrollbar-width: none;
     width: 100%;

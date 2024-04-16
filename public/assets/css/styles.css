@@ -526,7 +526,6 @@
 }
 
 .bg-content-home {
-  height: auto;
   position: fixed;
   top: 0px;
   left: 0px;
@@ -537,6 +536,8 @@
 
 .bg-content-home img {
   width: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .wrapper-banner {
@@ -677,7 +678,7 @@
 }
 
 .list-chapter {
-  max-height: 70vh;
+  height: 100%;
   overflow-y: scroll;
   scrollbar-width: none;
   width: 100%;
@@ -885,6 +886,10 @@
 }
 
 /* product-info end--------------------------- */
+#info-tab {
+  display: none;
+}
+
 /* product detail ------------------------- */
 .bg-pr-detail {
   --tw-bg-opacity: 1;
@@ -1318,7 +1323,6 @@
 }
 
 .bg-content {
-  height: 100%;
   background: rgb(48, 42, 41);
   width: 100vw;
   margin-left: calc((100vw - 630px) / -2);
@@ -1859,17 +1863,6 @@
     width: 47.5%;
   }
 }
-@media only screen and (min-height: 700px) {
-  .wrapper-content {
-    height: 100%;
-  }
-  .wrapper {
-    height: 100%;
-  }
-  .main {
-    height: 100%;
-  }
-}
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, input, button {
   border: 0;
   font: inherit;
@@ -1924,10 +1917,6 @@ body {
   -khtml-user-select: none;
   user-select: none;
   background-color: rgba(var(--background), var(--tw-bg-opacity));
-}
-
-html, body {
-  height: var(--inner-height, 100%);
 }
 
 a {

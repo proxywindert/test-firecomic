@@ -5,7 +5,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	 margin: 0;
 	 padding: 0;
 	 vertical-align: baseline;
-	 
+
 }
  article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	 display: block;
@@ -35,6 +35,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	 box-sizing: border-box;
 }
  body {
+     //height: 100%;
 	 overscroll-behavior-y: contain;
 	 -webkit-tap-highlight-color: transparent;
 	 text-indent: 0;
@@ -45,9 +46,6 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	 -khtml-user-select: none;
 	 user-select: none;
 	 background-color: rgba(var(--background),var(--tw-bg-opacity));
-}
- html, body {
-	 height: var(--inner-height, 100%);
 }
  a {
 	 color: inherit;
@@ -96,4 +94,3 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	 -webkit-appearance: none;
 	 appearance: none;
 }
- 
