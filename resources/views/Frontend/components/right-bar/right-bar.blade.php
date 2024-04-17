@@ -8,22 +8,22 @@
             <ul class="sub-contact">
                 <li>
                     <a target="_blank" href="https://m.me/61555659102327">
-                        <img src="{!! asset("assets/images/messenger.webp") !!}" alt="">
+                        <img src="{!! asset("assets/images/messenger.webp") !!}" alt="messenger">
                     </a>
                 </li>
                 <li>
-                    <a target="_blank" href="fb://page/?id=61555659102327">
-                        <img src="{!! asset("assets/images/fb-icon.png") !!}" alt="">
+                    <a target="_blank" href="https://www.facebook.com/profile.php?id=61555659102327">
+                        <img src="{!! asset("assets/images/fb-icon.png") !!}" alt="facebook">
                     </a>
                 </li>
                 <li>
                     <a target="_blank" href="mailto:firecomic247@gmail.com">
-                        <img src="{!! asset("assets/images/email.webp") !!}" alt="">
+                        <img src="{!! asset("assets/images/email.webp") !!}" alt="mailto">
                     </a>
                 </li>
                 <li>
-                    <a target="_blank" href="tiktok://user?username=firecomic247">
-                        <img src="{!! asset("assets/images/tik-tok.png") !!}" alt="">
+                    <a target="_blank" href="https://www.tiktok.com/@firecomic247">
+                        <img src="{!! asset("assets/images/tik-tok.png") !!}" alt="tiktok">
                     </a>
                 </li>
             </ul>

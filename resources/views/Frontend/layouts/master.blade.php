@@ -28,10 +28,10 @@
     <link rel="canonical" href="https://firecomic.onrender.com">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="{!! asset("assets/images/logo.png") !!}"
-          type="image/x-icon">
+          sizes="270x270"  type="image/x-icon">
     <link rel="icon" href="{!! asset("assets/images/logo.png") !!}"
-          sizes="170x170">
-    <link rel="apple-touch-icon" href="{!! asset("assets/images/logo.png") !!}" sizes="170x170">
+          sizes="270x270">
+    <link rel="apple-touch-icon" href="{!! asset("assets/images/logo.png") !!}" sizes="270x270">
     <meta name="next-head-count" content="25">
 
     <link rel="stylesheet" href="{!! asset('assets/css/styles.css') !!}">
