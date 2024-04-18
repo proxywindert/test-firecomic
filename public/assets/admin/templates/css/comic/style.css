@@ -1,4 +1,6 @@
-
+.label-hashtag{
+    cursor: pointer;
+}
 
 #link_bg_preview #closebtn {
     width: 20px;

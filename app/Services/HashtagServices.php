@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class HashtagServices extends BaseServices
 {
-    private $contentImageServices ;
-    public function __construct(HashtagModel $model)
+    private $taggedServices ;
+    public function __construct(HashtagModel $model,TaggedServices $taggedServices)
     {
+        $this->taggedServices = $taggedServices;
         parent::__construct($model);
     }
 
@@ -40,6 +41,15 @@ class HashtagServices extends BaseServices
         } else {
             $entity=$this->model->create($attributes);
             return $entity;
+        }
+    }
+
+    public function findByComicIdandIsMain($comic_code,$is_main_tag=true){
+        $tagged = $this->taggedServices->findByComicIdandHashtagandIsMain($comic_code);
+        if($tagged){
+            return $this->show($tagged->hashtag_id);
+        }else{
+            return null;
         }
     }
 

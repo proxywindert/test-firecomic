@@ -21,23 +21,32 @@
     <meta property="og:url" content="https://firecomic.onrender.com">
     <meta name="twitter:description"
           content="Khám phá comic kích thích trí tưởng tượng của bạn tại Firecomic. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
-    <meta name="twitter:image" content="{!! asset("assets/images/logo.png") !!}">
+    <meta name="twitter:image" content="{!! asset("assets/images/icon-tab/120.png") !!}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@kakaowebtoon_kr">
     <meta name="twitter:url" content="https://firecomic.onrender.com">
     <link rel="canonical" href="https://firecomic.onrender.com">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" href="{!! asset("assets/images/logo.png") !!}"
-          sizes="270x270"  type="image/x-icon">
-    <link rel="icon" href="{!! asset("assets/images/logo.png") !!}"
-          sizes="270x270">
-    <link rel="apple-touch-icon" href="{!! asset("assets/images/logo.png") !!}" sizes="270x270">
+    <link rel="shortcut icon" href="{!! asset("assets/images/icon-tab/180.png") !!}"
+          sizes="180x180"  type="image/x-icon">
+    <link rel="icon" href="{!! asset("assets/images/icon-tab/180.png") !!}"
+          sizes="180x180">
+    <link rel="apple-touch-icon" href="{!! asset("assets/images/icon-tab/144.png") !!}" sizes="144x144">
     <meta name="next-head-count" content="25">
 
     <link rel="stylesheet" href="{!! asset('assets/css/styles.css') !!}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M9VPQM1CDE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-M9VPQM1CDE');
+</script>
 @include('Frontend.layouts.loader')
 <div class="wrapper">
     @yield('header')

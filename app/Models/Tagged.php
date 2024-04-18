@@ -11,6 +11,7 @@ class Tagged extends BaseModel
     protected $fillable =[
         'comic_id',
         'hashtag_id',
+        'is_main_tag',
         'created_by',
         'updated_by',
         'created_at',
@@ -22,7 +23,7 @@ class Tagged extends BaseModel
     }
 
     public function comic(){
-        return $this->belongsTo(Hashtag::class,'comic_id');
+        return $this->belongsTo(Comic::class,'comic_id');
     }
 
 }

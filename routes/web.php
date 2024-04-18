@@ -9,6 +9,8 @@ use App\Http\Controllers\WebControllers\V1\Backend\LandingController as AdmLandi
 use App\Http\Controllers\WebControllers\V1\Backend\ComicController as AdmComicController;
 use App\Http\Controllers\AjaxControllers\V1\Backend\ChapterController as AdmChapterController;
 use App\Http\Controllers\AjaxControllers\V1\Frontend\ChapterController as FrontendChapterController;
+
+use App\Http\Controllers\AjaxControllers\V1\Backend\HashtagController as AjaxAdmHashtagController;
 use App\Http\Controllers\WebControllers\V1\Backend\HashtagController as AdmHashtagController;
 
 /*
@@ -48,6 +50,19 @@ Route::group(array('prefix' => 'ajax','as'=>'ajax.'), function () {
 
 });
 
+Route::group(array('prefix' => 'ajax','as'=>'ajax.'), function () {
+    Route::group(array('prefix' => 'admin','as'=>'admin.'), function () {
+        Route::group(array('prefix' => 'comics','as' => 'comics.'), function () {
+            Route::group(array('prefix' => '{comic_code}/hashtags','as' => 'hashtags.'), function () {
+                Route::get('/{id}', [AjaxAdmHashtagController::class, 'update'])->name('patch');
+            });
+        });
+
+    });
+});
+
+
+
 Route::group(array('prefix' => 'admin'), function () {
     Route::get('/dashboard', [AdmLandingController::class, 'index'])->name('dashboard');
     Route::group(array('prefix' => 'comics','as' => 'comics.'), function () {
@@ -78,4 +93,6 @@ Route::group(array('prefix' => 'admin'), function () {
         Route::post('/', [AdmHashtagController::class, 'store'])->name('store');
         Route::delete('/{id}', [AdmHashtagController::class, 'destroy'])->name('delete');
     });
+
+
 });

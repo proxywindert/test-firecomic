@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li>
-                    <a target="_blank" href="https://www.tiktok.com/@firecomic247">
+                    <a target="_blank" href="https://www.tiktok.com/@khotruyenfull">
                         <img src="{!! asset("assets/images/tik-tok.png") !!}" alt="tiktok">
                     </a>
                 </li>

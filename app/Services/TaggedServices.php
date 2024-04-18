@@ -29,21 +29,34 @@ class TaggedServices extends BaseServices
 
     public function save(array $attributes)
     {
-        if (!empty($attributes['id'])) {
-            $entity = $this->model->find($attributes['id']);
+        if (!empty($attributes['comic_id'])&&!empty($attributes['hashtag_id'])) {
+            $entity = $this->model
+                ->where('comic_id',$attributes['comic_id'])
+                ->where('hashtag_id',$attributes['hashtag_id'])
+                ->first();
             if ($entity) {
+                $this->model->where('comic_id', $attributes['comic_id'])
+                    ->update(['is_main_tag' => 0]);
                 $entity->fill($attributes)->save();
                 return $entity;
             } else {
-                return null;
+                return $this->model->create($attributes);
             }
         } else {
-            return $this->model->create($attributes);
+            return null;
         }
     }
 
     public function deleteByComicIdandHashtagId($comic_id,$hashtags){
         return $this->model->where('comic_id',$comic_id)->whereIn('hashtag_id',$hashtags)->delete();
+    }
+
+    public function findByComicIdandHashtagandIsMain($comic_code,$is_main_tag=true){
+        $query = TaggedModel::query();
+        $query = $query->whereHas('comic',function ($query)use ($comic_code){
+            $query->where('comic_code',$comic_code);
+        })->where('is_main_tag',$is_main_tag);
+        return $query->first();
     }
 
     public function delete($id)

@@ -68,7 +68,7 @@
                                 alt="" width="16" height="14" class="opacity-40">
                         </div>
                         <span class="type-name">
-                            {{ $comic?->hashtags?->isEmpty()?'': $comic->hashtags->first()->name}}
+                            {{ $main_tag?$main_tag->name:''}}
                             </span>
                     </div>
                     <div class="view">

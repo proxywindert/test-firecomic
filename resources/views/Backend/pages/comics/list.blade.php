@@ -63,7 +63,10 @@
                                         </td>
                                         <td class="comic-name">
                                             @foreach($comic->hashtags as $hashtag)
-                                                <span class="label label-success">{{$hashtag->name}}</span>
+                                                <span
+                                                    data-comic-id="{{ $comic->id }}"
+                                                      data-hashtag-id="{{ $hashtag->id }}"
+                                                      class="label-hashtag label label-success">{{$hashtag->name}}</span>
                                             @endforeach
                                         </td>
                                         <td>
@@ -139,6 +142,29 @@
                 threshold: 0.4
             });
         });
+        let hashtags = document.querySelectorAll('span[class^="label-hashtag"]');
+        const context = {
+            'X-CSRF-TOKEN': `{{ csrf_token() }}`,
+            'X-HTTP-Method-Override': 'GET'
+        }
+        hashtags.forEach(item =>{
+            item.addEventListener('click',(event)=>{
+                document.getElementById('preloader').setAttribute("style", "display:block");
+
+                apiGet(context,`/ajax/admin/comics/${item.getAttribute('data-comic-id')}/hashtags/${item.getAttribute('data-hashtag-id')}?XDEBUG_SESSION_START=12915`)
+                .then(response =>{
+                    showToast(response.data.message, "success", 5000);
+                    item.classList.remove("label-success");
+                    item.classList.add("label-warning");
+                    document.getElementById('preloader').setAttribute("style", "display:none");
+                })
+                .catch(error=>{
+                    document.getElementById('preloader').setAttribute("style", "display:none");
+                    // Xử lý lỗi nếu có
+                    showToast(error.response.data.message, "danger", 5000);
+                })
+            })
+        })
     </script>
 @endsection
 
