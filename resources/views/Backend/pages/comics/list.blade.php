@@ -66,7 +66,7 @@
                                                 <span
                                                     data-comic-id="{{ $comic->id }}"
                                                       data-hashtag-id="{{ $hashtag->id }}"
-                                                      class="label-hashtag label label-success">{{$hashtag->name}}</span>
+                                                      class="label-hashtag label {{ $hashtag?->is_main_tag?'label-warning':'label-success' }}">{{$hashtag->name}}</span>
                                             @endforeach
                                         </td>
                                         <td>
@@ -154,8 +154,15 @@
                 apiGet(context,`/ajax/admin/comics/${item.getAttribute('data-comic-id')}/hashtags/${item.getAttribute('data-hashtag-id')}?XDEBUG_SESSION_START=12915`)
                 .then(response =>{
                     showToast(response.data.message, "success", 5000);
+                    let parentElement = item.parentNode;
+                    parentElement.querySelectorAll('span').forEach(item=>{
+                        item.classList.remove("label-warning");
+                        item.classList.remove("label-success");
+                        item.classList.add("label-success");
+                    })
                     item.classList.remove("label-success");
                     item.classList.add("label-warning");
+
                     document.getElementById('preloader').setAttribute("style", "display:none");
                 })
                 .catch(error=>{
