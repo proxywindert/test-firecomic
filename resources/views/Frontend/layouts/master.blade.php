@@ -6,26 +6,26 @@
     <title>
         Đọc Truyện Tranh Online - Website chính thức - Khotruyenfull
     </title>
-    <meta name="twitter:title" content="Firecomic">
-    <meta property="og:title" content="Firecomic">
+    <meta name="twitter:title" content="Khotruyenfull">
+    <meta property="og:title" content="Khotruyenfull">
     <meta name="theme-color" content="#121212">
     <meta name="description"
-          content="Khám phá comic kích thích trí tưởng tượng của bạn tại Firecomic. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
+          content="Khám phá comic kích thích trí tưởng tượng của bạn tại Khotruyenfull. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
     <meta name="keywords" content="It's free if you wait, free comics">
-    <meta property="og:site_name" content="Firecomic">
+    <meta property="og:site_name" content="Khotruyenfull">
     <meta property="og:type" content="website">
     <meta property="og:image" content="{!! asset("assets/images/logo.png") !!}">
     <meta property="og:locale" content="vi">
     <meta property="og:description"
-          content="Khám phá comic kích thích trí tưởng tượng của bạn tại Firecomic. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
-    <meta property="og:url" content="https://firecomic.onrender.com">
+          content="Khám phá comic kích thích trí tưởng tượng của bạn tại Khotruyenfull. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
+    <meta property="og:url" content="https://Khotruyenfull.id.vn">
     <meta name="twitter:description"
-          content="Khám phá comic kích thích trí tưởng tượng của bạn tại Firecomic. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
+          content="Khám phá comic kích thích trí tưởng tượng của bạn tại Khotruyenfull. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">
     <meta name="twitter:image" content="{!! asset("assets/images/icon-tab/120.png") !!}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@kakaowebtoon_kr">
-    <meta name="twitter:url" content="https://firecomic.onrender.com">
-    <link rel="canonical" href="https://firecomic.onrender.com">
+    <meta name="twitter:url" content="https://Khotruyenfull.id.vn">
+    <link rel="canonical" href="https://Khotruyenfull.id.vn">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="{!! asset("assets/images/icon-tab/180.png") !!}"
           sizes="180x180"  type="image/x-icon">

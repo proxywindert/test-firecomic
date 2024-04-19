@@ -36,6 +36,7 @@
                 <div class="list-img">
                     <div id="img-item" class="img-item">
                         @foreach($contentImages as $item)
+
                             <img src="{!! asset($item->link_img) !!}" alt="firemcomic" >
                         @endforeach
                         @php

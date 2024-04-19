@@ -56,8 +56,17 @@ class ComicServices extends BaseServices
 
             // sort
             $data = $this->sortDataBy($data);
+
+            $data = $this->makeSkeletonColor($data);
         }
 
+        return $data;
+    }
+
+    public function  makeSkeletonColor($data){
+        $data->each(function ($item)  {
+            $item['skeleton_bg_color'] =str_replace(")", ", 0.3)", $item->bg_color);
+        });
         return $data;
     }
 
@@ -298,6 +307,8 @@ class ComicServices extends BaseServices
                         $item[$value] = Carbon::parse($item[$value])->tz(config('app.timezone'))->format('d/m/Y');
                 }
             });
+
+             $data['skeleton_bg_color'] =str_replace(")", ", 0.3)", $data->bg_color);
         }
         return $data;
     }
@@ -322,7 +333,13 @@ class ComicServices extends BaseServices
             $query->select('comic_id')->from('taggeds')->whereIn('hashtag_id', $hashtags);
         });
 
-        return $query->limit($limit)->get();
+        $data = $query->limit($limit)->get();
+
+        if (!$data->isEmpty()) {
+            $data = $this->makeSkeletonColor($data);
+        }
+
+        return $data;
     }
 
     public function delete($comicCode)

@@ -231,3 +231,30 @@
     left: 3px;
 }
 
+.skeleton-loader {
+    width: 100%;
+    height: 100%;
+}
+
+
+.skeleton-bg-content{
+    position: absolute;top:0;width: 100%;height: 100%;
+}
+
+.skeleton-tranfer-bg{
+    position: absolute;
+    right: 0;
+    top:44%;
+    bottom: 0;
+    width: 100%;
+    //height: 150px;
+}
+
+.loading-img-chapter{
+    background-image: linear-gradient(45deg, #ececec 26%, transparent 0, transparent 75%, #ececec 0, #ececec), linear-gradient(45deg, #ececec 25%, transparent 0, transparent 75%, #ececec 0, #ececec);
+    background-position: 0 0, 10px 10px;
+    background-size: 20px 20px;
+    background-repeat: round;
+    height: 80px;
+    width: 80px;
+}
