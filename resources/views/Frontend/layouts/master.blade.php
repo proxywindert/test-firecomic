@@ -39,13 +39,13 @@
 </head>
 <body>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M9VPQM1CDE"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P7J542KDYC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-M9VPQM1CDE');
+  gtag('config', 'G-P7J542KDYC');
 </script>
 @include('Frontend.layouts.loader')
 <div class="wrapper">
