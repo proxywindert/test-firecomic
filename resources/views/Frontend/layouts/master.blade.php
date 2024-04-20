@@ -64,15 +64,15 @@
 <script src="{!! asset('assets/js/iolazy.min.js') !!}"></script>
 @yield('addtional_scripts')
 <script>
-    // document.onkeydown = function (event) {
-    //     if (event.keyCode == 123) {
-    //         return false;
-    //     }
-    // }
-    //
-    // document.addEventListener('contextmenu', function (event) {
-    //     event.preventDefault();
-    // });
+    document.onkeydown = function (event) {
+        if (event.keyCode == 123) {
+            return false;
+        }
+    }
+
+    document.addEventListener('contextmenu', function (event) {
+        event.preventDefault();
+    });
 
     window.addEventListener('load', (event) => {
         console.log('Trang web đã tải hoàn tất');

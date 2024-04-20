@@ -58,7 +58,7 @@
                                     lazyImage.removeChild(tranfer_anchor)
 
                                     lazyImage.classList.remove("skeleton-loader");
-                                  \
+
                                 }
                             });
                         })
