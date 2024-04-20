@@ -25,56 +25,99 @@
 
 @endsection
 @section("main-content")
-   <div class="main">
-       <div class="container">
-           <div class="cards">
-               @foreach($comics as $comic)
-                   <div class="card">
-                       <a href="{{ route('comic-info', ['comic_code' => $comic->comic_code]) }}">
-                           <picture>
-                               <img
-                                   src="{!! $comic->link_bg?getLinkSpinImg():'' !!}"
-                                   class="lazyload bg-img" data-src="{!! asset($comic->link_bg) !!}"
-                                    alt="">
-                           </picture>
-                           <picture>
-                               <img class="lazyload char-img"
-                                    src="{!! $comic->link_banner?getLinkSpinImg():'' !!}"
-                                    data-src="{!! asset($comic->link_banner) !!}" alt="">
-                           </picture>
-                           <div class="label-time-content">
-                               <div class="time">
-                                   <img
-                                       class="lazyload"
-                                       src="{!! getLinkSpinImg() !!}"
-                                       data-src="{!! asset("assets/images/time-border.svg") !!}" alt="">
-                                   <span class=" content-overflow">{{ $comic?->diff_time }}</span>
-                               </div>
-                               <div class="comic-name">
-                                   <img
-                                       class="lazyload"
-                                       src="{!! $comic->link_comic_name?getLinkSpinImg():'' !!}"
-                                       data-src="{!! asset($comic->link_comic_name) !!}" alt="">
-                               </div>
-                           </div>
-                           <div class="chapter">
-                               <span class=" content-overflow">{{ $comic?->chapters?->last()?->chapter_name??'' }}</span>
-                           </div>
-                       </a>
-                   </div>
-               @endforeach
+    <div class="main">
+        <div class="container">
+            <div class="cards">
+                @foreach($comics as $comic)
+                    <div data-comic-id="{{ $comic->comic_code }}" class="skeleton-loader card">
+                        <div class="skeleton-bg-content"
+                             style="background:{{ $comic->skeleton_bg_color }}"></div>
+                        <div class="skeleton-tranfer-bg" style="{{ $comic->tranfer_color }}">
+                        </div>
+                        <a href="{{ route('comic-info', ['comic_code' => $comic->comic_code]) }}">
+                            <picture>
+                                <img class="lazyload bg-img"
+                                     data-src="{!! asset($comic->link_bg) !!}" alt="">
+                                {{--                                <img class="lazyload" data-src="{!! asset($comic->link_bg) !!}"--}}
+                                {{--                                     alt="">--}}
+                            </picture>
+                            <picture>
+                                <img class="lazyload char-img"
+                                     data-src="{!! asset($comic->link_banner) !!}" alt="">
+                            </picture>
+                            <div class="label-time-content">
+                                <div class="time">
+                                    <img class="lazyload"
+
+                                         data-src="{!! asset("assets/images/time-border.svg") !!}" alt="">
+                                    <span style="display: none" class="content-overflow">{{ $comic?->diff_time }}</span>
+                                </div>
+                                <div class="comic-name">
+                                    <img class="lazyload"
+                                         data-src="{!! asset($comic->link_comic_name) !!}" alt="">
+                                </div>
+                            </div>
+                            <div class="chapter">
+                                <span style="display: none"
+                                      class=" content-overflow">{{ $comic?->chapters?->last()?->chapter_name??'' }}</span>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+
             </div>
 
         </div>
     </div>
 @endsection
 @section("addtional_scripts")
-    <script >
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
-            new IOlazy({
-                image: 'img',
-                threshold: 0.1,
+            let lazyImageObserver;
+            lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        try {
+
+                            let lazyImage = entry.target;
+                            let span = lazyImage.querySelectorAll('span')
+                            let lazyImages = lazyImage.querySelectorAll('img[class^=lazyload]')
+                            let loadedImages = 0;
+                            lazyImages.forEach(item => {
+                                item.src = item.dataset.src;
+                                item.removeAttribute('data-src');
+                                item.addEventListener('load', (inner) => {
+                                    loadedImages++;
+                                    if (loadedImages === lazyImages.length) {
+                                        let bg_content = lazyImage.querySelector('div[class="skeleton-bg-content"]')
+                                        let tranfer_anchor = lazyImage.querySelector('div[class="skeleton-tranfer-bg"]')
+                                        lazyImage.removeChild(bg_content)
+                                        lazyImage.removeChild(tranfer_anchor)
+
+                                        lazyImage.classList.remove("skeleton-loader");
+                                        span.forEach(item => {
+                                            item.style.setProperty("display", "block");
+                                        })
+                                    }
+                                });
+                            })
+                            lazyImageObserver.unobserve(lazyImage);
+                        } catch (e) {
+
+                        }
+
+                    }
+                });
+            }, {
+                root: null, // Quan sát theo viewport
+                rootMargin: '0px', // Không có margin xung quanh phần tử gốc
+                threshold: 0.1 // Kích hoạt sự kiện khi phần tử hiển thị ít nhất 10% trong vùng nhìn thấy
             });
+
+            let imgs = document.querySelectorAll('div[class^=skeleton-loader]')
+            imgs.forEach((item) => {
+                lazyImageObserver.observe(item);
+            })
         });
     </script>
     <script>
