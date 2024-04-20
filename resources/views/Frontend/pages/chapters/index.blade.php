@@ -357,9 +357,9 @@
                                 if(data.length>=1){
                                     data.forEach(item => {
                                         // let newElement = $(`<img class="lazyload" src="${spinImgurl}" data-src="${item.link_img}" alt="firemcomic">`)
-                                        let newElement = $(`<img class="lazyload" data-src="${item.link_img}" alt="firemcomic">`)
+                                        let newElement = $(`<img class="lazyload" src="${item.link_img}" alt="firemcomic">`)
                                         link_bg_preview.append(newElement);
-                                        lazyImageObserver.observe(newElement.get(0));
+                                        //lazyImageObserver.observe(newElement.get(0));
                                     })
                                 }
 
