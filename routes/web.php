@@ -30,6 +30,10 @@ Route::get('/users', function () {
     return view('users', compact('users'));
 });
 
+Route::post('/github-webhook', function(){
+	return "ok";
+});
+
 Route::get('/', [LandingController::class, 'index'])->name('landingPage');
 
 Route::group(array('prefix' => 'comics'), function () {
