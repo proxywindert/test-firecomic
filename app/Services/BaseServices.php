@@ -14,6 +14,15 @@ class BaseServices
         $this->model = $model;
     }
 
+    protected function responseJson($message, $code = 200, $data=null)
+    {
+        return response()->json([
+            'code' => $code,
+            'message' => $message,
+            'data' => $data
+        ], $code);
+    }
+
     function generateRandomString($length = 10)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

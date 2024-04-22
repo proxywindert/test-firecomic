@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Chapter as ChapterModel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ChapterServices extends BaseServices
@@ -82,50 +83,65 @@ class ChapterServices extends BaseServices
 
     public function save($request, array $attributes)
     {
-        if (!empty($attributes['id'])) {
-            $entity = $this->model->where('id', $attributes['id'])->first();
-            if ($entity) {
-                $entity->fill($attributes)->save();
-                // update content image
-                $this->updateContentImages($request, $attributes, $entity);
-                return $entity;
+        DB::beginTransaction();
+        try {
+
+            if (!empty($attributes['id'])) {
+                $entity = $this->model->where('id', $attributes['id'])->first();
+                if ($entity) {
+                    $entity->fill($attributes)->save();
+                    // update content image
+                    DB::commit();
+                    $this->updateContentImages($request, $attributes, $entity);
+                }else{
+                    DB::rollback();
+                    return $this->responseJson( trans('chapter.msg_content.msg_edit_fail'),500,"not found comic");
+                }
             } else {
-                return null;
-            }
-        } else {
 
-            // get het chapter cua comic nay
-            $chapters = $this->findByComicId($attributes['comic_id']);
-            // neu comic chua co chapter nao : next,prv = null
-            if ($chapters->isEmpty()) {
-                $entity = $this->model->create($attributes);
+                // get het chapter cua comic nay
+                $chapters = $this->findByComicId($attributes['comic_id']);
+                // neu comic chua co chapter nao : next,prv = null
+                if ($chapters->isEmpty()) {
+                    $entity = $this->model->create($attributes);
+                }
+
+                // neu comic co hon 2 chapter : next = null , prv = chap ter vua ad ngay trc
+
+                if ($chapters->count() >= 1) {
+                    $oldChapter = $chapters[$chapters->count() - 1];
+                    $attributes['prv_chapter_id'] = $oldChapter->id;
+                    $entity = $this->model->create($attributes);
+                    $oldChapter['next_chapter_id'] = $entity->id;
+                    $oldChapter->save();
+                }
+
+                DB::commit();
+
+                // add content img
+                $contentImages['chapter_id'] = $entity->id;
+                $files = $this->contentImageServices->uploadGGDrive($request, $contentImages);
+                foreach ($files['link_img']['url'] as $link) {
+                    $contentImages['link_img'] = $link;
+                    $this->contentImageServices->save($contentImages);
+                }
             }
 
-            // neu comic co hon 2 chapter : next = null , prv = chap ter vua ad ngay trc
 
-            if ($chapters->count() >= 1) {
-                $oldChapter = $chapters[$chapters->count() - 1];
-                $attributes['prv_chapter_id'] = $oldChapter->id;
-                $entity = $this->model->create($attributes);
-                $oldChapter['next_chapter_id'] = $entity->id;
-                $oldChapter->save();
-            }
-
-            // add content img
-            $contentImages['chapter_id'] = $entity->id;
-            $files = $this->contentImageServices->uploadGGDrive($request, $contentImages);
-            foreach ($files['link_img']['url'] as $link) {
-                $contentImages['link_img'] = $link;
-                $this->contentImageServices->save($contentImages);
-            }
-            return $entity;
+            return $this->responseJson( trans('chapter.msg_content.msg_edit_success'),200,['redirect'=>route('comics.edit',['code'=>$entity->comic->comic_code])]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->responseJson( trans('chapter.msg_content.msg_edit_fail'),500,$e->getMessage());
         }
+
     }
 
     public function findByComicId($id)
     {
         $query = $this->model;
-        $query = $query->where('comic_id', $id);
+        $query = $query
+            ->lockForUpdate()
+            ->where('comic_id', $id);
         return $query->get();
     }
 

@@ -468,7 +468,7 @@
                 'X-CSRF-TOKEN': `{{ csrf_token() }}`,
                 'X-HTTP-Method-Override': 'POST'
             }
-            apiPost(context, `/admin/comics/${comic_code.value}/chapters/?XDEBUG_SESSION_START=13864`,
+            apiPost(context, `/admin/comics/${comic_code.value}/chapters/?XDEBUG_SESSION_START=14061`,
                 formData)
                 .then(response => {
                     $('#modal-add-chapter').modal('hide')

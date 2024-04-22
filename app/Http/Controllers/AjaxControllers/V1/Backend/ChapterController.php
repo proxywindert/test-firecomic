@@ -59,17 +59,13 @@ class ChapterController extends BaseController
             'chapter_name',
         ]);
 
-        DB::beginTransaction();
-        try {
+        try{
             $this->chapterServices->uploadGGDrive($request,$comic);
-            $result = $this->chapterServices->save($request,$comic);
-            DB::commit();
-
-            return $this->responseJson( trans('chapter.msg_content.msg_add_success'),200,['redirect'=>route('comics.edit',['code'=>$result->comic->comic_code])]);
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->responseErrorJson( trans('chapter.msg_content.msg_add_fail'),$e->getMessage(),500);
+        }catch(\Exception $e){
+            return $this->responseJson( trans('chapter.msg_content.msg_edit_fail'),500,$e->getMessage());
         }
+
+        return $this->chapterServices->save($request,$comic);
     }
 
 
@@ -109,17 +105,13 @@ class ChapterController extends BaseController
         ]);
         $comic['comic_code'] = $comic_code;
 
-        DB::beginTransaction();
-        try {
+        try{
             $this->chapterServices->uploadGGDrive($request,$comic);
-            $result = $this->chapterServices->save($request,$comic);
-            DB::commit();
-
-            return $this->responseJson( trans('chapter.msg_content.msg_edit_success'),200,['redirect'=>route('comics.edit',['code'=>$comic['comic_code']])]);
-        } catch (\Exception $e) {
-            DB::rollback();
+        }catch(\Exception $e){
             return $this->responseJson( trans('chapter.msg_content.msg_edit_fail'),500,$e->getMessage());
         }
+
+        return $this->chapterServices->save($request,$comic);
     }
 
     /**
