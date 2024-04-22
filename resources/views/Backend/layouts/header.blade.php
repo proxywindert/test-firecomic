@@ -83,12 +83,12 @@
               <li class="user-footer" >
                 <div class="pull-left">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">{{ __(trans('common.header.update_profile')) }}</button>
-                  </form>
                 </div>
 
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">{{ __(trans('common.header.logout')) }}</button>
-                  </form>
+                    <form action="{{route('logout')}}" id="logout-employee" onSubmit="return confirmAction('Are you sure logout?')">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">{{ __(trans('common.header.logout')) }}</button>
+                    </form>
 
                 </div>
               </li>

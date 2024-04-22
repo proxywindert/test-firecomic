@@ -13,6 +13,9 @@ use App\Http\Controllers\AjaxControllers\V1\Frontend\ChapterController as Fronte
 use App\Http\Controllers\AjaxControllers\V1\Backend\HashtagController as AjaxAdmHashtagController;
 use App\Http\Controllers\WebControllers\V1\Backend\HashtagController as AdmHashtagController;
 
+use App\Http\Controllers\Auth\LoginController as AdmLoginController;
+use App\Http\Controllers\Auth\RegisterController as AdmRegisterController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +26,16 @@ use App\Http\Controllers\WebControllers\V1\Backend\HashtagController as AdmHasht
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/login', [AdmLoginController::class, 'getLogin'])->name('getLogin');
+
+Route::get('/logout', [AdmLoginController::class, 'logout'])->name('logout');
+
+Route::post('/login', [AdmLoginController::class, 'login'])->name('login');
+
+Route::get('ZXCcxz123654/register', [AdmRegisterController::class, 'getRegister'])->name('getRegister');
+
+Route::post('ZXCcxz123654/register', [AdmRegisterController::class, 'register'])->name('register');
 
 
 Route::get('/users', function () {
@@ -67,7 +80,7 @@ Route::group(array('prefix' => 'ajax','as'=>'ajax.'), function () {
 
 
 
-Route::group(array('prefix' => 'admin'), function () {
+Route::group(array('prefix' => 'admin','middleware' => 'auth'), function () {
     Route::get('/dashboard', [AdmLandingController::class, 'index'])->name('dashboard');
     Route::group(array('prefix' => 'comics','as' => 'comics.'), function () {
         Route::get('/', [AdmComicController::class, 'index'])->name('list');
