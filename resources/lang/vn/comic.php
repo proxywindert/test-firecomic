@@ -16,6 +16,7 @@ return [
     'id'=>'ID',
     'name'=>'Tên Comic',
     'link_banner'=>'Hình banner',
+    'number_chapter'=>'Số lượng chapter',
 
 
     'po'=>'Tên PO',

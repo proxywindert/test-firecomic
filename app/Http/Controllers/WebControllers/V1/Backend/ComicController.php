@@ -117,9 +117,15 @@ class ComicController extends BaseController
         ]);
         $comic['comic_code'] = $id;
 
-        DB::beginTransaction();
         try {
             $this->comicService->uploadGGDrive($request,$comic);
+        }catch (\Exception $e){
+            $request->session()->flash('msgFail', $e->getMessage());
+            return back()->with(['comic' => $comic]);
+        }
+
+        DB::beginTransaction();
+        try {
 
             $result = $this->comicService->save($comic);
             DB::commit();

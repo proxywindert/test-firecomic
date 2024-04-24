@@ -153,7 +153,13 @@
                                         <p class="help-block">link_bg.</p>
                                     </div>
                                 </div>
-
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                        <label for="link_video_banner">link_video_banner</label>
+                                        <input type="file" name="link_video_banner" id="link_video_banner">
+                                        <p class="help-block">link_video_banner.</p>
+                                    </div>
+                                </div>
 
                             </div>
 

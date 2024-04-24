@@ -38,11 +38,19 @@
             <div class="wrapper-banner">
                 <div class="banner-char">
                     <div class="img-char" style="border-color:{{$comic->bg_color}}">
-                        <img
-{{--                            class="lazyload"--}}
-{{--                            src="{!! asset('assets/images/loadspinner.svg') !!}"--}}
-                            src="{!! asset($comic->link_banner) !!}" alt="">
-
+                        @if($comic->link_video_banner)
+                            <video onclick="this.play()" autoplay muted disableremoteplayback
+                                    style="background: none;" playsinline="" title=""
+                                  >
+                                <source type="video/webm"
+                                        src="https://zany-resisted-breeze.glitch.me/proxy/{{$comic->link_video_banner}}">
+                            </video>
+                        @else
+                            <img
+                                {{--                            class="lazyload"--}}
+                                {{--                            src="{!! asset('assets/images/loadspinner.svg') !!}"--}}
+                                src="{!! asset($comic->link_banner) !!}" alt="">
+                        @endif
                     </div>
                 </div>
             </div>
@@ -142,7 +150,7 @@
                                 <div class="icon-img">
                                     <img
                                         class="lazyload"
-{{--                                        src="{!! asset('assets/images/loadspinner.svg') !!}"--}}
+                                        {{--                                        src="{!! asset('assets/images/loadspinner.svg') !!}"--}}
                                         data-src="{!! asset($chapter->link_small_icon) !!}" alt="">
                                 </div>
                                 <div class="des">
@@ -742,7 +750,7 @@
             let bg_content_home = document.querySelector('.bg-content-home');
             let bg_content = document.querySelector('.bg-content');
 
-            bg_content_home.style.height = (wrapper_content.offsetTop + wrapper_content.offsetHeight - 100)+"px"
+            bg_content_home.style.height = (wrapper_content.offsetTop + wrapper_content.offsetHeight - 100) + "px"
             bg_content.style.height = "100%"
 
             document.querySelector('body').style.setProperty('background-color', `${bg_color}`)
@@ -791,7 +799,7 @@
             let bg_content_home = document.querySelector('.bg-content-home');
             let bg_content = document.querySelector('.bg-content');
 
-            bg_content_home.style.height = (wrapper_content.offsetTop + wrapper_content.offsetHeight -100)+"px"
+            bg_content_home.style.height = (wrapper_content.offsetTop + wrapper_content.offsetHeight - 100) + "px"
             bg_content.style.height = "100%"
 
         }

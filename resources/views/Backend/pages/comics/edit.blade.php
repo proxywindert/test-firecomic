@@ -173,14 +173,29 @@
                                 <div class="col col-md-6">
                                     <div class="form-group">
 
-                                            <img class="lazyload small-comic-img img-responsive"
-                                                 src="{!! asset('assets/images/loadspinner.svg') !!}"
-                                                 data-src="{!! asset(old('link_bg', isset($comic["link_bg"]) ? $comic["link_bg"] : null)) !!}"
-                                                 alt="Photo">
+                                        <img class="lazyload small-comic-img img-responsive"
+                                             src="{!! asset('assets/images/loadspinner.svg') !!}"
+                                             data-src="{!! asset(old('link_bg', isset($comic["link_bg"]) ? $comic["link_bg"] : null)) !!}"
+                                             alt="Photo">
 
                                         <label for="link_bg">link_bg</label>
                                         <input type="file" name="link_bg" id="link_bg">
                                         <p class="help-block">link_bg.</p>
+                                    </div>
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                        @if($comic?->link_video_banner)
+                                            <video onclick="this.play()" autoplay muted disableremoteplayback
+                                                   id="myVideo" style="background: none;" playsinline="" title="가드패스"
+                                                   class="lazyload small-comic-img img-responsive">
+                                                <source type="video/webm"
+                                                        src="https://zany-resisted-breeze.glitch.me/proxy/{{$comic->link_video_banner}}">
+                                            </video>
+                                        @endif
+                                        <label for="link_video_banner">link_video_banner</label>
+                                        <input type="file" name="link_video_banner" id="link_video_banner">
+                                        <p class="help-block">link_video_banner.</p>
                                     </div>
                                 </div>
                             </div>
@@ -244,8 +259,9 @@
 
     <script type="text/javascript">
 
-        function cleanModel(modal){
-            modal.find('input').each(function() {
+        //todo: bắt sự kiện submit form edit
+        function cleanModel(modal) {
+            modal.find('input').each(function () {
                 $(this).val('');
             });
         }
@@ -381,14 +397,14 @@
             let content_images_link_img = document.querySelector('#form-edit-chapter input[name="content_images-link_img[]"]');
             let content_images_id = document.querySelectorAll('#link_bg_preview .imgs img[alt="link_img"]');
             // let link_bg_preview = $(`#link_bg_preview .imgs img[alt="link_img"]`);
-            if(content_images_id){
-                content_images_id.forEach(function(input) {
-                    formData.append('content_images_id[]',input.getAttribute('data-link-img'));
+            if (content_images_id) {
+                content_images_id.forEach(function (input) {
+                    formData.append('content_images_id[]', input.getAttribute('data-link-img'));
                 });
             }
 
             formData.append('link_small_icon', link_small_icon.files[0]);
-             for (let i = 0; i < content_images_link_img.files.length; i++) {
+            for (let i = 0; i < content_images_link_img.files.length; i++) {
                 formData.append('link_img[]', content_images_link_img.files[i]);
             }
 

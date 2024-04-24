@@ -50,6 +50,7 @@
                                     <th>{{trans('comic.name')}}</th>
                                     <th>Hashtag</th>
                                     <th>{{trans('comic.link_banner')}}</th>
+                                    <th>{{trans('comic.number_chapter')}}</th>
                                     <th>{{trans('common.edit')}}</th>
                                 </tr>
                                 </thead>
@@ -74,6 +75,9 @@
                                                  src="{!! asset('assets/images/loadspinner.svg') !!}"
                                                  data-src="{{asset($comic->link_banner)}}"
                                                  alt="Photo">
+                                        </td>
+                                        <td class="comic-name">
+                                            <span>{{count($comic->chapters)}}</span>
                                         </td>
                                         <td class="project-actions text-right">
                                             {{--                                            <a class="btn btn-primary btn-sm" href="#">--}}

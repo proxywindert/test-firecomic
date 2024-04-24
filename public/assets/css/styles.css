@@ -581,6 +581,7 @@
   border-bottom: 1px solid rgba(171, 42, 53, 0.7);
 }
 
+.banner-char .img-char > video,
 .banner-char .img-char > img {
   max-height: calc(100% - 20px);
   width: 100%;

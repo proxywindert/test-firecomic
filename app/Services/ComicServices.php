@@ -206,6 +206,7 @@ class ComicServices extends BaseServices
     {
         $file = [];
         $file['link_banner']['file'] = $request->file('link_banner');
+        $file['link_video_banner']['file'] = $request->file('link_video_banner');
         $file['link_avatar']['file'] = $request->file('link_avatar');
         $file['link_comic_name']['file'] = $request->file('link_comic_name');
         $file['link_comic_small_name']['file'] = $request->file('link_comic_small_name');
@@ -243,6 +244,12 @@ class ComicServices extends BaseServices
             $file['link_banner']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
         }
 
+        $fileToUpload = $this->postGGDrive($driveService, $file['link_video_banner']['file'], $folderId);
+        if ($fileToUpload) {
+            $driveService->permissions->create($fileToUpload->id, $newPermission);
+            $file['link_video_banner']['url'] = 'https://drive.usercontent.google.com/download?id=' . $fileToUpload->id . '&export=download';
+        }
+
 
         $fileToUpload = $this->postGGDrive($driveService, $file['link_comic_small_name']['file'], $folderId);
         if ($fileToUpload) {
@@ -250,6 +257,10 @@ class ComicServices extends BaseServices
             $file['link_comic_small_name']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
         }
 
+
+         if (!empty($file['link_video_banner']['url'])) {
+             $comic['link_video_banner'] = $file['link_video_banner']['url'];
+         }
         if (!empty($file['link_banner']['url'])) {
             $comic['link_banner'] = $file['link_banner']['url'];
         }
