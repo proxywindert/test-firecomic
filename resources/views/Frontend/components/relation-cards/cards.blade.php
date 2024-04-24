@@ -6,6 +6,7 @@
         </div>
         <picture class="bg-content-comic">
             <img
+				referrerpolicy="no-referrer"
                 class="lazyload"
 {{--                src="{!! $relation->link_bg?getLinkSpinImg():'' !!}"--}}
                 data-src="{!! $relation->link_bg !!}"
@@ -13,6 +14,7 @@
         </picture>
         <picture class="comic-avatar">
             <img
+			referrerpolicy="no-referrer"
                 class="lazyload"
 {{--                src="{!! $relation->link_avatar?getLinkSpinImg():'' !!}"--}}
                 data-src="{!! $relation->link_avatar !!}"
@@ -23,6 +25,7 @@
         </div>
         <div class="comic-name">
             <img
+			referrerpolicy="no-referrer"
                 class="lazyload"
 {{--                src="{!! $relation->link_comic_small_name?getLinkSpinImg():'' !!}"--}}
                 data-src="{!! $relation->link_comic_small_name !!}"

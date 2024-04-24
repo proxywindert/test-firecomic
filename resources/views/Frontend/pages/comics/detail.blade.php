@@ -7,16 +7,17 @@
             <div class="col-right">
                 <a class="back-button" href="#">
                     <img
+						referrerpolicy="no-referrer"
                         src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAzMiAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00LjQxNzUzIDEwLjU4NThMNy45NDU2NiA3LjA1NzY4TDcuOTUzMDUgNy4wNTAyMkM4LjM0MzU3IDYuNjU5NjkgOC45NzY3NCA2LjY1OTY5IDkuMzY3MjYgNy4wNTAyMkM5Ljc1Nzc3IDcuNDQwNzMgOS43NTc3OSA4LjA3Mzg3IDkuMzY3MyA4LjQ2NDM5TDkuMzY3MzQgOC40NjQ0M0w2LjgzMTggMTFIMjguMDAwMkMyOC41NTI1IDExIDI5LjAwMDIgMTEuNDQ3NyAyOS4wMDAyIDEyQzI5LjAwMDIgMTIuNTUyMyAyOC41NTI1IDEzIDI4LjAwMDIgMTNINi44MzE2OUw5LjM2MTQ5IDE1LjUyOThMOS4zNjcyNiAxNS41MzU1QzkuNzU3NzkgMTUuOTI2IDkuNzU3NzkgMTYuNTU5MiA5LjM2NzI2IDE2Ljk0OTdDOC45NzY3NCAxNy4zNDAyIDguMzQzNTcgMTcuMzQwMiA3Ljk1MzA1IDE2Ljk0OTdMNy45NTMwNCAxNi45NDk3TDcuOTUzMDEgMTYuOTQ5N0w0LjAwMzI2IDEzSDQuMDAwMlYxMi45OTY5TDMuNzEwMzcgMTIuNzA3MUMzLjMxOTg1IDEyLjMxNjYgMy4zMTk4NSAxMS42ODM0IDMuNzEwMzcgMTEuMjkyOUw0LjAwMDIgMTEuMDAzVjExSDQuMDAzMjdMNC40MTc0OCAxMC41ODU4TDQuNDE3NTMgMTAuNTg1OFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo="
                         alt="back" width="32px" height="24px">
                 </a>
             </div>
             <div class="col-left">
                 <a href="" class="search-btn">
-                    <img src="{!! asset("assets/images/search.svg") !!}" alt="">
+                    <img referrerpolicy="no-referrer" src="{!! asset("assets/images/search.svg") !!}" alt="">
                 </a>
                 <div id="open-tab-nav-header" class="menu-btn">
-                    <img src="{!! asset("assets/images/menu.svg") !!}" alt="">
+                    <img referrerpolicy="no-referrer" src="{!! asset("assets/images/menu.svg") !!}" alt="">
                 </div>
             </div>
         </div>
@@ -30,6 +31,7 @@
             <div>
                 <picture class="bg-content-home">
                     <img
+						referrerpolicy="no-referrer"
                         class="bg-img-home"
                         src="{!! asset($comic->link_bg) !!}" alt="">
                 </picture>
@@ -49,6 +51,7 @@
                             <img
                                 {{--                            class="lazyload"--}}
                                 {{--                            src="{!! asset('assets/images/loadspinner.svg') !!}"--}}
+								referrerpolicy="no-referrer"
                                 src="{!! asset($comic->link_banner) !!}" alt="">
                         @endif
                     </div>
@@ -72,6 +75,7 @@
                     <div class="type">
                         <div class="icon">
                             <img
+								referrerpolicy="no-referrer"
                                 src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNiAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMyIgeT0iMy41IiB3aWR0aD0iMTEiIGhlaWdodD0iMSIgcng9IjAuNSIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iMyIgeT0iNi41IiB3aWR0aD0iOCIgaGVpZ2h0PSIxIiByeD0iMC41IiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSIzIiB5PSI5LjUiIHdpZHRoPSI1IiBoZWlnaHQ9IjEiIHJ4PSIwLjUiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo="
                                 alt="" width="16" height="14" class="opacity-40">
                         </div>
@@ -149,6 +153,7 @@
 
                                 <div class="icon-img">
                                     <img
+										referrerpolicy="no-referrer"
                                         class="lazyload"
                                         {{--                                        src="{!! asset('assets/images/loadspinner.svg') !!}"--}}
                                         data-src="{!! asset($chapter->link_small_icon) !!}" alt="">

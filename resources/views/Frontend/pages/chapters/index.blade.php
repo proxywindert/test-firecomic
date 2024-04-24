@@ -37,7 +37,7 @@
                     <div id="img-item" class="img-item">
                         @foreach($contentImages as $item)
 
-                            <img src="{!! asset($item->link_img) !!}" alt="firemcomic" >
+                            <img referrerpolicy="no-referrer" src="{!! asset($item->link_img) !!}" alt="firemcomic" >
                         @endforeach
                         @php
                             unset($item);
@@ -201,6 +201,7 @@
                                            class="next-chapter">
                                             <div class="next-chapter-img">
                                                 <img
+													referrerpolicy="no-referrer"
                                                     src="{!! asset($comic?->nextChapter?$comic?->nextChapter?->link_small_icon:$comic?->link_small_icon) !!}"
                                                     alt="">
                                             </div>
@@ -356,8 +357,8 @@
                                 }
                                 if(data.length>=1){
                                     data.forEach(item => {
-                                        // let newElement = $(`<img class="lazyload" src="${spinImgurl}" data-src="${item.link_img}" alt="firemcomic">`)
-                                        let newElement = $(`<img class="lazyload" src="${item.link_img}" alt="firemcomic">`)
+                                        // let newElement = $(`<img referrerpolicy="no-referrer" class="lazyload" src="${spinImgurl}" data-src="${item.link_img}" alt="firemcomic">`)
+                                        let newElement = $(`<img referrerpolicy="no-referrer" class="lazyload" src="${item.link_img}" alt="firemcomic">`)
                                         link_bg_preview.append(newElement);
                                         //lazyImageObserver.observe(newElement.get(0));
                                     })

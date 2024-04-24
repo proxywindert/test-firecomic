@@ -37,23 +37,26 @@
                         <a href="{{ route('comic-info', ['comic_code' => $comic->comic_code]) }}">
                             <picture>
                                 <img class="lazyload bg-img"
+									referrerpolicy="no-referrer"
                                      data-src="{!! asset($comic->link_bg) !!}" alt="">
                                 {{--                                <img class="lazyload" data-src="{!! asset($comic->link_bg) !!}"--}}
                                 {{--                                     alt="">--}}
                             </picture>
                             <picture>
                                 <img class="lazyload char-img"
+									referrerpolicy="no-referrer"
                                      data-src="{!! asset($comic->link_banner) !!}" alt="">
                             </picture>
                             <div class="label-time-content">
                                 <div class="time">
                                     <img class="lazyload"
-
+											referrerpolicy="no-referrer"
                                          data-src="{!! asset("assets/images/time-border.svg") !!}" alt="">
                                     <span style="display: none" class="content-overflow">{{ $comic?->diff_time }}</span>
                                 </div>
                                 <div class="comic-name">
                                     <img class="lazyload"
+										referrerpolicy="no-referrer"
                                          data-src="{!! asset($comic->link_comic_name) !!}" alt="">
                                 </div>
                             </div>
