@@ -17,6 +17,7 @@ class Comic extends BaseModel
         'bg_color',
         'link_banner',
         'link_video_banner',
+        'link_video_banner_2',
         'ggdrive_id',
         'link_bg',
         'link_avatar',

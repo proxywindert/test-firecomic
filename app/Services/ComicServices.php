@@ -202,11 +202,22 @@ class ComicServices extends BaseServices
 
     }
 
+    public function createIdGG($driveService,$folderId,$newPermission,$field_name,$googleUrl,&$comic,&$file){
+        $fileToUpload = $this->postGGDrive($driveService, $file[$field_name]['file'], $folderId);
+        if ($fileToUpload) {
+            $driveService->permissions->create($fileToUpload->id, $newPermission);
+            $file[$field_name]['url'] = $googleUrl[0] . $fileToUpload->id . $googleUrl[1];
+            $comic[$field_name] = $file[$field_name]['url'];
+        }
+        return $file;
+    }
+
     public function uploadGGDrive($request, &$comic)
     {
         $file = [];
         $file['link_banner']['file'] = $request->file('link_banner');
         $file['link_video_banner']['file'] = $request->file('link_video_banner');
+        $file['link_video_banner_2']['file'] = $request->file('link_video_banner_2');
         $file['link_avatar']['file'] = $request->file('link_avatar');
         $file['link_comic_name']['file'] = $request->file('link_comic_name');
         $file['link_comic_small_name']['file'] = $request->file('link_comic_small_name');
@@ -217,65 +228,75 @@ class ComicServices extends BaseServices
         $newPermission = app()->make('googlePermission');
         $folderId = app()->make('googleFolderId');
 
-        $fileToUpload = $this->postGGDrive($driveService, $file['link_avatar']['file'], $folderId);
-        if ($fileToUpload) {
-            $driveService->permissions->create($fileToUpload->id, $newPermission);
-            $file['link_avatar']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
-        }
+        $googleUrlImg[0]="https://lh3.googleusercontent.com/d/";
+        $googleUrlImg[1]="=w1000";
 
+        $googleUrlVideoWebm[0]="https://drive.usercontent.google.com/download?id=";
+        $googleUrlVideoWebm[1]="&export=download&type=video/webm";
 
-        $fileToUpload = $this->postGGDrive($driveService, $file['link_comic_name']['file'], $folderId);
-        if ($fileToUpload) {
-            $driveService->permissions->create($fileToUpload->id, $newPermission);
-            $file['link_comic_name']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
-        }
+        $googleUrlVideoMov[0]="https://drive.usercontent.google.com/download?id=";
+        $googleUrlVideoMov[1]="&export=download&type=video/quicktime";
 
+        $this->createIdGG($driveService,$folderId,$newPermission,"link_avatar",$googleUrlImg,$comic,$file);
+        $this->createIdGG($driveService,$folderId,$newPermission,"link_banner",$googleUrlImg,$comic,$file);
+        $this->createIdGG($driveService,$folderId,$newPermission,"link_video_banner",$googleUrlVideoWebm,$comic,$file);
+        $this->createIdGG($driveService,$folderId,$newPermission,"link_video_banner_2",$googleUrlVideoMov,$comic,$file);
+        $this->createIdGG($driveService,$folderId,$newPermission,"link_comic_name",$googleUrlImg,$comic,$file);
+        $this->createIdGG($driveService,$folderId,$newPermission,"link_comic_small_name",$googleUrlImg,$comic,$file);
+        $this->createIdGG($driveService,$folderId,$newPermission,"link_bg",$googleUrlImg,$comic,$file);
 
-        $fileToUpload = $this->postGGDrive($driveService, $file['link_bg']['file'], $folderId);
-        if ($fileToUpload) {
-            $driveService->permissions->create($fileToUpload->id, $newPermission);
-            $file['link_bg']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
-        }
-
-
-        $fileToUpload = $this->postGGDrive($driveService, $file['link_banner']['file'], $folderId);
-        if ($fileToUpload) {
-            $driveService->permissions->create($fileToUpload->id, $newPermission);
-            $file['link_banner']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
-        }
-
-        $fileToUpload = $this->postGGDrive($driveService, $file['link_video_banner']['file'], $folderId);
-        if ($fileToUpload) {
-            $driveService->permissions->create($fileToUpload->id, $newPermission);
-            $file['link_video_banner']['url'] = 'https://drive.usercontent.google.com/download?id=' . $fileToUpload->id . '&export=download';
-        }
-
-
-        $fileToUpload = $this->postGGDrive($driveService, $file['link_comic_small_name']['file'], $folderId);
-        if ($fileToUpload) {
-            $driveService->permissions->create($fileToUpload->id, $newPermission);
-            $file['link_comic_small_name']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
-        }
-
-
-         if (!empty($file['link_video_banner']['url'])) {
-             $comic['link_video_banner'] = $file['link_video_banner']['url'];
-         }
-        if (!empty($file['link_banner']['url'])) {
-            $comic['link_banner'] = $file['link_banner']['url'];
-        }
-        if (!empty($file['link_bg']['url'])) {
-            $comic['link_bg'] = $file['link_bg']['url'];
-        }
-        if (!empty($file['link_comic_name']['url'])) {
-            $comic['link_comic_name'] = $file['link_comic_name']['url'];
-        }
-        if (!empty($file['link_avatar']['url'])) {
-            $comic['link_avatar'] = $file['link_avatar']['url'];
-        }
-        if (!empty($file['link_comic_small_name']['url'])) {
-            $comic['link_comic_small_name'] = $file['link_comic_small_name']['url'];
-        }
+//        $fileToUpload = $this->postGGDrive($driveService, $file['link_avatar']['file'], $folderId);
+//        if ($fileToUpload) {
+//            $driveService->permissions->create($fileToUpload->id, $newPermission);
+//            $file['link_avatar']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
+//            $comic['link_avatar'] = $file['link_avatar']['url'];
+//        }
+//
+//
+//        $fileToUpload = $this->postGGDrive($driveService, $file['link_comic_name']['file'], $folderId);
+//        if ($fileToUpload) {
+//            $driveService->permissions->create($fileToUpload->id, $newPermission);
+//            $file['link_comic_name']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
+//            $comic['link_comic_name'] = $file['link_comic_name']['url'];
+//        }
+//
+//
+//        $fileToUpload = $this->postGGDrive($driveService, $file['link_bg']['file'], $folderId);
+//        if ($fileToUpload) {
+//            $driveService->permissions->create($fileToUpload->id, $newPermission);
+//            $file['link_bg']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
+//            $comic['link_bg'] = $file['link_bg']['url'];
+//        }
+//
+//
+//        $fileToUpload = $this->postGGDrive($driveService, $file['link_banner']['file'], $folderId);
+//        if ($fileToUpload) {
+//            $driveService->permissions->create($fileToUpload->id, $newPermission);
+//            $file['link_banner']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
+//            $comic['link_banner'] = $file['link_banner']['url'];
+//        }
+//
+//        $fileToUpload = $this->postGGDrive($driveService, $file['link_video_banner']['file'], $folderId);
+//        if ($fileToUpload) {
+//            $driveService->permissions->create($fileToUpload->id, $newPermission);
+//            $file['link_video_banner']['url'] = 'https://drive.usercontent.google.com/download?id=' . $fileToUpload->id . '&export=download';
+//            $comic['link_video_banner'] = $file['link_video_banner']['url'];
+//        }
+//
+//        $fileToUpload = $this->postGGDrive($driveService, $file['link_video_banner_2']['file'], $folderId);
+//        if ($fileToUpload) {
+//            $driveService->permissions->create($fileToUpload->id, $newPermission);
+//            $file['link_video_banner_2']['url'] = 'https://drive.usercontent.google.com/download?id=' . $fileToUpload->id . '&export=download';
+//            $comic['link_video_banner_2'] = $file['link_video_banner_2']['url'];
+//        }
+//
+//
+//        $fileToUpload = $this->postGGDrive($driveService, $file['link_comic_small_name']['file'], $folderId);
+//        if ($fileToUpload) {
+//            $driveService->permissions->create($fileToUpload->id, $newPermission);
+//            $file['link_comic_small_name']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
+//            $comic['link_comic_small_name'] = $file['link_comic_small_name']['url'];
+//        }
 
         return $file;
     }

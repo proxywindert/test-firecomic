@@ -304,10 +304,7 @@
     <script src="{!! asset("assets/js/slider.js") !!}"></script>
     <script >
         document.addEventListener("DOMContentLoaded", function () {
-            new IOlazy({
-                image: 'img',
-                threshold: 0.01,
-            });
+         
         });
     </script>
     <script>

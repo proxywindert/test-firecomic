@@ -40,13 +40,15 @@
             <div class="wrapper-banner">
                 <div class="banner-char">
                     <div class="img-char" style="border-color:{{$comic->bg_color}}">
-                        @if($comic->link_video_banner)
-                            <video onclick="this.play()" autoplay muted disableremoteplayback
-                                    style="background: none;" playsinline="" title=""
+                        @if($comic->link_video_banner || $comic->link_video_banner_2)
+                            <video preload="none" id="videoBanner" playsinline autoplay muted disableremoteplayback
+                                    style="background: none;"  title=""
                                   >
-                                <source type="video/webm"
-                                        src="https://zany-resisted-breeze.glitch.me/proxy/{{$comic->link_video_banner}}">
+
+								<source type="video/quicktime" >
+                               <source type="video/webm" >
                             </video>
+
                         @else
                             <img
                                 {{--                            class="lazyload"--}}
@@ -55,6 +57,8 @@
                                 src="{!! asset($comic->link_banner) !!}" alt="">
                         @endif
                     </div>
+
+
                 </div>
             </div>
 
@@ -742,12 +746,72 @@
                 lazyImageObserver.observe(item);
             })
 
-            new IOlazy({
-                image: 'img',
-                threshold: 0.1,
-            });
         });
     </script>
+    <script>
+		function isFormatSupported(format,video) {
+		
+		  if (!video.canPlayType) {
+			// Trình duyệt không hỗ trợ phương thức canPlayType, không thể xác định được
+			return false;
+		  }
+		  var supported = video.canPlayType(format);
+		  return supported === 'probably' || supported === 'maybe';
+		}
+
+        var link_video_banner_2 = 'https://zany-resisted-breeze.glitch.me/cac/{!! $comic->link_video_banner_2 !!}'
+        function loadVideo(video,urlMp4Link) {
+            fetch(urlMp4Link, {
+                method: 'GET',
+                headers: {
+                    'Accept': '*/*',
+                }
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Có lỗi khi gửi yêu cầu: ' + response.status);
+                }
+                return response.blob();
+            })
+                .then(blob => {
+                    const videoBlobUrl = URL.createObjectURL(blob);
+                    video.src = videoBlobUrl;
+                    loaded = true
+                })
+                .catch(error => {
+                    console.error('Đã xảy ra lỗi:', error);
+                });
+
+        }
+
+        const video = document.getElementById('videoBanner');
+		
+		// Kiểm tra xem trình duyệt có hỗ trợ định dạng MP4 không
+		
+		
+		if(video){
+			var sources = video.getElementsByTagName('source');
+			
+			
+			if (isFormatSupported('video/quicktime',video)) {
+				loadVideo(video,link_video_banner_2)
+			} else {
+				sources[1].src = link_video_banner;
+			    video.load()
+			}
+			
+			
+			
+			
+			video.addEventListener('click', function (event) {
+				video.play()
+			});
+			
+			
+		}
+		
+    </script>
+
+
     <script>
         const bg_color = '{{$comic->bg_color}}'
         window.addEventListener('load', (event) => {

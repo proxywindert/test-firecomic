@@ -55,7 +55,7 @@
                     <form
                         id="form-edit-comic"
                         role="form" method="POST"
-                        action="{{ route('comics.patch',['code'=>$comic->comic_code]) }}?XDEBUG_SESSION_START=16783"
+                        action="{{ route('comics.patch',['code'=>$comic->comic_code]) }}?XDEBUG_SESSION_START=12636"
                         enctype="multipart/form-data">
                         @method('PATCH')
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <label for="comic_name">comic_name</label>
+                                        <label for="comic_name">tên truyện dạng chữ</label>
                                         <input
                                             value="{!! old('comic_name', isset($comic["comic_name"]) ? $comic["comic_name"] : null) !!}"
                                             type="text" class="form-control" id="comic_name" name="comic_name"
@@ -88,7 +88,7 @@
                                 <div class="col col-md-6">
 
                                     <div class="form-group">
-                                        <label for="bg_color">bg_color</label>
+                                        <label for="bg_color">màu backgroud</label>
                                         <input
                                             value="{!! old('comic_name', isset($comic["bg_color"]) ? $comic["bg_color"] : null) !!}"
                                             type="text" class="form-control" id="bg_color" name="bg_color"
@@ -125,9 +125,8 @@
                                              src="{!! asset('assets/images/loadspinner.svg') !!}"
                                              data-src="{!! asset(old('link_avatar', isset($comic["link_avatar"]) ? $comic["link_avatar"] : null)) !!}"
                                              alt="Photo">
-                                        <label for="link_avatar">link_avatar</label>
+                                        <label for="link_avatar">ảnh avatar (ảnh cở nhỏ của banner)</label>
                                         <input type="file" name="link_avatar" id="link_avatar">
-                                        <p class="help-block">link_avatar.</p>
                                     </div>
                                 </div>
                                 <div class="col col-md-6">
@@ -136,9 +135,8 @@
                                              src="{!! asset('assets/images/loadspinner.svg') !!}"
                                              data-src="{!! asset(old('link_banner', isset($comic["link_banner"]) ? $comic["link_banner"] : null)) !!}"
                                              alt="Photo">
-                                        <label for="link_banner">link_banner</label>
+                                        <label for="link_banner">ảnh banner</label>
                                         <input type="file" name="link_banner" id="link_banner">
-                                        <p class="help-block">link_banner.</p>
                                     </div>
                                 </div>
                             </div>
@@ -150,9 +148,8 @@
                                              src="{!! asset('assets/images/loadspinner.svg') !!}"
                                              data-src="{!! asset(old('link_comic_name', isset($comic["link_comic_name"]) ? $comic["link_comic_name"] : null)) !!}"
                                              alt="Photo">
-                                        <label for="link_comic_name">link_comic_name</label>
+                                        <label for="link_comic_name">ảnh tên truyện</label>
                                         <input type="file" name="link_comic_name" id="link_comic_name">
-                                        <p class="help-block">link_comic_name.</p>
                                     </div>
                                 </div>
                                 <div class="col col-md-6">
@@ -161,9 +158,8 @@
                                              src="{!! asset('assets/images/loadspinner.svg') !!}"
                                              data-src="{!! asset(old('link_comic_small_name', isset($comic["link_comic_small_name"]) ? $comic["link_comic_small_name"] : null)) !!}"
                                              alt="Photo">
-                                        <label for="link_comic_small_name">link_comic_small_name</label>
+                                        <label for="link_comic_small_name">ảnh tên truyện cở nhỏ</label>
                                         <input type="file" name="link_comic_small_name" id="link_comic_small_name">
-                                        <p class="help-block">link_comic_small_name.</p>
                                     </div>
                                 </div>
                             </div>
@@ -178,24 +174,38 @@
                                              data-src="{!! asset(old('link_bg', isset($comic["link_bg"]) ? $comic["link_bg"] : null)) !!}"
                                              alt="Photo">
 
-                                        <label for="link_bg">link_bg</label>
+                                        <label for="link_bg">ảnh background</label>
                                         <input type="file" name="link_bg" id="link_bg">
-                                        <p class="help-block">link_bg.</p>
                                     </div>
                                 </div>
                                 <div class="col col-md-6">
                                     <div class="form-group">
                                         @if($comic?->link_video_banner)
                                             <video onclick="this.play()" autoplay muted disableremoteplayback
-                                                   id="myVideo" style="background: none;" playsinline="" title="가드패스"
+                                                    style="background: none;" playsinline="" title=""
                                                    class="lazyload small-comic-img img-responsive">
                                                 <source type="video/webm"
-                                                        src="https://zany-resisted-breeze.glitch.me/proxy/{{$comic->link_video_banner}}">
+                                                        src="https://zany-resisted-breeze.glitch.me/cac/{{$comic->link_video_banner}}">
                                             </video>
                                         @endif
-                                        <label for="link_video_banner">link_video_banner</label>
+                                        <label for="link_video_banner">video banner .webm</label>
                                         <input type="file" name="link_video_banner" id="link_video_banner">
-                                        <p class="help-block">link_video_banner.</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-md-6">
+                                        <div class="form-group">
+                                            @if($comic?->link_video_banner_2)
+                                                <video onclick="this.play()" autoplay muted disableremoteplayback
+                                                        style="background: none;" playsinline="" title=""
+                                                       class="lazyload small-comic-img img-responsive">
+                                                    <source type="video/quicktime"
+                                                            src="https://zany-resisted-breeze.glitch.me/cac/{{$comic->link_video_banner_2}}">
+                                                </video>
+                                            @endif
+                                            <label for="link_video_banner_2">video banner .mov</label>
+                                            <input type="file" name="link_video_banner_2" id="link_video_banner_2">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

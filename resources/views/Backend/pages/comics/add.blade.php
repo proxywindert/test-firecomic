@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <label for="comic_name">comic_name</label>
+                                        <label for="comic_name">tên truyện dạng chữ</label>
                                         <input
                                             value="{!! old('comic_name', isset($comic["comic_name"]) ? $comic["comic_name"] : null) !!}"
                                             type="text" class="form-control" id="comic_name" name="comic_name"
@@ -83,7 +83,7 @@
                             <div class="row">
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <label for="bg_color">bg_color</label>
+                                        <label for="bg_color">màu backgroud</label>
                                         <input
                                             value="{!! old('bg_color', isset($comic["bg_color"]) ? $comic["bg_color"] : null) !!}"
                                             type="text" class="form-control" id="bg_color" name="bg_color"
@@ -114,16 +114,14 @@
                             <div class="row">
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <label for="link_avatar">link_avatar</label>
+                                        <label for="link_avatar">ảnh avatar (ảnh cở nhỏ của banner)</label>
                                         <input type="file" name="link_avatar" id="link_avatar">
-                                        <p class="help-block">link_avatar.</p>
                                     </div>
                                 </div>
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <label for="link_banner">link_banner</label>
+                                        <label for="link_banner">ảnh banner</label>
                                         <input type="file" name="link_banner" id="link_banner">
-                                        <p class="help-block">link_banner.</p>
                                     </div>
                                 </div>
 
@@ -131,16 +129,14 @@
                             <div class="row">
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <label for="link_comic_name">link_comic_name</label>
+                                        <label for="link_comic_name">ảnh tên truyện</label>
                                         <input type="file" name="link_comic_name" id="link_comic_name">
-                                        <p class="help-block">link_comic_name.</p>
                                     </div>
                                 </div>
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <label for="link_comic_small_name">link_comic_small_name</label>
+                                        <label for="link_comic_small_name">ảnh tên truyện cở nhỏ</label>
                                         <input type="file" name="link_comic_small_name" id="link_comic_small_name">
-                                        <p class="help-block">link_comic_small_name.</p>
                                     </div>
                                 </div>
 
@@ -148,19 +144,25 @@
                             <div class="row">
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <label for="link_bg">link_bg</label>
+                                        <label for="link_bg">ảnh background</label>
                                         <input type="file" name="link_bg" id="link_bg">
-                                        <p class="help-block">link_bg.</p>
                                     </div>
                                 </div>
                                 <div class="col col-md-6">
                                     <div class="form-group">
-                                        <label for="link_video_banner">link_video_banner</label>
+                                        <label for="link_video_banner">video banner .webm</label>
                                         <input type="file" name="link_video_banner" id="link_video_banner">
-                                        <p class="help-block">link_video_banner.</p>
                                     </div>
                                 </div>
 
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-6">
+                                    <div class="form-group">
+                                        <label for="link_video_banner_2">video banner .mov</label>
+                                        <input type="file" name="link_video_banner_2" id="link_video_banner_2">
+                                    </div>
+                                </div>
                             </div>
 
 

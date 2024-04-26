@@ -6,6 +6,7 @@
     <title>
         Đọc Truyện Tranh Online - Website chính thức - Khotruyenfull
     </title>
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="twitter:title" content="Khotruyenfull">
     <meta property="og:title" content="Khotruyenfull">
     <meta name="theme-color" content="#121212">
@@ -61,7 +62,6 @@
 <script src="{!! asset('assets/js/axios/axios.min.js') !!}"></script>
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
 
-<script src="{!! asset('assets/js/iolazy.min.js') !!}"></script>
 @yield('addtional_scripts')
 <script>
     document.onkeydown = function (event) {

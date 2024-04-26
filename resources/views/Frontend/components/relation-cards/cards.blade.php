@@ -83,9 +83,5 @@
             lazyImageObserver.observe(item);
         })
 
-        new IOlazy({
-            image: 'img',
-            threshold: 0.1,
-        });
     });
 </script>
