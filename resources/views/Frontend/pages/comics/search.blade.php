@@ -34,7 +34,7 @@
                              style="background:{{ $comic->skeleton_bg_color }}"></div>
                         <div class="skeleton-tranfer-bg" style="{{ $comic->tranfer_color }}">
                         </div>
-                        <a href="{{ route('comic-info', ['comic_code' => $comic->comic_code]) }}">
+                        <a href="{{ route('comic-info',  [$comic->slug, $comic->comic_code]) }}">
                             <picture>
                                 <img class="lazyload bg-img"
 									referrerpolicy="no-referrer"

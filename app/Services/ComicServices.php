@@ -306,6 +306,17 @@ class ComicServices extends BaseServices
         return $this->model->where('comic_code', $comic_code)->first();
     }
 
+    public function  getAllComics(){
+        $data = ComicModel::query();
+
+        $data = $data
+            ->select('slug','id','comic_name');
+        $data =   $data->with('chapters',function ($data){
+            $data->select('comic_id','slug','chapter_name','id');
+        })->get();
+        return $data;
+    }
+
     public function show($comicCode)
     {
         $data = ComicModel::query();

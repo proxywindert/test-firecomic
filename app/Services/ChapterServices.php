@@ -41,6 +41,10 @@ class ChapterServices extends BaseServices
         return $query->paginate($limit);
     }
 
+    public function getAllChapter(){
+        return $this->model->get();
+    }
+
     public function findByComicCodeAndChapterId($comic_code, $id)
     {
         $query = $this->model;

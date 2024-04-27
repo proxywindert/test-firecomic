@@ -28,7 +28,7 @@ class ChapterController extends BaseController
         return view('Frontend.pages.comics.index');
     }
 
-    public function show(Request $request, $comic_code, $id)
+    public function show(Request $request,$slug1, $comic_code,$slug2, $id)
     {
         $comic = $this->chapterServices->findByComicCodeAndChapterId($comic_code, $id);
         if ($comic) {

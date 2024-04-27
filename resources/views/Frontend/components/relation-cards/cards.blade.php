@@ -1,5 +1,5 @@
 @foreach($relations as $relation)
-    <a href="{{ route('comic-info',['comic_code'=>$relation->comic_code]) }}" class="skeleton-loader comic">
+    <a href="{{ route('comic-info', [$relation->slug, $relation->comic_code]) }}" class="skeleton-loader comic">
         <div class="skeleton-bg-content"
              style="background:{{ $relation->skeleton_bg_color }}"></div>
         <div class="skeleton-tranfer-bg" style="{{ $relation->tranfer_color }}">

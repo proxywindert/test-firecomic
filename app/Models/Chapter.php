@@ -5,9 +5,12 @@ namespace App\Models;
 use App\Services\ContentImageServices;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Chapter extends BaseModel
 {
+    use HasSlug;
     protected $table = "chapters";
     protected $fillable =[
 
@@ -22,6 +25,7 @@ class Chapter extends BaseModel
         'publish_at',
         'free_at',
         'link_small_icon',
+        'slug',
 
         'created_by',
         'updated_by',
@@ -48,6 +52,13 @@ class Chapter extends BaseModel
             }
             return true;
         });
+    }
+
+    public function getSlugOptions() :  SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('chapter_name')
+            ->saveSlugsTo('slug');
     }
 
     public function comic(){

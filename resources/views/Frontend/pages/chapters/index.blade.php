@@ -197,7 +197,11 @@
                             <div class="card card-pr-detail">
                                 <div class="content">
                                     <div class="content-body">
-                                        <a href="{{ route('view-comic',['comic_code' => ($comic?->comic?->comic_code)??$comic_code,'id' => ($comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id)??'1' ]) }}"
+                                        <a href="{{ route('view-comic',[
+     'slug1'=> ($comic?->comic?->slug)??"slug",
+     'slug2'=> ($comic?->nextChapter?$comic?->nextChapter?->slug:$comic?->slug)??"slug",
+    'comic_code' => ($comic?->comic?->comic_code)??$comic_code,
+    'id' => ($comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id)??'1' ]) }}"
                                            class="next-chapter">
                                             <div class="next-chapter-img">
                                                 <img
@@ -304,7 +308,7 @@
     <script src="{!! asset("assets/js/slider.js") !!}"></script>
     <script >
         document.addEventListener("DOMContentLoaded", function () {
-         
+
         });
     </script>
     <script>
@@ -377,7 +381,7 @@
             document.getElementById('preloader').setAttribute("style", "display:none");
             fakeHeaderMenu.style.opacity = 1;
             document.querySelector('.back-button').addEventListener('click', function () {
-                window.location.href = "{{ route('comic-info', ['comic_code' =>$comic?->comic?->comic_code ]) }}";
+                window.location.href = "{{ route('comic-info', ['slug'=>$comic?->comic?->slug,'comic_code' =>$comic?->comic?->comic_code ]) }}";
             });
 
             document.querySelector('.navigationBar-content-comment').addEventListener('click', function () {
@@ -385,10 +389,17 @@
             });
 
             document.querySelector('.navigationBar-content-right')?document.querySelector('.navigationBar-content-right').addEventListener('click', function () {
-                window.location.href = "{{ route('view-comic', ['comic_code' => $comic?->comic?->comic_code,'id' => $comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id]) }}";
+                window.location.href = "{{ route('view-comic', [
+     'slug1'=> $comic?->comic?->slug,
+     'slug2'=> $comic?->nextChapter?$comic?->nextChapter?->slug:$comic?->slug,
+    'comic_code' => $comic?->comic?->comic_code,
+    'id' => $comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id]) }}";
             }):'';
             document.querySelector('.navigationBar-content-left')?document.querySelector('.navigationBar-content-left').addEventListener('click', function () {
-                window.location.href = "{{ route('view-comic', ['comic_code' => $comic?->comic?->comic_code,'id' => $comic->prvChapter?$comic?->prvChapter?->id:$comic?->id]) }}";
+                window.location.href = "{{ route('view-comic', [
+     'slug1'=> $comic?->comic?->slug,
+     'slug2'=> $comic?->prvChapter?$comic?->prvChapter?->slug:$comic?->slug,
+    'comic_code' => $comic?->comic?->comic_code,'id' => $comic->prvChapter?$comic?->prvChapter?->id:$comic?->id]) }}";
             }):'';
 
         });

@@ -47,7 +47,8 @@ class Hashtag extends BaseModel
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug');
+            ->saveSlugsTo('slug')
+            ->separator('-');
     }
 
 }

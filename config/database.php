@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'pgsql'),
+    'default' => 'pgsql',
 
     /*
     |--------------------------------------------------------------------------
@@ -48,15 +48,15 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-	
+
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DATABASE_URL',"postgres://test_spring_user:nBqjLW73LGpeImzWG452u8Y8D6nK6nSu@dpg-coakhkkf7o1s73ds61d0-a.singapore-postgres.render.com/test_spring_1q40"),
-            'host' => env('DB_HOST', "dpg-coakhkkf7o1s73ds61d0-a.singapore-postgres.render.com"),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'test_spring_1q40'),
-            'username' => env('DB_USERNAME', 'test_spring_user'),
-            'password' => env('DB_PASSWORD', 'nBqjLW73LGpeImzWG452u8Y8D6nK6nSu'),
+            'url' => "postgres://test_spring_user:nBqjLW73LGpeImzWG452u8Y8D6nK6nSu@dpg-coakhkkf7o1s73ds61d0-a.singapore-postgres.render.com/test_spring_1q40",
+            'host' => "dpg-coakhkkf7o1s73ds61d0-a.singapore-postgres.render.com",
+            'port' => '5432',
+            'database' => 'test_spring_1q40',
+            'username' => 'test_spring_user',
+            'password' => 'nBqjLW73LGpeImzWG452u8Y8D6nK6nSu',
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,

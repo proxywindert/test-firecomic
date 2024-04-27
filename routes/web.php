@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\ComicServices;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebControllers\V1\Frontend\ComicController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\WebControllers\V1\Backend\HashtagController as AdmHasht
 
 use App\Http\Controllers\Auth\LoginController as AdmLoginController;
 use App\Http\Controllers\Auth\RegisterController as AdmRegisterController;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,25 @@ use App\Http\Controllers\Auth\RegisterController as AdmRegisterController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/test/{slug1}-{id1}/cate/{slug2}-{id2}', function($slug1,$id1,$slug2,$id2){
+    $comicSerives = app()->make(ComicServices::class);
+    $data = $comicSerives->getAllComics();
+    $data->each(function ($item){
+        $slug = Str::slug($item->comic_name, '-');
+        $item->slug= $slug;
+        $item->save();
+        $item->chapters->each(function ($chapter){
+            $slug = Str::slug($chapter->chapter_name, '-');
+            $chapter->slug= $slug;
+            $chapter->save();
+        });
+    });
+})->where('slug1', '[a-zA-Z0-9-_]+')
+    ->where('slug2', '[a-zA-Z0-9-_]+')
+    ->where('id1', 'COMIC-[0-9]+')
+    ->where('id2', '[0-9]+')
+    ->name('test');
 
 Route::get('/login', [AdmLoginController::class, 'getLogin'])->name('getLogin');
 
@@ -52,8 +73,17 @@ Route::get('/', [LandingController::class, 'index'])->name('landingPage');
 Route::group(array('prefix' => 'comics'), function () {
     Route::get('/content/search', [ComicController::class, 'searchByhashTag'])->name('search');
     Route::get('/content/keywork/{hashtag}', [ComicController::class, 'searchByhashTag'])->name('searchByhashTag');
-    Route::get('/content/{comic_code}', [ComicController::class, 'show'])->name('comic-info')->middleware('viewed');
-    Route::get('/viewer/{comic_code}/chapter/{id}', [ChapterController::class, 'show'])->name('view-comic')->middleware('viewed');
+    Route::get('/viewer/{slug1}-{comic_code}/chapter/{slug2}-{id}', [ChapterController::class, 'show'])
+        ->where('slug1', '[a-zA-Z0-9-_]+')
+        ->where('slug2', '[a-zA-Z0-9-_]+')
+        ->where('comic_code', 'COMIC-[0-9]+')
+        ->where('id', '[0-9]+')
+        ->name('view-comic')->middleware('viewed');
+    Route::get('/content/{slug}-{comic_code}', [ComicController::class, 'show'])
+        ->where('slug', '[a-zA-Z0-9-_]+')
+        ->where('comic_code', 'COMIC-[0-9]+')
+        ->name('comic-info')->middleware('viewed');
+
 
     Route::get('/api', [FrontendChapterController::class, 'show'])->name('show');
 });

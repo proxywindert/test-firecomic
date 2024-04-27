@@ -7,9 +7,12 @@ use App\Services\HashtagServices;
 use App\Services\TaggedServices;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Comic extends BaseModel
 {
+    use HasSlug;
     protected $table = "comics";
     protected $fillable =[
         'comic_code',
@@ -26,6 +29,8 @@ class Comic extends BaseModel
         'tranfer_color',
         'total_view',
         'total_like',
+        'slug',
+
         'created_by',
         'updated_by',
         'created_at',
@@ -60,6 +65,13 @@ class Comic extends BaseModel
             $model->summaryContents()->delete();
             return true;
         });
+    }
+
+    public function getSlugOptions() :  SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('comic_name')
+            ->saveSlugsTo('slug');
     }
 
     public function chapters(){
