@@ -142,7 +142,7 @@
                     <a href="{!! route('view-comic', [
                                                     'slug1'=> $comic->slug,
                                                     'slug2'=> $comic?->chapters->isEmpty()?'1':$comic?->chapters[0]->slug,
-                                                    'comic_code' => $comic->comic_code,
+                                                    'comic_code' => (convertComicIdtoString($comic->id)),
                                                     'id' => $comic?->chapters->isEmpty()?'1':$comic?->chapters[0]->id]) !!}"
                        class="chapter">
                         <div class="watch-first-chap">
@@ -158,7 +158,7 @@
                                                      [
                                                     'slug1'=> $comic->slug,
                                                     'slug2'=> $chapter->slug,
-                                                    'comic_code' => $comic->comic_code,
+                                                    'comic_code' =>convertComicIdtoString($comic->id),
                                                     'id' => $chapter->id]) !!}"
                                class="skeleton-loader chapter">
                                 <div class="skeleton-bg-icon"

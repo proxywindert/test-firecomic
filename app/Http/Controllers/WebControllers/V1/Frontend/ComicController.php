@@ -26,8 +26,9 @@ class ComicController extends BaseController
         return view('Frontend.pages.comics.search',compact('comics'));
     }
 
-    public function show(Request $request,$slug,$comic_code)
+    public function show(Request $request,$slug)
     {
+        $comic_code = $request->get('comic_code');
         $relations = $this->comicServices->getRelationComic($comic_code);
         $main_tag = $this->hashtagServices->findByComicIdandIsMain($comic_code);
         $comic = $this->comicServices->show($comic_code);

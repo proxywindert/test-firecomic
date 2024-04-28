@@ -30,6 +30,7 @@ class ChapterController extends BaseController
 
     public function show(Request $request,$slug1, $comic_code,$slug2, $id)
     {
+        $comic_code = $request->get('comic_code');
         $comic = $this->chapterServices->findByComicCodeAndChapterId($comic_code, $id);
         if ($comic) {
             $relations = $this->comicServices->getRelationComic($comic_code);

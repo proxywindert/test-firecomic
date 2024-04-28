@@ -200,7 +200,7 @@
                                         <a href="{{ route('view-comic',[
      'slug1'=> ($comic?->comic?->slug)??"slug",
      'slug2'=> ($comic?->nextChapter?$comic?->nextChapter?->slug:$comic?->slug)??"slug",
-    'comic_code' => ($comic?->comic?->comic_code)??$comic_code,
+    'comic_code' => (convertComicIdtoString($comic?->comic?->id))??$comic_code,
     'id' => ($comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id)??'1' ]) }}"
                                            class="next-chapter">
                                             <div class="next-chapter-img">
@@ -312,7 +312,7 @@
         });
     </script>
     <script>
-        const currentUrl = `{{ route('ajax.comics.chapters.show',['comic_code'=>($comic?->comic?->comic_code)??$comic_code,'id'=>($comic?->id)??'1']) }}`;
+        const currentUrl = `{{ route('ajax.comics.chapters.show',['comic_code'=>(convertComicIdtoString($comic?->comic?->id))??$comic_code,'id'=>($comic?->id)??'1']) }}`;
         const spinImgurl = "{!! getLinkSpinImg() !!}"
         let isLoadComplete = true
         let isStopLoad = false;
@@ -381,7 +381,7 @@
             document.getElementById('preloader').setAttribute("style", "display:none");
             fakeHeaderMenu.style.opacity = 1;
             document.querySelector('.back-button').addEventListener('click', function () {
-                window.location.href = "{{ route('comic-info', ['slug'=>$comic?->comic?->slug,'comic_code' =>$comic?->comic?->comic_code ]) }}";
+                window.location.href = "{{ route('comic-info', ['slug'=>$comic?->comic?->slug,'comic_code' => convertComicIdtoString($comic?->comic?->id) ]) }}";
             });
 
             document.querySelector('.navigationBar-content-comment').addEventListener('click', function () {
@@ -392,14 +392,14 @@
                 window.location.href = "{{ route('view-comic', [
      'slug1'=> $comic?->comic?->slug,
      'slug2'=> $comic?->nextChapter?$comic?->nextChapter?->slug:$comic?->slug,
-    'comic_code' => $comic?->comic?->comic_code,
+    'comic_code' =>convertComicIdtoString($comic?->comic?->id) ,
     'id' => $comic?->nextChapter?$comic?->nextChapter?->id:$comic?->id]) }}";
             }):'';
             document.querySelector('.navigationBar-content-left')?document.querySelector('.navigationBar-content-left').addEventListener('click', function () {
                 window.location.href = "{{ route('view-comic', [
      'slug1'=> $comic?->comic?->slug,
      'slug2'=> $comic?->prvChapter?$comic?->prvChapter?->slug:$comic?->slug,
-    'comic_code' => $comic?->comic?->comic_code,'id' => $comic->prvChapter?$comic?->prvChapter?->id:$comic?->id]) }}";
+    'comic_code' =>convertComicIdtoString($comic?->comic?->id),'id' => $comic->prvChapter?$comic?->prvChapter?->id:$comic?->id]) }}";
             }):'';
 
         });

@@ -29,19 +29,41 @@ use Illuminate\Support\Str;
 |
 */
 
-Route::get('/test/{slug1}-{id1}/cate/{slug2}-{id2}', function($slug1,$id1,$slug2,$id2){
-    $comicSerives = app()->make(ComicServices::class);
-    $data = $comicSerives->getAllComics();
-    $data->each(function ($item){
-        $slug = Str::slug($item->comic_name, '-');
-        $item->slug= $slug;
-        $item->save();
-        $item->chapters->each(function ($chapter){
-            $slug = Str::slug($chapter->chapter_name, '-');
-            $chapter->slug= $slug;
-            $chapter->save();
-        });
-    });
+
+
+Route::get('/test/{slug1}-{id1}/cate/{slug2}-{id2}', function ($slug1, $id1, $slug2, $id2) {
+
+    $keyArray= config('settings.arrray_keys_convert_id');
+
+// Chuỗi số 1
+    $string1 = $id2;
+
+// Chuyển đổi từ chuỗi số 1 sang chuỗi số 2
+    $string2 = convertString($string1, $keyArray);
+    echo "Chuỗi số 2: " . $string2. "\n";
+
+// Chuyển đổi từ chuỗi số 2 về chuỗi số 1
+    $reversedString = reverseConvert($string2, $keyArray);
+    echo "Chuỗi số 1 (ngược lại): " . $reversedString . "\n";
+
+    dd($string1);
+
+// Để lấy lại chuỗi ban đầu, chỉ cần áp dụng lại phép XOR với cùng một key
+//    $originalString = xorTransform($transformedString, $key);
+//    echo "Chuỗi ban đầu: " . asciiStringToNumbers($originalString) . "\n";
+
+//    $comicSerives = app()->make(ComicServices::class);
+//    $data = $comicSerives->getAllComics();
+//    $data->each(function ($item){
+//        $slug = Str::slug($item->comic_name, '-');
+//        $item->slug= $slug;
+//        $item->save();
+//        $item->chapters->each(function ($chapter){
+//            $slug = Str::slug($chapter->chapter_name, '-');
+//            $chapter->slug= $slug;
+//            $chapter->save();
+//        });
+//    });
 })->where('slug1', '[a-zA-Z0-9-_]+')
     ->where('slug2', '[a-zA-Z0-9-_]+')
     ->where('id1', 'COMIC-[0-9]+')
@@ -64,8 +86,8 @@ Route::get('/users', function () {
     return view('users', compact('users'));
 });
 
-Route::post('/github-webhook', function(){
-	return "ok";
+Route::post('/github-webhook', function () {
+    return "ok";
 });
 
 Route::get('/', [LandingController::class, 'index'])->name('landingPage');
@@ -76,31 +98,37 @@ Route::group(array('prefix' => 'comics'), function () {
     Route::get('/viewer/{slug1}-{comic_code}/chapter/{slug2}-{id}', [ChapterController::class, 'show'])
         ->where('slug1', '[a-zA-Z0-9-_]+')
         ->where('slug2', '[a-zA-Z0-9-_]+')
-        ->where('comic_code', 'COMIC-[0-9]+')
+        ->where('comic_code', '[0-9]+')
         ->where('id', '[0-9]+')
-        ->name('view-comic')->middleware('viewed');
+        ->name('view-comic')
+        ->middleware('convertId')
+        ->middleware('viewed')
+
+    ;
     Route::get('/content/{slug}-{comic_code}', [ComicController::class, 'show'])
         ->where('slug', '[a-zA-Z0-9-_]+')
-        ->where('comic_code', 'COMIC-[0-9]+')
-        ->name('comic-info')->middleware('viewed');
+        ->where('comic_code', '[0-9]+')
+        ->name('comic-info')
+        ->middleware('convertId')
+        ->middleware('viewed');
 
 
     Route::get('/api', [FrontendChapterController::class, 'show'])->name('show');
 });
 
-Route::group(array('prefix' => 'ajax','as'=>'ajax.'), function () {
-    Route::group(array('prefix' => 'comics','as' => 'comics.'), function () {
-        Route::group(array('prefix' => '{comic_code}/chapters','as' => 'chapters.'), function () {
+Route::group(array('prefix' => 'ajax', 'as' => 'ajax.'), function () {
+    Route::group(array('prefix' => 'comics', 'as' => 'comics.'), function () {
+        Route::group(array('prefix' => '{comic_code}/chapters', 'as' => 'chapters.'), function () {
             Route::get('/{id}', [FrontendChapterController::class, 'show'])->name('show');
         });
     });
 
 });
 
-Route::group(array('prefix' => 'ajax','as'=>'ajax.'), function () {
-    Route::group(array('prefix' => 'admin','as'=>'admin.'), function () {
-        Route::group(array('prefix' => 'comics','as' => 'comics.'), function () {
-            Route::group(array('prefix' => '{comic_code}/hashtags','as' => 'hashtags.'), function () {
+Route::group(array('prefix' => 'ajax', 'as' => 'ajax.'), function () {
+    Route::group(array('prefix' => 'admin', 'as' => 'admin.'), function () {
+        Route::group(array('prefix' => 'comics', 'as' => 'comics.'), function () {
+            Route::group(array('prefix' => '{comic_code}/hashtags', 'as' => 'hashtags.'), function () {
                 Route::get('/{id}', [AjaxAdmHashtagController::class, 'update'])->name('patch');
             });
         });
@@ -109,10 +137,9 @@ Route::group(array('prefix' => 'ajax','as'=>'ajax.'), function () {
 });
 
 
-
-Route::group(array('prefix' => 'admin','middleware' => 'auth'), function () {
+Route::group(array('prefix' => 'admin', 'middleware' => 'auth'), function () {
     Route::get('/dashboard', [AdmLandingController::class, 'index'])->name('dashboard');
-    Route::group(array('prefix' => 'comics','as' => 'comics.'), function () {
+    Route::group(array('prefix' => 'comics', 'as' => 'comics.'), function () {
         Route::get('/', [AdmComicController::class, 'index'])->name('list');
         Route::get('/create', [AdmComicController::class, 'create'])->name('create');
         Route::get('/edit/{code}', [AdmComicController::class, 'edit'])->name('edit');
@@ -121,7 +148,7 @@ Route::group(array('prefix' => 'admin','middleware' => 'auth'), function () {
         Route::post('/', [AdmComicController::class, 'store'])->name('store');
         Route::delete('/{code}', [AdmComicController::class, 'destroy'])->name('delete');
 
-        Route::group(array('prefix' => '{comic_code}/chapters','as' => 'chapters.'), function () {
+        Route::group(array('prefix' => '{comic_code}/chapters', 'as' => 'chapters.'), function () {
             Route::get('/', [AdmChapterController::class, 'index'])->name('list');
             Route::get('/create', [AdmChapterController::class, 'create'])->name('create');
             Route::get('/edit/{id}', [AdmChapterController::class, 'edit'])->name('edit');
@@ -131,7 +158,7 @@ Route::group(array('prefix' => 'admin','middleware' => 'auth'), function () {
             Route::delete('/{id}', [AdmChapterController::class, 'destroy'])->name('delete');
         });
     });
-    Route::group(array('prefix' => 'hashtags','as' => 'hashtags.'), function () {
+    Route::group(array('prefix' => 'hashtags', 'as' => 'hashtags.'), function () {
         Route::get('/', [AdmHashtagController::class, 'index'])->name('list');
         Route::get('/create', [AdmHashtagController::class, 'create'])->name('create');
         Route::get('/edit/{id}', [AdmHashtagController::class, 'edit'])->name('edit');

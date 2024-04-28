@@ -17,9 +17,10 @@ class TrafficMiddleware
 
         if($comic_code){
             $entity = $comicServices->findByComicCode($comic_code);
-            if($entity)
+            if($entity){
                 ++$entity->total_view;
-            $entity->save();
+				$entity->save();
+			}
         }
 
         return $next($request);
