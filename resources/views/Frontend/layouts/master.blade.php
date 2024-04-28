@@ -75,7 +75,6 @@
     });
 
     window.addEventListener('load', (event) => {
-        console.log('Trang web đã tải hoàn tất');
         document.getElementById('preloader').setAttribute("style", "display:none");
     });
 

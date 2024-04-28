@@ -349,7 +349,7 @@
                         const context = {
                             'X-CSRF-TOKEN': `{{ csrf_token() }}`,
                         }
-                        apiGet(context, currentUrl + `?page=${page}&XDEBUG_SESSION_START=14087`)
+                        apiGet(context, currentUrl + `?page=${page}`)
                             .then(response => {
                                 let data = response.data.data
                                 if(data && data.length <1){

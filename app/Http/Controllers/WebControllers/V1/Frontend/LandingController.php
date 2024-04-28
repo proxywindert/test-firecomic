@@ -25,7 +25,8 @@ class LandingController extends BaseController
     {
         $genres = $this->genreService->index($request);
         $comics = $this->comicService->index($request);
-        return view('Frontend.pages.landing.index',compact('genres','comics'));
+        $param = ($request->except(['page']));
+        return view('Frontend.pages.landing.index',compact('genres','comics','param'));
     }
 
 

@@ -90,7 +90,13 @@
                 @endforeach
 
             </div>
-
+            <div class="row">
+                @if($comics->hasPages())
+                    <div class="col-sm-12 pagination-outter">
+                        {{  $comics->appends($param)->render('Frontend.components.pagination.custom') }}
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 @endsection

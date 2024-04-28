@@ -29,3 +29,29 @@ function getArray($modal){
 function getLinkSpinImg(){
     return asset('assets/images/loadspinner.svg');
 }
+
+function getPaginationArrays($paginator){
+    $currentPage = $paginator->currentPage();
+    $lastPage= $paginator->lastPage();
+    $min = 0;
+    $max = $lastPage+1;
+    $tmp_min = $currentPage-2;
+    $tmp_max = $currentPage+2;
+    // next
+    if($currentPage-1 <= $min){
+        $tmp_max++;
+    }
+    if($currentPage-2 <= $min){
+        $tmp_max++;
+    }
+
+    if($currentPage+1 >= $max){
+        $tmp_min--;
+    }
+    if($currentPage+2 >= $max){
+        $tmp_min--;
+    }
+    $tmp_min = $tmp_min<=$min?1:$tmp_min;
+    $tmp_max = $tmp_max>$lastPage?$lastPage:$tmp_max;
+    return [$tmp_min,$tmp_max];
+}

@@ -1,3 +1,4 @@
+@import "../../assets/css/css/bootstrap.min.css";
 :root {
   --tw-bg-opacity: 1;
   --tw-border-opacity: 1;
@@ -2131,6 +2132,47 @@ input[type=text], input[type=search], input[type=password] {
   .slider-scrollbar .scrollbar-thumb {
     width: 20%;
   }
+}
+.pagination-outter {
+  text-align: center;
+  color: rgba(var(--any-white));
+  margin: 20px 0;
+}
+
+.pagination {
+  text-align: center;
+}
+
+.pager-pagination li, .pagination > li {
+  text-align: center;
+  display: inline-block;
+  border-radius: 150px;
+  cursor: pointer;
+}
+
+.pager-pagination li a:hover {
+  background-color: #f18121;
+  color: #fff;
+}
+
+.pager-pagination li a,
+.pager-pagination li span {
+  text-decoration: none;
+  list-style: none;
+  margin: 0 4px;
+  line-height: 40px;
+  width: 40px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 150px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.pager-pagination .active span {
+  cursor: default;
+  background-color: #f18121;
+  color: #fff;
 }
 
 /*# sourceMappingURL=styles.css.map */
