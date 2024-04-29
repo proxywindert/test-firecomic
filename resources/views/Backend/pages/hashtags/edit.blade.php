@@ -53,7 +53,7 @@
 
                     </div>
                     <form role="form" method="POST"
-                          action="{{ route('hashtags.patch',['id'=>$hashtag->id]) }}?XDEBUG_SESSION_START=11657"
+                          action="{{ route('hashtags.patch',['id'=>$hashtag->id]) }}?XDEBUG_SESSION_START=19072"
                           enctype="multipart/form-data">
                         @method('PATCH')
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">

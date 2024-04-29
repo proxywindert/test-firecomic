@@ -47,7 +47,7 @@
                         @endif
 
                     </div>
-                    <form role="form" method="POST" action="{{ route('hashtags.store') }}?XDEBUG_SESSION_START=19407">
+                    <form role="form" method="POST" action="{{ route('hashtags.store') }}?XDEBUG_SESSION_START=19072">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="box-body">
 
