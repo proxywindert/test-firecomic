@@ -6,10 +6,13 @@ namespace App\Services;
 
 use App\Models\ContentImage as ContentImageModel;
 use Google_Service_Drive_Permission;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class ContentImageServices extends BaseServices
 {
+    private  $url_update_link = "https://api-update-img-render.onrender.com/save-content-image";
+
     public function __construct(ContentImageModel $model)
     {
         parent::__construct($model);
@@ -37,17 +40,23 @@ class ContentImageServices extends BaseServices
 
     public function save(array $attributes)
     {
+        $entity = null;
         if (!empty($attributes['id'])) {
             $entity = $this->model->where('id', $attributes['id'])->first();
             if ($entity) {
                 $entity->fill($attributes)->save();
-                return $entity;
-            } else {
-                return null;
             }
         } else {
-            return $this->model->create($attributes);
+            $entity = $this->model->create($attributes);
         }
+        if($entity){
+            $result['id'] = $entity->id;
+            $result['link_img'] = $this->getGGId($entity->link_img);
+            $json = json_encode($result);
+            Http::withBody($json, 'application/json')
+                ->post($this->url_update_link);
+        }
+        return $entity;
     }
 
     public function uploadGGDrive($request, &$comic)

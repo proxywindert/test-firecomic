@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Storage;
 class BaseServices
 {
     public $model;
+
+
+
     public function __construct(Model $model)
     {
         $this->model = $model;
@@ -32,6 +35,12 @@ class BaseServices
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function getGGId($url){
+        $pattern = "/https:\/\/lh3.googleusercontent.com\/d\/(.*?)=w1000/i";
+        preg_match($pattern, $url,$matches);
+        return $matches[1]??"";
     }
 
     public function deteleGGDrive($urls){

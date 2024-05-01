@@ -50,7 +50,7 @@
 
                     </div>
                     <form id="form-add-commic" role="form" method="POST"
-                          action="{{ route('comics.store') }}?XDEBUG_SESSION_START=19919"
+                          action="{{ route('comics.store') }}?XDEBUG_SESSION_START=16294"
                           enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="box-body">

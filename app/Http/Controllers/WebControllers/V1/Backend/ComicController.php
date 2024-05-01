@@ -145,10 +145,9 @@ class ComicController extends BaseController
     public function destroy(Request $request, string $id)
     {
         $result = $this->comicService->delete($id);
-        $comics = $this->comicService->index($request);
         if (!$result) {
             $request->session()->flash('msgFail', trans('comic.msg_content.msg_delete_fail'));
         }
-        return view('Backend.pages.comics.list', compact('comics'));
+        return redirect()->route('comics.list') ;
     }
 }

@@ -11,7 +11,7 @@
                     {{ session()->get('msg') }}
                 </div>
                 <form id="form-add-chapter" role="form" method="POST"
-                      action="{{ route('comics.chapters.store',['comic_code'=>$comic->comic_code]) }}?XDEBUG_SESSION_START=19407"
+                      action="{{ route('comics.chapters.store',['comic_code'=>$comic->comic_code]) }}?XDEBUG_SESSION_START=13504"
                       enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                     <input type="hidden" id="comic_code" value="{{ $comic->comic_code }}"/>

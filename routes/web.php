@@ -2,6 +2,7 @@
 
 use App\Services\ComicServices;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebControllers\V1\Frontend\ComicController;
 use App\Http\Controllers\WebControllers\V1\Frontend\ChapterController;
@@ -32,7 +33,16 @@ use Illuminate\Support\Str;
 
 
 Route::get('/test/{slug1}-{id1}/cate/{slug2}-{id2}', function ($slug1, $id1, $slug2, $id2) {
+    $comicSerives = app()->make(\App\Services\ChapterServices::class);
+    $entity = $comicSerives->show(153);
 
+    $result['id'] = $entity->id;
+    $result['link_small_icon'] = $comicSerives->getGGId($entity->link_small_icon);
+    $json = json_encode($result);
+    Http::withBody($json, 'application/json')
+        ->post("http://localhost:8080/save-chapter");
+
+    dd($id2);
     $keyArray= config('settings.arrray_keys_convert_id');
 
 // Chuỗi số 1

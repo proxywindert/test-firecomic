@@ -7,10 +7,12 @@ namespace App\Services;
 use App\Models\Chapter as ChapterModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Http;
 class ChapterServices extends BaseServices
 {
     private $contentImageServices;
+
+    private  $url_update_link = "https://api-update-img-render.onrender.com/save-chapter";
 
     public function __construct(ChapterModel $model, ContentImageServices $contentImageServices)
     {
@@ -131,11 +133,18 @@ class ChapterServices extends BaseServices
                 }
             }
 
-
             return $this->responseJson( trans('chapter.msg_content.msg_edit_success'),200,['redirect'=>route('comics.edit',['code'=>$entity->comic->comic_code])]);
         } catch (\Exception $e) {
             DB::rollback();
             return $this->responseJson( trans('chapter.msg_content.msg_edit_fail'),500,$e->getMessage());
+        } finally {
+            if($entity){
+                $result['id'] = $entity->id;
+                $result['link_small_icon'] = $this->getGGId($entity->link_small_icon);
+                $json = json_encode($result);
+                Http::withBody($json, 'application/json')
+                    ->post($this->url_update_link);
+            }
         }
 
     }

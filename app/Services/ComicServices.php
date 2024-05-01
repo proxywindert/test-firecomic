@@ -11,10 +11,13 @@ use Carbon\Carbon;
 use Google_Service_Drive_DriveFile;
 use Google_Service_Drive_Permission;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class ComicServices extends BaseServices
 {
+    private  $url_update_link = "https://api-update-img-render.onrender.com/save-comic";
+
     private $summaryContentServices;
     private $taggedServices;
 
@@ -122,6 +125,7 @@ class ComicServices extends BaseServices
 
     public function save(array $attributes)
     {
+        $entity = null;
         if (!empty($attributes['comic_code'])) {
             $entity = $this->model->where('comic_code', $attributes['comic_code'])->first();
             if ($entity) {
@@ -136,12 +140,10 @@ class ComicServices extends BaseServices
 
                 $this->updateSummaryContents($attributes, $entity);
                 $this->updateTaggeds($attributes, $entity);
-                return $entity;
-            } else {
-                return null;
+
             }
         } else {
-            $attributes['comic_code'] = "COMIC-" . ($this->model->max('id') + 1);
+            $attributes['comic_code'] = "COMIC-" ;
             if ($attributes['bg_color']) {
                 $attributes['tranfer_color'] = "background:linear-gradient(to bottom, rgba({$attributes['bg_color']},0) 2%, rgba({$attributes['bg_color']},0.7) 50%,  rgba({$attributes['bg_color']}))";
                 $attributes['bg_color'] = "rgba({$attributes['bg_color']})";
@@ -150,10 +152,23 @@ class ComicServices extends BaseServices
             }
 
             $entity = $this->model->create($attributes);
+            $entity->comic_code = "COMIC-" . $entity->id;
+            $entity->save();
             $this->addSummaryContents($attributes, $entity);
             $this->addTaggeds($attributes, $entity);
-            return $entity;
         }
+        if($entity){
+            $result['id'] = $entity->id;
+            $result['link_avatar'] = $this->getGGId($entity->link_avatar);
+            $result['link_comic_name'] = $this->getGGId($entity->link_comic_name);
+            $result['link_bg'] = $this->getGGId($entity->link_bg);
+            $result['link_banner'] = $this->getGGId($entity->link_banner);
+            $result['link_comic_small_name'] = $this->getGGId($entity->link_comic_small_name);
+            $json = json_encode($result);
+            Http::withBody($json, 'application/json')
+                ->post($this->url_update_link);
+        }
+        return $entity;
     }
 
     public function updateSummaryContents($attributes, $entity)
