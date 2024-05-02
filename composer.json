@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8",
         "laravelcollective/html": "^6.4",
         "masbug/flysystem-google-drive-ext": "^2.0",
+        "nicolaslopezj/searchable": "^1.13",
         "spatie/laravel-sluggable": "^3.6"
     },
     "require-dev": {

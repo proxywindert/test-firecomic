@@ -36,6 +36,7 @@
     <meta name="next-head-count" content="25">
 
     <link rel="stylesheet" href="{!! asset('assets/css/styles.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/css/plugins/plugins.mini.css') !!}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -49,12 +50,13 @@
   gtag('config', 'G-P7J542KDYC');
 </script>
 @include('Frontend.layouts.loader')
+
 <div class="wrapper">
     @yield('header')
     @yield('main-content')
     @yield('footer')
 </div>
-
+@include('Frontend.components.search-modal.search-modal')
 {{--@include('Frontend.layouts.footer')--}}
 <script src="{!! asset('assets/js/menu.js') !!}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -76,6 +78,18 @@
 
     window.addEventListener('load', (event) => {
         document.getElementById('preloader').setAttribute("style", "display:none");
+
+        let openSearch = document.querySelector('#open-tab-search-modal');
+        let modalSearch = document.querySelector('#search_modal');
+        let closeSearch = document.querySelector("#close-search-modal");
+        closeSearch.addEventListener("click",(event)=>{
+            modalSearch.style.display="none"
+        })
+        openSearch.addEventListener("click",(event)=>{
+            modalSearch.style.display="block"
+            modalSearch.classList.add("uk-open", "uk-modal-full");
+        })
+
     });
 
     if ('') {

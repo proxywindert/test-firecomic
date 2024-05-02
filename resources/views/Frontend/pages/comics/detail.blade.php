@@ -13,7 +13,7 @@
                 </a>
             </div>
             <div class="col-left">
-                <a href="" class="search-btn">
+                <a id="open-tab-search-modal" href="#search_modal" class="search-btn">
                     <img referrerpolicy="no-referrer" src="{!! asset("assets/images/search.svg") !!}" alt="">
                 </a>
                 <div id="open-tab-nav-header" class="menu-btn">

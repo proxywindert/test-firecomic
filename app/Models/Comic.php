@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Traits\SearchableTraitExtend;
 
 class Comic extends BaseModel
 {
+    use SearchableTraitExtend;
     use HasSlug;
     protected $table = "comics";
     protected $fillable =[
@@ -43,6 +45,20 @@ class Comic extends BaseModel
         'attendance_end_at',
         'approved_at'
     ];
+
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'comics.comic_name'=> 10
+        ]
+    ];
+
     public static function boot()
     {
         parent::boot();

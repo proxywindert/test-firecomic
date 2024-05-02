@@ -46,6 +46,11 @@ class ComicServices extends BaseServices
             $query = $query->with('taggeds');
         }
 
+        $keyword = $request->get('keyword');
+        if ($keyword && $keyword != 'null') {
+            $query = $query->search($keyword);
+        }
+
         $query = $query->with('chapters', function ($query) {
             $query->orderBy('id', 'asc');
         });

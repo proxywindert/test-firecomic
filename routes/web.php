@@ -103,7 +103,7 @@ Route::post('/github-webhook', function () {
 Route::get('/', [LandingController::class, 'index'])->name('landingPage');
 
 Route::group(array('prefix' => 'comics'), function () {
-    Route::get('/content/search', [ComicController::class, 'searchByhashTag'])->name('search');
+    Route::get('/content/search', [ComicController::class, 'index'])->name('search');
     Route::get('/content/keywork/{hashtag}', [ComicController::class, 'searchByhashTag'])->name('searchByhashTag');
     Route::get('/viewer/{slug1}-{comic_code}/chapter/{slug2}-{id}', [ChapterController::class, 'show'])
         ->where('slug1', '[a-zA-Z0-9-_]+')
