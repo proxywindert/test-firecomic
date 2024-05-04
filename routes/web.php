@@ -18,7 +18,7 @@ use App\Http\Controllers\WebControllers\V1\Backend\HashtagController as AdmHasht
 use App\Http\Controllers\Auth\LoginController as AdmLoginController;
 use App\Http\Controllers\Auth\RegisterController as AdmRegisterController;
 use Illuminate\Support\Str;
-
+use Spatie\Sitemap\SitemapGenerator;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -91,9 +91,10 @@ Route::get('ZXCcxz123654/register', [AdmRegisterController::class, 'getRegister'
 Route::post('ZXCcxz123654/register', [AdmRegisterController::class, 'register'])->name('register');
 
 
-Route::get('/users', function () {
-    $users = DB::table('users')->get();
-    return view('users', compact('users'));
+
+Route::get('/sitemap', function () {
+    SitemapGenerator::create('https://firecomic-admin.onrender.com/')->writeToFile('sitemap.xml');
+    return "sitemap created";
 });
 
 Route::post('/github-webhook', function () {

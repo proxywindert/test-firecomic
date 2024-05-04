@@ -9,6 +9,12 @@ use App\Console\customCmd;
 class Kernel extends ConsoleKernel
 {
 
+	protected $commands = [
+
+		\App\Console\Commands\GenSiteMap::class,
+
+	];
+
     /**
      * Define the application's command schedule.
      */
