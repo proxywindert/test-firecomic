@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<img src="{!! asset('assets/images/logo.png') !!}" alt="">
+<img src="{!! asset('assets/images/logo.webp') !!}" alt="">
 </body>
 
 </html>

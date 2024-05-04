@@ -273,7 +273,7 @@
                     </button>
                 @endif
                 <div class="navigationBar-content-comment">
-                    <img  src="{!! asset("assets/images/logo.png") !!}" alt="">
+                    <img  src="{!! asset("assets/images/logo.webp") !!}" alt="">
                 </div>
 {{--                <button class="navigationBar-content-comment">--}}
 {{--                    <img--}}

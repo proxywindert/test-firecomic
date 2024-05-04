@@ -15,7 +15,7 @@
     <meta name="keywords" content="It's free if you wait, free comics">
     <meta property="og:site_name" content="Khotruyenfull">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="{!! asset("assets/images/logo.png") !!}">
+    <meta property="og:image" content="{!! asset("assets/images/logo.webp") !!}">
     <meta property="og:locale" content="vi">
     <meta property="og:description"
           content="Khám phá comic kích thích trí tưởng tượng của bạn tại Khotruyenfull. Bạn có thể thưởng thức COMIC mới thuộc nhiều thể loại khác nhau!">

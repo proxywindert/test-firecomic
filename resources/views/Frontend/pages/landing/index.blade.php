@@ -5,7 +5,7 @@
             <div class="header-content">
                 <div class="banner">
                     <a href="{!! route('landingPage') !!}">
-                        <img src="{!! asset("assets/images/logo.png") !!}" alt="">
+                        <img src="{!! asset("assets/images/logo.webp") !!}" alt="">
                     </a>
 
                 </div>
