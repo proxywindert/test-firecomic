@@ -91,10 +91,14 @@ Route::get('ZXCcxz123654/register', [AdmRegisterController::class, 'getRegister'
 Route::post('ZXCcxz123654/register', [AdmRegisterController::class, 'register'])->name('register');
 
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Promise\Utils;
+
 
 Route::get('/sitemap', function () {
-    SitemapGenerator::create('https://firecomic-admin.onrender.com/')->writeToFile('sitemap.xml');
-    return "sitemap created";
+	
+    //SitemapGenerator::create('http://127.0.0.1:8080/')->writeToFile('sitemap.xml');
+    return "created";
 });
 
 Route::post('/github-webhook', function () {

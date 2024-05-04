@@ -4,7 +4,7 @@ composer install --no-dev --working-dir=/var/www/html
 
 echo "Running migrations..."
 
-php artisan sitemap:generate
+#php artisan sitemap:generate
 
 #php artisan db:seed --class=MakeSlugSeeder
 
