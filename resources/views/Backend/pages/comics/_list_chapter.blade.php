@@ -4,6 +4,7 @@
         <th>{{trans('chapter.id')}}</th>
         <th>{{trans('chapter.chapter_name')}}</th>
         <th>{{trans('chapter.link_small_icon')}}</th>
+        <th>số lượng ảnh</th>
         <th>{{trans('common.edit')}}</th>
     </tr>
     </thead>
@@ -19,10 +20,14 @@
             </td>
             <td>
                 <img
+                    style="width: 150px; height: 150px"
                     class="lazyload small-comic-img img-fluid"
                     src="{!! asset('assets/images/loadspinner.svg') !!}"
                     data-src="{{asset($chapter->link_small_icon)}}"
                      alt="Photo">
+            </td>
+            <td>
+                {{$chapter->contentImages->count()}}
             </td>
             <td class="project-actions text-right">
 {{--                <a class="btn btn-primary btn-sm" href="#">--}}
