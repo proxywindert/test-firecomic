@@ -154,7 +154,8 @@ class ChapterServices extends BaseServices
         $query = $this->model;
         $query = $query
             ->lockForUpdate()
-            ->where('comic_id', $id);
+            ->where('comic_id', $id)
+			->orderBy('id', 'asc');
         return $query->get();
     }
 
