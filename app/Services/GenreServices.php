@@ -15,9 +15,9 @@ class GenreServices extends BaseServices
 
     public function index($request)
     {
-        $limit = $request->get('limit', GenreModel::LIMIT_PAGE);
+//        $limit = $request->get('limit', GenreModel::LIMIT_PAGE);
         $query = $this->model;
-        return $query->paginate($limit);
+        return $query->get();
     }
 
     public function show($chapterNumber)

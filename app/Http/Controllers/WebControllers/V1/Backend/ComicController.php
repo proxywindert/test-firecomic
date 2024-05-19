@@ -32,6 +32,7 @@ class ComicController extends BaseController
      */
     public function index(Request $request)
     {
+        $request['isBackend'] = true;
         $request['loading_hashtag']= true;
         $request['loading_tagged']= true;
         $comics = $this->comicService->index($request);

@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
+
 class ComicServices extends BaseServices
 {
-    private  $url_update_link = "https://api-update-img-render.onrender.com/save-comic";
+    private $url_update_link = "https://api-update-img-render.onrender.com/save-comic";
 
     private $summaryContentServices;
     private $taggedServices;
@@ -54,7 +55,22 @@ class ComicServices extends BaseServices
         $query = $query->with('chapters', function ($query) {
             $query->orderBy('id', 'asc');
         });
-        $query = $query->orderBy('id', 'desc');
+
+        if(!$request->get('isBackend')){
+            $latestChapters = DB::table('chapters')
+                ->select('comic_id', DB::raw('MAX(publish_at) as latest_chapter_updated_at'))
+                ->groupBy('comic_id');
+
+            $query = $query
+                ->joinSub($latestChapters, 'latest_chapters', function ($join) {
+                    $join->on('comics.id', '=', 'latest_chapters.comic_id');
+                })
+                ->orderBy('latest_chapter_updated_at', 'desc');
+        }
+
+        $query->orderBy('comics.id', 'desc');
+
+        $query->select('comics.*');
 
         $data = $query->paginate($limit);
 
@@ -71,31 +87,43 @@ class ComicServices extends BaseServices
         return $data;
     }
 
-    public function  makeSkeletonColor($data){
-        $data->each(function ($item)  {
-            $item['skeleton_bg_color'] =str_replace(")", ", 0.3)", $item->bg_color);
+    public function makeSkeletonColor($data)
+    {
+        $data->each(function ($item) {
+            $item['skeleton_bg_color'] = str_replace(")", ", 0.3)", $item->bg_color);
         });
         return $data;
     }
 
-    public function calDiffTime($data){
+    public function calDiffTime($data)
+    {
         $now = Carbon::now();
         $data->each(function ($item) use ($now) {
-            if ($item ?->chapters ?->last() ?->publish_at){
-                $item['diff_time'] = $now->diffInMinutes($item ?->chapters ?->last() ?->publish_at);
-                    $item['diff_time_to_sort'] = $now->diffInMinutes($item ?->chapters ?->last() ?->publish_at);
+
+
+
+            if ($item ?->chapters->isNotEmpty()){
+                $latestItem = $item->chapters->reduce(function ($carry, $item) {
+                    if (is_null($carry) || $item['publish_at'] > $carry['publish_at']) {
+                        return $item;
+                    }
+                    return $carry;
+                });
+
+                $item['diff_time'] = $now->diffInMinutes($latestItem->publish_at);
+                    $item['diff_time_to_sort'] = $now->diffInMinutes($latestItem->publish_at);
                     if ($item['diff_time'] <= 0) {
                         $item['diff_time'] = 'Mới cập nhật';
                     } else if ($item['diff_time'] <= 60) {
                         $item['diff_time'] = 'Cách đây ' . $item['diff_time'] . ' phút';
                     } else if ($item['diff_time'] <= 1440) {
                         $item['diff_time'] = 'Cách đây ' . round(($item['diff_time'] / 60), 0, PHP_ROUND_HALF_DOWN) . ' giờ';
-                    } else if($item['diff_time'] <= 10080){
+                    } else if ($item['diff_time'] <= 10080) {
                         $item['diff_time'] = 'Cách đây ' . round(($item['diff_time'] / (60 * 24)), 0, PHP_ROUND_HALF_DOWN) . ' ngày';
-                    }else if($item['diff_time'] <= 40320){
-                        $item['diff_time'] = 'Cách đây ' . round(($item['diff_time'] / (60 * 24*7)), 0, PHP_ROUND_HALF_DOWN) . ' tuần';
-                    }else{
-                        $item['diff_time'] = 'Cách đây ' . round(($item['diff_time'] / (60 * 24*7*4)), 0, PHP_ROUND_HALF_DOWN) . ' tháng';
+                    } else if ($item['diff_time'] <= 40320) {
+                        $item['diff_time'] = 'Cách đây ' . round(($item['diff_time'] / (60 * 24 * 7)), 0, PHP_ROUND_HALF_DOWN) . ' tuần';
+                    } else {
+                        $item['diff_time'] = 'Cách đây ' . round(($item['diff_time'] / (60 * 24 * 7 * 4)), 0, PHP_ROUND_HALF_DOWN) . ' tháng';
                     }
                 }else{
                 $item['diff_time_to_sort'] = 0;
@@ -106,7 +134,8 @@ class ComicServices extends BaseServices
         return $data;
     }
 
-    public function sortDataBy($data){
+    public function sortDataBy($data)
+    {
         $data->setCollection(collect($data->items())->sortBy(function ($item) {
             return $item['diff_time_to_sort'];
         }));
@@ -148,7 +177,7 @@ class ComicServices extends BaseServices
 
             }
         } else {
-            $attributes['comic_code'] = "COMIC-" ;
+            $attributes['comic_code'] = "COMIC-";
             if ($attributes['bg_color']) {
                 $attributes['tranfer_color'] = "background:linear-gradient(to bottom, rgba({$attributes['bg_color']},0) 2%, rgba({$attributes['bg_color']},0.7) 50%,  rgba({$attributes['bg_color']}))";
                 $attributes['bg_color'] = "rgba({$attributes['bg_color']})";
@@ -162,7 +191,7 @@ class ComicServices extends BaseServices
             $this->addSummaryContents($attributes, $entity);
             $this->addTaggeds($attributes, $entity);
         }
-        if($entity){
+        if ($entity) {
             $result['id'] = $entity->id;
             $result['link_avatar'] = $this->getGGId($entity->link_avatar);
             $result['link_comic_name'] = $this->getGGId($entity->link_comic_name);
@@ -222,7 +251,8 @@ class ComicServices extends BaseServices
 
     }
 
-    public function createIdGG($driveService,$folderId,$newPermission,$field_name,$googleUrl,&$comic,&$file){
+    public function createIdGG($driveService, $folderId, $newPermission, $field_name, $googleUrl, &$comic, &$file)
+    {
         $fileToUpload = $this->postGGDrive($driveService, $file[$field_name]['file'], $folderId);
         if ($fileToUpload) {
             $driveService->permissions->create($fileToUpload->id, $newPermission);
@@ -248,22 +278,22 @@ class ComicServices extends BaseServices
         $newPermission = app()->make('googlePermission');
         $folderId = app()->make('googleFolderId');
 
-        $googleUrlImg[0]="https://lh3.googleusercontent.com/d/";
-        $googleUrlImg[1]="=w1000";
+        $googleUrlImg[0] = "https://lh3.googleusercontent.com/d/";
+        $googleUrlImg[1] = "=w1000";
 
-        $googleUrlVideoWebm[0]="https://drive.usercontent.google.com/download?id=";
-        $googleUrlVideoWebm[1]="&export=download&type=video/webm";
+        $googleUrlVideoWebm[0] = "https://drive.usercontent.google.com/download?id=";
+        $googleUrlVideoWebm[1] = "&export=download&type=video/webm";
 
-        $googleUrlVideoMov[0]="https://drive.usercontent.google.com/download?id=";
-        $googleUrlVideoMov[1]="&export=download&type=video/quicktime";
+        $googleUrlVideoMov[0] = "https://drive.usercontent.google.com/download?id=";
+        $googleUrlVideoMov[1] = "&export=download&type=video/quicktime";
 
-        $this->createIdGG($driveService,$folderId,$newPermission,"link_avatar",$googleUrlImg,$comic,$file);
-        $this->createIdGG($driveService,$folderId,$newPermission,"link_banner",$googleUrlImg,$comic,$file);
-        $this->createIdGG($driveService,$folderId,$newPermission,"link_video_banner",$googleUrlVideoWebm,$comic,$file);
-        $this->createIdGG($driveService,$folderId,$newPermission,"link_video_banner_2",$googleUrlVideoMov,$comic,$file);
-        $this->createIdGG($driveService,$folderId,$newPermission,"link_comic_name",$googleUrlImg,$comic,$file);
-        $this->createIdGG($driveService,$folderId,$newPermission,"link_comic_small_name",$googleUrlImg,$comic,$file);
-        $this->createIdGG($driveService,$folderId,$newPermission,"link_bg",$googleUrlImg,$comic,$file);
+        $this->createIdGG($driveService, $folderId, $newPermission, "link_avatar", $googleUrlImg, $comic, $file);
+        $this->createIdGG($driveService, $folderId, $newPermission, "link_banner", $googleUrlImg, $comic, $file);
+        $this->createIdGG($driveService, $folderId, $newPermission, "link_video_banner", $googleUrlVideoWebm, $comic, $file);
+        $this->createIdGG($driveService, $folderId, $newPermission, "link_video_banner_2", $googleUrlVideoMov, $comic, $file);
+        $this->createIdGG($driveService, $folderId, $newPermission, "link_comic_name", $googleUrlImg, $comic, $file);
+        $this->createIdGG($driveService, $folderId, $newPermission, "link_comic_small_name", $googleUrlImg, $comic, $file);
+        $this->createIdGG($driveService, $folderId, $newPermission, "link_bg", $googleUrlImg, $comic, $file);
 
 //        $fileToUpload = $this->postGGDrive($driveService, $file['link_avatar']['file'], $folderId);
 //        if ($fileToUpload) {
@@ -326,13 +356,14 @@ class ComicServices extends BaseServices
         return $this->model->where('comic_code', $comic_code)->first();
     }
 
-    public function  getAllComics(){
+    public function getAllComics()
+    {
         $data = ComicModel::query();
 
         $data = $data
-            ->select('slug','id','comic_name');
-        $data =   $data->with('chapters',function ($data){
-            $data->select('comic_id','slug','chapter_name','id');
+            ->select('slug', 'id', 'comic_name');
+        $data = $data->with('chapters', function ($data) {
+            $data->select('comic_id', 'slug', 'chapter_name', 'id');
         })->get();
         return $data;
     }
@@ -371,7 +402,7 @@ class ComicServices extends BaseServices
                 }
             });
 
-             $data['skeleton_bg_color'] =str_replace(")", ", 0.3)", $data->bg_color);
+             $data['skeleton_bg_color'] = str_replace(")", ", 0.3)", $data->bg_color);
         }
         return $data;
     }

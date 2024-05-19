@@ -7,7 +7,6 @@
                     <a href="{!! route('landingPage') !!}">
                         <img src="{!! asset("assets/images/logo.webp") !!}" alt="">
                     </a>
-
                 </div>
                 <div class="nav-bar-anchor"
                      style="top: 44px;background-color: rgba(var(--background), var(--tw-bg-opacity));">
@@ -21,11 +20,8 @@
                         </ul>
                     </div>
                 </div>
-
-
             </div>
         </div>
-
         <div id="block-search" class="block-search">
             <div class="col-right">
 

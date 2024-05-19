@@ -5,15 +5,20 @@
     <ul>
         <li class="nav-item">
             <a href="" class="s13-bold-white">Liên hệ</a>
-            <ul class="sub-contact">
+            <ul style="flex-wrap: wrap;row-gap: 15px;" class="sub-contact">
                 <li>
                     <a target="_blank" href="https://m.me/61555659102327">
                         <img src="{!! asset("assets/images/messenger.webp") !!}" alt="messenger">
                     </a>
                 </li>
-                <li>
+				 <li>
                     <a target="_blank" href="https://www.facebook.com/profile.php?id=61555659102327">
                         <img src="{!! asset("assets/images/fb-icon.png") !!}" alt="facebook">
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="https://www.facebook.com/groups/1464437311167965">
+                        <img src="{!! asset("assets/images/fb-group-icon.webp") !!}" alt="facebook">
                     </a>
                 </li>
                 <li>
