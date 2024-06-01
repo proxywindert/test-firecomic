@@ -25,6 +25,7 @@ class Chapter extends BaseModel
         'publish_at',
         'free_at',
         'link_small_icon',
+        'link_small_icon_backup',
         'slug',
 
         'created_by',

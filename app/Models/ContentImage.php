@@ -12,6 +12,7 @@ class ContentImage extends BaseModel
     protected $fillable =[
 
         'link_img',
+        'link_img_backup',
         'chapter_id',
         'ggdrive_id',
         'created_by',

@@ -83,6 +83,7 @@ class ChapterServices extends BaseServices
         $files = $this->contentImageServices->uploadGGDrive($request, $contentImages);
         foreach ($files['link_img']['url'] as $link) {
             $contentImages['link_img'] = $link;
+            $contentImages['link_img_backup'] = $link;
             $this->contentImageServices->save($contentImages);
         }
     }
@@ -129,6 +130,7 @@ class ChapterServices extends BaseServices
                 $files = $this->contentImageServices->uploadGGDrive($request, $contentImages);
                 foreach ($files['link_img']['url'] as $link) {
                     $contentImages['link_img'] = $link;
+                    $contentImages['link_img_backup'] = $link;
                     $this->contentImageServices->save($contentImages);
                 }
             }
@@ -179,6 +181,7 @@ class ChapterServices extends BaseServices
 
         if (!empty($file['link_small_icon']['url'])) {
             $comic['link_small_icon'] = $file['link_small_icon']['url'];
+            $comic['link_small_icon_backup'] = $file['link_small_icon']['url'];
         }
 
         return $file;
@@ -189,7 +192,7 @@ class ChapterServices extends BaseServices
         $entity = $this->model
             ->where('id', $id)->first();
         // xoa img tren ggdrive
-        $result = collect($entity)->only(['link_small_icon']);
+        $result = collect($entity)->only(['link_small_icon','link_small_icon_backup']);
         $this->deteleGGDrive($result->toArray());
         return !empty($entity) ? $entity->delete() : null;
     }

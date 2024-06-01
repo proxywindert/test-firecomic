@@ -258,6 +258,7 @@ class ComicServices extends BaseServices
             $driveService->permissions->create($fileToUpload->id, $newPermission);
             $file[$field_name]['url'] = $googleUrl[0] . $fileToUpload->id . $googleUrl[1];
             $comic[$field_name] = $file[$field_name]['url'];
+            $comic[$field_name.'_backup'] = $file[$field_name]['url'];
         }
         return $file;
     }
@@ -441,7 +442,8 @@ class ComicServices extends BaseServices
         $entity = $this->model
             ->where('comic_code', $comicCode)->first();
         // xoa img tren ggdrive
-        $result = collect($entity)->only(['link_bg', 'link_avatar', 'link_comic_name', 'link_banner', 'link_comic_small_name']);
+        $result = collect($entity)->only(['link_bg', 'link_avatar', 'link_comic_name', 'link_banner', 'link_comic_small_name',
+            'link_banner_backup','link_bg_backup','link_avatar_backup','link_comic_name_backup','link_comic_small_name_backup']);
         $this->deteleGGDrive($result->toArray());
         return !empty($entity) ? $entity->delete() : null;
     }

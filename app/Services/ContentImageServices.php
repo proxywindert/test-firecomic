@@ -92,7 +92,7 @@ class ContentImageServices extends BaseServices
         $entity = $this->model
             ->where('id', $id)->first();
         // xoa img tren ggdrive
-        $result = collect($entity)->only(['link_img']);
+        $result = collect($entity)->only(['link_img','link_img_backup']);
         $this->deteleGGDrive($result->toArray());
         return !empty($entity) ? $entity->delete() : null;
     }
