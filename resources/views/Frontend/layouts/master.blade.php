@@ -27,7 +27,7 @@
     <meta name="twitter:site" content="@kakaowebtoon_kr">
     <meta name="twitter:url" content="https://Khotruyenfull.id.vn">
     <link rel="canonical" href="https://Khotruyenfull.id.vn">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="shortcut icon" href="{!! asset("assets/images/icon-tab/180.png") !!}"
           sizes="180x180"  type="image/x-icon">
     <link rel="icon" href="{!! asset("assets/images/icon-tab/180.png") !!}"
@@ -40,6 +40,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+<style>
+html,
+body {
+    overscroll-behavior: auto !important
+}
+</style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P7J542KDYC"></script>
 <script>
