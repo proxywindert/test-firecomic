@@ -46,6 +46,7 @@
                             <table id="comic-list" class="table table-bordered table-striped table-fit">
                                 <thead>
                                 <tr>
+									<th>{{trans('hashtags.id')}}</th>
                                     <th>{{trans('hashtags.name')}}</th>
                                     <th>{{trans('hashtags.slug')}}</th>
                                     <th>{{trans('comic.edit')}}</th>
@@ -55,6 +56,9 @@
                                 @foreach($hashtags as $hashtag)
                                     <tr class="comic-menu" id="hashtag-id-{{$hashtag->id}}"
                                         data-hashtag-id="{{$hashtag->id}}">
+										<td class="comic-name">
+                                            <span>{{$hashtag->id}}</span>
+                                        </td>
                                         <td class="comic-name">
                                             <span>{{$hashtag->name}}</span>
                                         </td>
