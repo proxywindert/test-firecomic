@@ -71,7 +71,7 @@ class ComicController extends BaseController
 
         DB::beginTransaction();
         try {
-            $result = $this->comicService->save($comic);
+            $result = $this->comicService->save($comic,$request);
             DB::commit();
 
             $request->session()->flash('msgSuccess', trans('comic.msg_content.msg_add_success'));
@@ -128,7 +128,7 @@ class ComicController extends BaseController
         DB::beginTransaction();
         try {
 
-            $result = $this->comicService->save($comic);
+            $result = $this->comicService->save($comic,$request);
             DB::commit();
 
             $request->session()->flash('msgSuccess', trans('comic.msg_content.msg_edit_success'));

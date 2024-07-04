@@ -15,33 +15,14 @@ class ChapterController extends BaseController
 {
     private $chapterServices;
     private $comicServices;
-    public function __construct(ChapterServices $chapterServices,ComicServices $comicServices)
+
+    public function __construct(ChapterServices $chapterServices, ComicServices $comicServices)
     {
         $this->comicServices = $comicServices;
         $this->chapterServices = $chapterServices;
         parent::__construct();
     }
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
-    {
-        $comic = $this->chapterServices->index($request);
-       return (new ChapterListResource($comic))->additional([
-            'total' => $comic->total(),
-            'lastPage' => $comic->lastPage(),
-            'currentPage' => $comic->currentPage(),
-            'perPage' => (int)$comic->perPage(),
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -59,20 +40,16 @@ class ChapterController extends BaseController
             'chapter_name',
         ]);
 
-        try{
-            $this->chapterServices->uploadGGDrive($request,$comic);
-        }catch(\Exception $e){
-            return $this->responseJson( trans('chapter.msg_content.msg_edit_fail'),500,$e->getMessage());
+        try {
+            $this->chapterServices->uploadGGDrive($request, $comic);
+        } catch (\Exception $e) {
+            return $this->responseJson(trans('chapter.msg_content.msg_edit_fail'), 500, $e->getMessage());
         }
 
-        return $this->chapterServices->save($request,$comic);
+        return $this->chapterServices->save($request, $comic);
     }
 
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+   public function show(string $id)
     {
         return $this->responseJson('ok',200);
     }
@@ -86,10 +63,7 @@ class ChapterController extends BaseController
         return new ChapterDetailResource($chapters);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request,string $comic_code, string $id)
+    public function update(Request $request, string $comic_code, string $id)
     {
         $comic = $request->only([
             'publish_at',
@@ -105,24 +79,24 @@ class ChapterController extends BaseController
         ]);
         $comic['comic_code'] = $comic_code;
 
-        try{
-            $this->chapterServices->uploadGGDrive($request,$comic);
-        }catch(\Exception $e){
-            return $this->responseJson( trans('chapter.msg_content.msg_edit_fail'),500,$e->getMessage());
+        try {
+            $this->chapterServices->uploadGGDrive($request, $comic);
+        } catch (\Exception $e) {
+            return $this->responseJson(trans('chapter.msg_content.msg_edit_fail'), 500, $e->getMessage());
         }
 
-        return $this->chapterServices->save($request,$comic);
+        return $this->chapterServices->save($request, $comic);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request,string $comic_code, string $id)
+    public function destroy(Request $request, string $comic_code, string $id)
     {
         $result = $this->chapterServices->delete($id);
         if (!$result) {
-            return $this->responseJson( trans('chapter.msg_content.msg_delete_fail'),500,'');
+            return $this->responseJson(trans('chapter.msg_content.msg_delete_fail'), 500, '');
         }
-        return $this->responseJson( trans('chapter.msg_content.msg_delete_success'),200,['redirect'=>route('comics.edit',['code'=>$comic_code])]);
+        return $this->responseJson(trans('chapter.msg_content.msg_delete_success'), 200, ['redirect' => route('comics.edit', ['code' => $comic_code])]);
     }
 }

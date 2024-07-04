@@ -10,6 +10,7 @@ use App\Models\Tagged;
 use Carbon\Carbon;
 use Google_Service_Drive_DriveFile;
 use Google_Service_Drive_Permission;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -157,7 +158,34 @@ class ComicServices extends BaseServices
         return $data;
     }
 
-    public function save(array $attributes)
+    public function deleteImgComics($entity,$request){
+        $array = array();
+        if($request->file('link_banner')){
+            $array[]=$entity['link_banner_backup'];
+        }
+        if($request->file('link_video_banner')){
+            $array[]=$entity['link_video_banner_backup'];
+        }
+        if($request->file('link_video_banner_2')){
+            $array[]=$entity['link_video_banner_2_backup'];
+        }
+        if($request->file('link_avatar')){
+            $array[]=$entity['link_avatar_backup'];
+        }
+        if($request->file('link_comic_name')){
+            $array[]=$entity['link_comic_name_backup'];
+        }
+        if($request->file('link_comic_small_name')){
+            $array[]=$entity['link_comic_small_name_backup'];
+        }
+        if($request->file('link_bg')){
+            $array[]=$entity['link_bg_backup'];
+        }
+
+        $this->deteleGGDrive($array);
+    }
+
+    public function save(array $attributes,Request $request)
     {
         $entity = null;
         if (!empty($attributes['comic_code'])) {
@@ -169,7 +197,7 @@ class ComicServices extends BaseServices
                 } else {
                     $attributes['tranfer_color'] = '';
                 }
-
+                $this->deleteImgComics($entity,$request);
                 $entity->fill($attributes)->save();
 
                 $this->updateSummaryContents($attributes, $entity);

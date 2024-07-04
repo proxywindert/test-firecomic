@@ -51,7 +51,7 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => "postgres://khotruyendb:WbigOUSRkV9wtEokG9syi3nMy90NKJuv@dpg-cq35hvcs1f4s73f93vi0-a.singapore-postgres.render.com/khotruyendb",
+            'url' => "postgres://khotruyendb:jl7XPHfhcVLuRC8PJ7xAObIYcRV1y8AM@dpg-cq35hvcs1f4s73f93vi0-a.singapore-postgres.render.com/khotruyendb",
             'host' => "dpg-cq35hvcs1f4s73f93vi0-a.singapore-postgres.render.com",
             'port' => '5432',
             'database' => 'khotruyendb',

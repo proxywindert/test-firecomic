@@ -86,6 +86,15 @@ class ChapterServices extends BaseServices
         }
     }
 
+    public function deleteImgChapters($entity,$request){
+        $array = array();
+        if($request->file('link_small_icon')){
+            $array[]=$entity['link_small_icon_backup'];
+        }
+
+        $this->deteleGGDrive($array);
+    }
+
     public function save($request, array $attributes)
     {
         DB::beginTransaction();
@@ -94,6 +103,7 @@ class ChapterServices extends BaseServices
             if (!empty($attributes['id'])) {
                 $entity = $this->model->where('id', $attributes['id'])->first();
                 if ($entity) {
+                    $this->deleteImgChapters($entity,$request);
                     $entity->fill($attributes)->save();
                     // update content image
                     DB::commit();
@@ -133,7 +143,7 @@ class ChapterServices extends BaseServices
                 }
             }
 
-            return $this->responseJson( trans('chapter.msg_content.msg_edit_success'),200,['redirect'=>route('comics.edit',['code'=>$entity->comic->comic_code])]);
+            return $this->responseJson( trans('chapter.msg_content.msg_edit_success'),200,['redirect'=>route('comics.edit',['code'=>$entity->comic->comic_code]),'id'=>$entity->id]);
         } catch (\Exception $e) {
             DB::rollback();
             return $this->responseJson( trans('chapter.msg_content.msg_edit_fail'),500,$e->getMessage());
