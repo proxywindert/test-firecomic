@@ -191,17 +191,17 @@ class ComicServices extends BaseServices
             $this->addSummaryContents($attributes, $entity);
             $this->addTaggeds($attributes, $entity);
         }
-        if ($entity) {
-            $result['id'] = $entity->id;
-            $result['link_avatar'] = $this->getGGId($entity->link_avatar);
-            $result['link_comic_name'] = $this->getGGId($entity->link_comic_name);
-            $result['link_bg'] = $this->getGGId($entity->link_bg);
-            $result['link_banner'] = $this->getGGId($entity->link_banner);
-            $result['link_comic_small_name'] = $this->getGGId($entity->link_comic_small_name);
-            $json = json_encode($result);
-            Http::withBody($json, 'application/json')
-                ->post($this->url_update_link);
-        }
+//        if ($entity) {
+//            $result['id'] = $entity->id;
+//            $result['link_avatar'] = $this->getGGId($entity->link_avatar);
+//            $result['link_comic_name'] = $this->getGGId($entity->link_comic_name);
+//            $result['link_bg'] = $this->getGGId($entity->link_bg);
+//            $result['link_banner'] = $this->getGGId($entity->link_banner);
+//            $result['link_comic_small_name'] = $this->getGGId($entity->link_comic_small_name);
+//            $json = json_encode($result);
+//            Http::withBody($json, 'application/json')
+//                ->post($this->url_update_link);
+//        }
         return $entity;
     }
 
@@ -280,7 +280,7 @@ class ComicServices extends BaseServices
         $folderId = app()->make('googleFolderId');
 
         $googleUrlImg[0] = "https://lh3.googleusercontent.com/d/";
-        $googleUrlImg[1] = "=w1000";
+        $googleUrlImg[1] = "=w1000-rw";
 
         $googleUrlVideoWebm[0] = "https://drive.usercontent.google.com/download?id=";
         $googleUrlVideoWebm[1] = "&export=download&type=video/webm";
@@ -295,60 +295,6 @@ class ComicServices extends BaseServices
         $this->createIdGG($driveService, $folderId, $newPermission, "link_comic_name", $googleUrlImg, $comic, $file);
         $this->createIdGG($driveService, $folderId, $newPermission, "link_comic_small_name", $googleUrlImg, $comic, $file);
         $this->createIdGG($driveService, $folderId, $newPermission, "link_bg", $googleUrlImg, $comic, $file);
-
-//        $fileToUpload = $this->postGGDrive($driveService, $file['link_avatar']['file'], $folderId);
-//        if ($fileToUpload) {
-//            $driveService->permissions->create($fileToUpload->id, $newPermission);
-//            $file['link_avatar']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
-//            $comic['link_avatar'] = $file['link_avatar']['url'];
-//        }
-//
-//
-//        $fileToUpload = $this->postGGDrive($driveService, $file['link_comic_name']['file'], $folderId);
-//        if ($fileToUpload) {
-//            $driveService->permissions->create($fileToUpload->id, $newPermission);
-//            $file['link_comic_name']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
-//            $comic['link_comic_name'] = $file['link_comic_name']['url'];
-//        }
-//
-//
-//        $fileToUpload = $this->postGGDrive($driveService, $file['link_bg']['file'], $folderId);
-//        if ($fileToUpload) {
-//            $driveService->permissions->create($fileToUpload->id, $newPermission);
-//            $file['link_bg']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
-//            $comic['link_bg'] = $file['link_bg']['url'];
-//        }
-//
-//
-//        $fileToUpload = $this->postGGDrive($driveService, $file['link_banner']['file'], $folderId);
-//        if ($fileToUpload) {
-//            $driveService->permissions->create($fileToUpload->id, $newPermission);
-//            $file['link_banner']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
-//            $comic['link_banner'] = $file['link_banner']['url'];
-//        }
-//
-//        $fileToUpload = $this->postGGDrive($driveService, $file['link_video_banner']['file'], $folderId);
-//        if ($fileToUpload) {
-//            $driveService->permissions->create($fileToUpload->id, $newPermission);
-//            $file['link_video_banner']['url'] = 'https://drive.usercontent.google.com/download?id=' . $fileToUpload->id . '&export=download';
-//            $comic['link_video_banner'] = $file['link_video_banner']['url'];
-//        }
-//
-//        $fileToUpload = $this->postGGDrive($driveService, $file['link_video_banner_2']['file'], $folderId);
-//        if ($fileToUpload) {
-//            $driveService->permissions->create($fileToUpload->id, $newPermission);
-//            $file['link_video_banner_2']['url'] = 'https://drive.usercontent.google.com/download?id=' . $fileToUpload->id . '&export=download';
-//            $comic['link_video_banner_2'] = $file['link_video_banner_2']['url'];
-//        }
-//
-//
-//        $fileToUpload = $this->postGGDrive($driveService, $file['link_comic_small_name']['file'], $folderId);
-//        if ($fileToUpload) {
-//            $driveService->permissions->create($fileToUpload->id, $newPermission);
-//            $file['link_comic_small_name']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
-//            $comic['link_comic_small_name'] = $file['link_comic_small_name']['url'];
-//        }
-
         return $file;
     }
 
@@ -446,5 +392,18 @@ class ComicServices extends BaseServices
             'link_banner_backup','link_bg_backup','link_avatar_backup','link_comic_name_backup','link_comic_small_name_backup']);
         $this->deteleGGDrive($result->toArray());
         return !empty($entity) ? $entity->delete() : null;
+    }
+
+    public function restoreLink(){
+        $entities = $this->model->get();
+        $entities->each(function ($item) {
+            $item['link_bg']= $item['link_bg_backup']."-rw";
+            $item['link_avatar']= $item['link_avatar_backup']."-rw";
+            $item['link_comic_name']= $item['link_comic_name_backup']."-rw";
+            $item['link_comic_small_name']= $item['link_comic_small_name_backup']."-rw";
+            $item['link_banner']= $item['link_banner_backup']."-rw";
+
+            $item->save();
+        });
     }
 }

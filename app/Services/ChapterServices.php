@@ -12,8 +12,6 @@ class ChapterServices extends BaseServices
 {
     private $contentImageServices;
 
-    private  $url_update_link = "https://api-update-img-render.onrender.com/save-chapter";
-
     public function __construct(ChapterModel $model, ContentImageServices $contentImageServices)
     {
         $this->contentImageServices = $contentImageServices;
@@ -139,15 +137,16 @@ class ChapterServices extends BaseServices
         } catch (\Exception $e) {
             DB::rollback();
             return $this->responseJson( trans('chapter.msg_content.msg_edit_fail'),500,$e->getMessage());
-        } finally {
-            if($entity){
-                $result['id'] = $entity->id;
-                $result['link_small_icon'] = $this->getGGId($entity->link_small_icon);
-                $json = json_encode($result);
-                Http::withBody($json, 'application/json')
-                    ->post($this->url_update_link);
-            }
         }
+//        finally {
+//            if($entity){
+//                $result['id'] = $entity->id;
+//                $result['link_small_icon'] = $this->getGGId($entity->link_small_icon);
+//                $json = json_encode($result);
+//                Http::withBody($json, 'application/json')
+//                    ->post($this->url_update_link);
+//            }
+//        }
 
     }
 
@@ -175,7 +174,7 @@ class ChapterServices extends BaseServices
         $fileToUpload = $this->postGGDrive($driveService, $file['link_small_icon']['file'], $folderId);
         if ($fileToUpload) {
             $driveService->permissions->create($fileToUpload->id, $newPermission);
-            $file['link_small_icon']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
+            $file['link_small_icon']['url'] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000-rw';
         }
 
 
@@ -195,5 +194,13 @@ class ChapterServices extends BaseServices
         $result = collect($entity)->only(['link_small_icon','link_small_icon_backup']);
         $this->deteleGGDrive($result->toArray());
         return !empty($entity) ? $entity->delete() : null;
+    }
+
+    public function restoreLink(){
+        $entities = $this->model->get();
+        $entities->each(function ($item) {
+            $item['link_small_icon']= $item['link_small_icon_backup']."-rw";
+            $item->save();
+        });
     }
 }

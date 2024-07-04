@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ContentImageServices extends BaseServices
 {
-    private  $url_update_link = "https://api-update-img-render.onrender.com/save-content-image";
+//    private  $url_update_link = "https://api-update-img-render.onrender.com/save-content-image";
 
     public function __construct(ContentImageModel $model)
     {
@@ -49,13 +49,13 @@ class ContentImageServices extends BaseServices
         } else {
             $entity = $this->model->create($attributes);
         }
-        if($entity){
-            $result['id'] = $entity->id;
-            $result['link_img'] = $this->getGGId($entity->link_img);
-            $json = json_encode($result);
-            Http::withBody($json, 'application/json')
-                ->post($this->url_update_link);
-        }
+//        if($entity){
+//            $result['id'] = $entity->id;
+//            $result['link_img'] = $this->getGGId($entity->link_img);
+//            $json = json_encode($result);
+//            Http::withBody($json, 'application/json')
+//                ->post($this->url_update_link);
+//        }
         return $entity;
     }
 
@@ -77,7 +77,7 @@ class ContentImageServices extends BaseServices
                 $fileToUpload = $this->postGGDrive($driveService, $itemImg, $folderId);
                 if ($fileToUpload) {
                     $driveService->permissions->create($fileToUpload->id, $newPermission);
-                    $file['link_img']['url'][] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000';
+                    $file['link_img']['url'][] = 'https://lh3.googleusercontent.com/d/' . $fileToUpload->id . '=w1000-rw';
                 }
 
             }
@@ -97,5 +97,11 @@ class ContentImageServices extends BaseServices
         return !empty($entity) ? $entity->delete() : null;
     }
 
-
+    public function restoreLink(){
+        $entities = $this->model->get();
+        $entities->each(function ($item) {
+            $item['link_img']= $item['link_img_backup']."-rw";
+            $item->save();
+        });
+    }
 }

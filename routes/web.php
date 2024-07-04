@@ -15,10 +15,15 @@ use App\Http\Controllers\AjaxControllers\V1\Frontend\ChapterController as Fronte
 use App\Http\Controllers\AjaxControllers\V1\Backend\HashtagController as AjaxAdmHashtagController;
 use App\Http\Controllers\WebControllers\V1\Backend\HashtagController as AdmHashtagController;
 
+
 use App\Http\Controllers\Auth\LoginController as AdmLoginController;
 use App\Http\Controllers\Auth\RegisterController as AdmRegisterController;
 use Illuminate\Support\Str;
 use Spatie\Sitemap\SitemapGenerator;
+use GuzzleHttp\Client;
+use GuzzleHttp\Promise\Utils;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -91,15 +96,22 @@ Route::get('ZXCcxz123654/register', [AdmRegisterController::class, 'getRegister'
 Route::post('ZXCcxz123654/register', [AdmRegisterController::class, 'register'])->name('register');
 
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Promise\Utils;
-
 
 Route::get('/sitemap', function () {
-	
+
     //SitemapGenerator::create('http://127.0.0.1:8080/')->writeToFile('sitemap.xml');
     return "created";
 });
+
+//Route::get('/restore', function () {
+//    $services = app()->make(ComicServices::class);
+//    $chapters = app()->make(\App\Services\ChapterServices::class);
+//    $contents = app()->make(\App\Services\ContentImageServices::class);
+//    $services->restoreLink();
+//    $chapters->restoreLink();
+//    $contents->restoreLink();
+//    return "created";
+//});
 
 Route::post('/github-webhook', function () {
     return "ok";

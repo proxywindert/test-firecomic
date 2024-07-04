@@ -38,7 +38,7 @@ class BaseServices
     }
 
     public function getGGId($url){
-        $pattern = "/https:\/\/lh3.googleusercontent.com\/d\/(.*?)=w1000/i";
+        $pattern = "/https:\/\/lh3.googleusercontent.com\/d\/(.*?)=w1000-rw/i";
         preg_match($pattern, $url,$matches);
         return $matches[1]??"";
     }
@@ -46,7 +46,7 @@ class BaseServices
     public function deteleGGDrive($urls){
         try {
             $driveService = Storage::disk('google');
-            $pattern = "/https:\/\/lh3.googleusercontent.com\/d\/(.*?)=w1000/i";
+            $pattern = "/https:\/\/lh3.googleusercontent.com\/d\/(.*?)=w1000-rw/i";
             if(isset($urls)){
                 foreach ($urls as $url){
                     preg_match($pattern, $url,$matches);
