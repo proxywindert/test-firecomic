@@ -33,30 +33,15 @@ return [
     |
     */
 
-    'connections' => [
-		'mysql' => [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'strict' => true,
-            'engine' => null,
-        ],
-
+     'connections' => [
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => "postgres://khotruyendb:NzCbRfoLvfAXIHxXCF0M9VS3iYekXN1z@dpg-cqqaei56l47c73ar1ot0-a.singapore-postgres.render.com/khotruyendb_lhlx",
+            'url' => "postgres://khotruyendb:Yjg4dQZpoySj95ISX9SJpewJPWt65dVk@dpg-cre6fhjv2p9s73cra5u0-a.singapore-postgres.render.com/khotruyendb_3dq7",
             'host' => "dpg-cqqaei56l47c73ar1ot0-a.singapore-postgres.render.com",
             'port' => '5432',
-            'database' => 'khotruyendb_lhlx',
+            'database' => 'khotruyendb_3dq7',
             'username' => 'khotruyendb',
-            'password' => 'NzCbRfoLvfAXIHxXCF0M9VS3iYekXN1z',
+            'password' => 'Yjg4dQZpoySj95ISX9SJpewJPWt65dVk',
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
