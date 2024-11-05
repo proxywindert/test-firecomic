@@ -17,6 +17,8 @@ echo "Running vite..."
 npm install
 npm run build
 ```
+https://stackoverflow.com/questions/7718585/how-to-set-auto-increment-primary-key-in-postgresql
+
 
 See https://laravel.com/docs/10.x/vite#running-vite
 
