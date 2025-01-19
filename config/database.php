@@ -34,20 +34,20 @@ return [
     */
 
      'connections' => [
-       'pgsql' => [
+       'pgsql' =>  [
             'driver' => 'pgsql',
-            'url' => "postgres://khotruyendb:38OOUNfYFKE4TuWAUpuFBnIgZKsV4XOE@dpg-ctj9edl2ng1s73bhn58g-a.singapore-postgres.render.com/khotruyendb_8lca",
-            'host' => "dpg-ctj9edl2ng1s73bhn58g-a.singapore-postgres.render.com",
+            'url' => "postgres://khotruyendb:CZxThajlmHklQVHje5BMaIP1Ai5ec7Wn@dpg-cu69b4rtq21c7385ltt0-a.singapore-postgres.render.com/khotruyendb_bczt",
+            'host' => "dpg-cu69b4rtq21c7385ltt0-a.singapore-postgres.render.com",
             'port' => '5432',
-            'database' => 'khotruyendb_8lca',
+            'database' => 'khotruyendb_bczt',
             'username' => 'khotruyendb',
-            'password' => '38OOUNfYFKE4TuWAUpuFBnIgZKsV4XOE',
+            'password' => 'CZxThajlmHklQVHje5BMaIP1Ai5ec7Wn',
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'prefer',
-        ]
+        ],
 
     ],
 
